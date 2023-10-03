@@ -22,6 +22,7 @@ public class LoginController {
     
     public void initialize() {
         // TODO
+        System.out.println("NUEVO CAMBIO");
     }
     
     @FXML
