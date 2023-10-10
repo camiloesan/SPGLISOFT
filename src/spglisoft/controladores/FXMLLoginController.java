@@ -5,9 +5,15 @@
 package spglisoft.controladores;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import spglisoft.dao.UsersDAO;
+import spglisoft.pojo.User;
+import spglisoft.utils.SingletonLogin;
 
 /**
  * FXML Controller class
@@ -16,40 +22,75 @@ import javafx.scene.control.PasswordField;
  */
 public class FXMLLoginController {
     @FXML
-    TextField txtUsername;
+    TextField tfEmail;
     @FXML
-    PasswordField txtPassword;
+    PasswordField tfPassword;
     
     public void initialize() {
         // TODO
     }
     
-    @FXML
-    public void validateLogin() {
-        String usertype = txtUsername.getText();
-        switch (usertype) {
-            case "admin":
+    private void redirectUserToScene(User user) {
+        switch (user.getTipo_usuario()) {
+            case "administrador":
                 try {
-                MainStage.changeView("/spglisoft/vistas/FXMLUserManagement.fxml", 1000, 600);
+                MainStage.changeView("/spglisoft/vistas/FXMLGestionUsuarios.fxml", 1000, 600);
+                    
             } catch (IOException e) {
                 e.getMessage();
             }
-                break;
+            break;
 
-            case "rp":
+            case "representante_proyecto":
                 try {
-                MainStage.changeView("/spglisoft/vistas/FXMLRPMainMenu.fxml", 1000, 600);
+                MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
             } catch (IOException e) {
                 e.getMessage();
             }
-                break;
+            break;
 
             case "desarrollador":
                 try {
-                MainStage.changeView("/spglisoft/vistas/FXMLDeveloperLogs.fxml", 1000, 600);
+                MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
             } catch (IOException e) {
                 e.getMessage();
             }
+        }
+    }
+    
+    private User sessionUser() {
+        UsersDAO usersDAO = new UsersDAO();
+        String email = tfEmail.getText();
+        User user = new User();
+        
+        try {
+            user = usersDAO.getUserByEmail(email);
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (user != null) {
+            SingletonLogin singletonLogin;
+            singletonLogin = SingletonLogin.getInstance();   
+            singletonLogin.setUser(user);
+            return user;
+        }
+        return null;
+    }
+    
+    @FXML
+    private void btnLogin() {
+        UsersDAO usersDAO = new UsersDAO();
+        String email = tfEmail.getText();
+        String password = tfPassword.getText();
+        
+        try {
+            if (usersDAO.areCredentialsValid(email, password)) {
+                System.out.println(usersDAO.areCredentialsValid(email, password));
+                redirectUserToScene(sessionUser());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

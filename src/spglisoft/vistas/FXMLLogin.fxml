@@ -28,11 +28,11 @@
       </HBox>
       <VBox alignment="CENTER" fillWidth="false" prefHeight="350.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="190.0" text="Usuario: " />
-            <TextField fx:id="txtUsername" depthTest="ENABLE" prefHeight="25.0" prefWidth="190.0" />
+            <Label prefHeight="17.0" prefWidth="190.0" text="Correo Electrónico: " />
+            <TextField fx:id="tfEmail" depthTest="ENABLE" prefHeight="25.0" prefWidth="190.0" />
             <Label prefHeight="17.0" prefWidth="190.0" text="Contraseña: " />
-            <PasswordField fx:id="txtPassword" prefHeight="25.0" prefWidth="190.0" />
-            <Button fx:id="buttonContinue" mnemonicParsing="false" onAction="#validateLogin" text="Continuar">
+            <PasswordField fx:id="tfPassword" prefHeight="25.0" prefWidth="190.0" />
+            <Button fx:id="buttonContinue" mnemonicParsing="false" onAction="#btnLogin" text="Continuar">
                <VBox.margin>
                   <Insets left="115.0" top="20.0" />
                </VBox.margin>

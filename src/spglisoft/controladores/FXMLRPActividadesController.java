@@ -16,7 +16,7 @@ import javafx.fxml.Initializable;
  *
  * @author camilo
  */
-public class FXMLRPActivitiesController implements Initializable, ISidebarRPButtons {
+public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
 
     /**
      * Initializes the controller class.
@@ -54,9 +54,9 @@ public class FXMLRPActivitiesController implements Initializable, ISidebarRPButt
     @Override
     public void btnRegresar() {
         try {
-            MainStage.changeView("/spglisoft/vistas/FXMLRPMainMenu.fxml", 1000, 600);
+            MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
         } catch (IOException ex) {
-            Logger.getLogger(FXMLRPActivitiesController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FXMLRPActividadesController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
