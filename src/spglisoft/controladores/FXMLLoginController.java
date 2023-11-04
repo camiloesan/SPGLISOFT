@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
-import spglisoft.dao.UsersDAO;
-import spglisoft.pojo.User;
+import spglisoft.modelo.dao.UsersDAO;
+import spglisoft.modelo.pojo.User;
 import spglisoft.utils.SingletonLogin;
 
 /**

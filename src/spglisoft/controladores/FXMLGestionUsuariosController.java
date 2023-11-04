@@ -15,8 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import spglisoft.dao.UsersDAO;
-import spglisoft.pojo.User;
+import spglisoft.modelo.dao.UsersDAO;
+import spglisoft.modelo.pojo.User;
 import spglisoft.utils.SingletonLogin;
 
 /**

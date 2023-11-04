@@ -20,8 +20,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import spglisoft.dao.UsersDAO;
-import spglisoft.pojo.User;
+import spglisoft.modelo.dao.UsersDAO;
+import spglisoft.modelo.pojo.User;
 
 /**
  * FXML Controller class

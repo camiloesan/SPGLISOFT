@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="spglisoft.controladores.FXMLRPActividadesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRPActividadesController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
          <children>
@@ -61,7 +61,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Actividades">
+                  <Label text="Bitácora de Actividades">
                      <font>
                         <Font size="18.0" />
                      </font>

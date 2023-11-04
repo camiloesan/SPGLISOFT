@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLLoginController">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLLoginController">
    <children>
       <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #272727;" VBox.vgrow="ALWAYS">
          <children>

@@ -4,7 +4,7 @@
  */
 package spglisoft.utils;
 
-import spglisoft.pojo.User;
+import spglisoft.modelo.pojo.User;
 
 /**
  *
