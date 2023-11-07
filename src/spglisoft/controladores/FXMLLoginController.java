@@ -87,7 +87,13 @@ public class FXMLLoginController {
         try {
             if (usersDAO.areCredentialsValid(email, password)) {
                 redirectUserToScene(sessionUser());
+<<<<<<< HEAD
             } else {
+=======
+                System.out.println("valid");
+            } else {
+                System.out.println("invalid");
+>>>>>>> 20c62e682fe710a722eddd2049fd9e583cafb85b
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Alerta");
                 alert.setContentText("Numero de personal o contraseña incorrectos");
