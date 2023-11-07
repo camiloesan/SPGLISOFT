@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import spglisoft.modelo.dao.UsersDAO;
@@ -35,7 +36,6 @@ public class FXMLLoginController {
             case "administrador":
                 try {
                 MainStage.changeView("/spglisoft/vistas/FXMLGestionUsuarios.fxml", 1000, 600);
-                    
             } catch (IOException e) {
                 e.getMessage();
             }
@@ -86,8 +86,12 @@ public class FXMLLoginController {
         
         try {
             if (usersDAO.areCredentialsValid(email, password)) {
-                System.out.println(usersDAO.areCredentialsValid(email, password));
                 redirectUserToScene(sessionUser());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Alerta");
+                alert.setContentText("Numero de personal o contraseña incorrectos");
+                alert.showAndWait();
             }
         } catch (SQLException ex) {
             Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
