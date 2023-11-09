@@ -17,7 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.ProyectoDAO;
-import spglisoft.modelo.dao.UsersDAO;
+import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Proyecto;
 import spglisoft.utils.SingletonLogin;
 
@@ -55,7 +55,6 @@ public class FXMLRPMenuPrincipalController implements Initializable {
         try {
             tablaProyectos.getItems().addAll(proyectoDAO.getProyectosList());
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLGestionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

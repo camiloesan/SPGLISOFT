@@ -4,7 +4,7 @@
  */
 package spglisoft.utils;
 
-import spglisoft.modelo.pojo.User;
+import spglisoft.modelo.pojo.Usuario;
 
 /**
  *
@@ -12,7 +12,7 @@ import spglisoft.modelo.pojo.User;
  */
 public class SingletonLogin {
     private static SingletonLogin instance;
-    private User user;
+    private Usuario user;
     
     public static SingletonLogin getInstance() {
         if (instance == null) {
@@ -25,11 +25,11 @@ public class SingletonLogin {
         instance = null;
     }
 
-    public User getUser() {
+    public Usuario getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Usuario user) {
         this.user = user;
     }
 }

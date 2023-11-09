@@ -8,14 +8,15 @@ package spglisoft.modelo.pojo;
  *
  * @author camilo
  */
-public class User {
+public class Usuario {
     private int userId;
     private String nombre;
-    private String apellidos;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String email;
     private String contrasena;
     private String matricula;
-    private String tipo_usuario;
+    private String tipoUsuario;
 
     public int getUserId() {
         return userId;
@@ -33,12 +34,20 @@ public class User {
         this.nombre = nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getEmail() {
@@ -65,11 +74,11 @@ public class User {
         this.matricula = matricula;
     }
 
-    public String getTipo_usuario() {
-        return tipo_usuario;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setTipo_usuario(String tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 }

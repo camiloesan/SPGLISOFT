@@ -12,8 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
-import spglisoft.modelo.dao.UsersDAO;
-import spglisoft.modelo.pojo.User;
+import spglisoft.modelo.dao.UsuarioDAO;
+import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.SingletonLogin;
 
 /**
@@ -31,8 +31,8 @@ public class FXMLLoginController {
         // TODO
     }
     
-    private void redirectUserToScene(User user) {
-        switch (user.getTipo_usuario()) {
+    private void redirigirAEscena(Usuario usuario) {
+        switch (usuario.getTipoUsuario()) {
             case "administrador":
                 try {
                 MainStage.changeView("/spglisoft/vistas/FXMLGestionUsuarios.fxml", 1000, 600);
@@ -58,13 +58,13 @@ public class FXMLLoginController {
         }
     }
     
-    private User sessionUser() {
-        UsersDAO usersDAO = new UsersDAO();
+    private Usuario sessionUser() {
+        UsuarioDAO usersDAO = new UsuarioDAO();
         String email = tfEmail.getText();
-        User user = new User();
+        Usuario user = new Usuario();
         
         try {
-            user = usersDAO.getUserByEmail(email);
+            user = usersDAO.obtenerUsuarioPorEmail(email);
         } catch (SQLException ex) {
             Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,13 +80,13 @@ public class FXMLLoginController {
     
     @FXML
     private void btnLogin() {
-        UsersDAO usersDAO = new UsersDAO();
+        UsuarioDAO usersDAO = new UsuarioDAO();
         String email = tfEmail.getText();
         String password = tfPassword.getText();
         
         try {
-            if (usersDAO.areCredentialsValid(email, password)) {
-                redirectUserToScene(sessionUser());
+            if (usersDAO.sonCredencialesValidas(email, password)) {
+                redirigirAEscena(sessionUser());
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Alerta");
