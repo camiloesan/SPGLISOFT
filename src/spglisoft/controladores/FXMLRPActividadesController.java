@@ -56,8 +56,6 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     public void btnInformacionProyecto() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
 
     @Override
     @FXML
@@ -70,7 +68,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @FXML
-    private void btnAsignarActividad(ActionEvent event) {
+    private void btnAsignarActividad() {
         try {
             MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600);
         } catch (IOException ex) {

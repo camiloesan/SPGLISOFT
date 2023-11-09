@@ -33,12 +33,11 @@ public class FXMLAsignarActividadController implements Initializable {
     }    
 
     @FXML
-    private void btnCancelar(ActionEvent event) {
+    private void btnCancelar() {
         try {
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
         } catch (IOException ex) {
             Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
