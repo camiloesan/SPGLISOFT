@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 
 public class FXMLDefectosDesarrolladorController implements Initializable, ISidebarDesarrollador {
     @Override
@@ -25,6 +26,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
     }
 
     @Override
+    @FXML
     public void btnActividades() {
         spglisoft.utils.SidebarDesarrollador.irMenuActividades();
     }
@@ -35,6 +37,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
     }
 
     @Override
+    @FXML
     public void btnDefectos() {
 
     }
@@ -45,7 +48,13 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
     }
 
     @Override
+    @FXML
     public void btnCerrarSesion() {
         spglisoft.utils.SidebarDesarrollador.cerrarSesionDesarrollador();
+    }
+
+    @FXML
+    private void btRegistrarDefecto(ActionEvent event) {
+        
     }
 }

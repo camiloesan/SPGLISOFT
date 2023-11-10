@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRegistrarDefectoController">
+   <children>
+      <Pane prefHeight="88.0" prefWidth="800.0" style="-fx-background-color: #18529D;">
+         <children>
+            <Label layoutX="14.0" layoutY="24.0" text="Registrar defecto" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="88.0" fitWidth="107.0" layoutX="698.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/bugicon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="118.0" text="Nombre">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNombreDefecto" layoutX="14.0" layoutY="145.0" prefHeight="25.0" prefWidth="318.0" />
+      <Label layoutX="14.0" layoutY="189.0" text="Descripcion">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="taDescripcion" layoutX="14.0" layoutY="216.0" prefHeight="200.0" prefWidth="769.0" />
+      <ComboBox fx:id="cbTipoDefecto" layoutX="14.0" layoutY="454.0" prefWidth="150.0" />
+      <Label layoutX="14.0" layoutY="427.0" text="Tipo de defecto">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="541.0" layoutY="537.0" mnemonicParsing="false" onAction="#btRegistrarDefecto" text="Registrar defecto" />
+      <Button layoutX="679.0" layoutY="537.0" mnemonicParsing="false" onAction="#btVolver" prefHeight="25.0" prefWidth="107.0" text="Volver" />
+   </children>
+</AnchorPane>
