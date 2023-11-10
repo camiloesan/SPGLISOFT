@@ -4,7 +4,6 @@
  */
 package spglisoft.controladores;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -45,7 +44,8 @@ public class FXMLRPMenuPrincipalController implements Initializable {
         ProyectoDAO proyectoDAO = new ProyectoDAO();
         tablaProyectos.getItems().clear();
         try {
-            tablaProyectos.getItems().addAll(proyectoDAO.getProyectosList());
+            int userID = SingletonLogin.getInstance().getUser().getUserId();
+            tablaProyectos.getItems().addAll(proyectoDAO.obtenerProyectosPorIDUsuario(userID));
         } catch (SQLException ex) {
         }
     }

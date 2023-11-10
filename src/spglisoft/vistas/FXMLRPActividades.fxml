@@ -87,12 +87,12 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </HBox>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tvActividades" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Título" />
-                      <TableColumn prefWidth="75.0" text="Fecha Inicio" />
-                        <TableColumn prefWidth="75.0" text="Fecha Fin" />
-                        <TableColumn prefWidth="75.0" text="Estado" />
+                      <TableColumn fx:id="colTitulo" prefWidth="75.0" text="Título" />
+                      <TableColumn fx:id="colFechaInicio" prefWidth="75.0" text="Fecha Inicio" />
+                        <TableColumn fx:id="colFechaFin" prefWidth="75.0" text="Fecha Fin" />
+                        <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

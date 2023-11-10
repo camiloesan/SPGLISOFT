@@ -6,6 +6,10 @@ package spglisoft.controladores;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import spglisoft.modelo.pojo.Actividad;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,8 +19,36 @@ import java.util.logging.Logger;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
 
+    @FXML
+    private TableView<Actividad> tvActividades;
+
+    @FXML
+    private TableColumn<Actividad, String> colFechaInicio;
+
+    @FXML
+    private TableColumn<Actividad, String> colEstado;
+
+    @FXML
+    private TableColumn<Actividad, String> colTitulo;
+
+    @FXML
+    private TableColumn<Actividad, String> colFechaFin;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        formatearTabla();
+
+    }
+
+    private void formatearTabla() {
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("FechaInicio"));
+        colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+    }
+
+    private void llenarTabla() {
+
     }
 
     @Override
