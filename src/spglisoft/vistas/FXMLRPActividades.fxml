@@ -79,7 +79,14 @@
                         <Insets bottom="30.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0" promptText="Seleccionar filtro" />
+                  <HBox>
+                     <children>
+                        <ComboBox prefWidth="150.0" promptText="Seleccionar filtro" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" />
+                     </VBox.margin>
+                  </HBox>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Título" />
@@ -96,7 +103,7 @@
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" spacing="15.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Ver detalle" />
+                        <Button mnemonicParsing="false" onAction="#btnVerDetalleActividad" text="Ver detalle" />
                         <Button mnemonicParsing="false" onAction="#btnAsignarActividad" text="Asignar actividad" />
                      </children>
                      <padding>

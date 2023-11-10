@@ -4,23 +4,20 @@
  */
 package spglisoft.controladores;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.SingletonLogin;
 
-/**
- * FXML Controller class
- *
- * @author camilo
- */
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class FXMLLoginController {
     @FXML
     TextField tfEmail;
@@ -28,7 +25,6 @@ public class FXMLLoginController {
     PasswordField tfPassword;
     
     public void initialize() {
-        // TODO
     }
     
     private void redirigirAEscena(Usuario usuario) {
@@ -86,7 +82,7 @@ public class FXMLLoginController {
         
         try {
             if (usersDAO.sonCredencialesValidas(email, password)) {
-                redirigirAEscena(sessionUser());
+                redirigirAEscena(Objects.requireNonNull(sessionUser()));
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Alerta");
