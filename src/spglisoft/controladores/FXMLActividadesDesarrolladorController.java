@@ -4,23 +4,51 @@
  */
 package spglisoft.controladores;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author camilo
- */
-public class FXMLActividadesDesarrolladorController implements Initializable {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-    /**
-     * Initializes the controller class.
-     */
+public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    }
+
+    @Override
+    public void btnActividades() {
+
+    }
+
+    @Override
+    public void btnCambios() {
+
+    }
+
+    @Override
+    public void btnDefectos() {
+        spglisoft.utils.SidebarDesarrollador.irMenuDefectos();
+    }
+
+    @Override
+    public void btnInformacionProyecto() {
+
+    }
+
+    @Override
+    public void btnCerrarSesion() {
+        spglisoft.utils.SidebarDesarrollador.cerrarSesionDesarrollador();
+    }
+
+    @FXML
+    private void btnVerDetalleActividad() {
+        try {
+            MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

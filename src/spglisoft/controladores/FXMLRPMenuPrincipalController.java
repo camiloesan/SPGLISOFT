@@ -4,12 +4,6 @@
  */
 package spglisoft.controladores;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,15 +11,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.ProyectoDAO;
-import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Proyecto;
 import spglisoft.utils.SingletonLogin;
 
-/**
- * FXML Controller class
- *
- * @author camilo
- */
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class FXMLRPMenuPrincipalController implements Initializable {
 
     @FXML
@@ -35,9 +30,6 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     @FXML
     private TableColumn<Proyecto, String> columnaEstado;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
@@ -59,7 +51,7 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     }
 
     @FXML
-    private void btnDetails(ActionEvent event) {
+    private void btnDetails() {
         try {
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
         } catch (IOException ex) {

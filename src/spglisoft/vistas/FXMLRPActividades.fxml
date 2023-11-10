@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -14,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRPActividadesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRPActividadesController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
          <children>
@@ -74,7 +79,14 @@
                         <Insets bottom="30.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0" promptText="Seleccionar filtro" />
+                  <HBox>
+                     <children>
+                        <ComboBox prefWidth="150.0" promptText="Seleccionar filtro" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="25.0" right="25.0" />
+                     </VBox.margin>
+                  </HBox>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Título" />
@@ -89,15 +101,15 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </TableView>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                    <buttons>
-                      <Button mnemonicParsing="false" text="Ver detalle" />
-                        <Button layoutX="740.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnAsignarActividad" text="Asignar actividad" />
-                    </buttons>
+                  <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnVerDetalleActividad" text="Ver detalle" />
+                        <Button mnemonicParsing="false" onAction="#btnAsignarActividad" text="Asignar actividad" />
+                     </children>
                      <padding>
                         <Insets right="25.0" />
                      </padding>
-                  </ButtonBar>
+                  </HBox>
                </children>
             </VBox>
          </children></HBox>
