@@ -51,7 +51,7 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     }
 
     @FXML
-    private void btnDetails(ActionEvent event) {
+    private void btnDetails() {
         try {
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
         } catch (IOException ex) {
