@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,6 +40,9 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     private TableColumn<Actividad, String> colFechaFin;
 
     @FXML
+    private Button btnAsignarActividad;
+
+    @FXML
     private ComboBox<String> cbFiltroActividades;
 
     private final static ObservableList<String> observableListCbFiltroActividades =
@@ -53,6 +57,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     public void formatearComboFiltro() {
         cbFiltroActividades.getItems().addAll(observableListCbFiltroActividades);
+        cbFiltroActividades.getSelectionModel().select(1);
     }
 
     private void formatearTabla() {
@@ -65,7 +70,6 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     private void llenarTablaActividadesNoAsignadas() {
         ActividadDAO actividadDAO = new ActividadDAO();
         tvActividades.getItems().clear();
-        System.out.println(SingletonLogin.getInstance().getNombreProyectoActual());
         List<Actividad> listaActividades;
         try {
             listaActividades = actividadDAO.obtenerActividadesNoAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
@@ -73,6 +77,34 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
             throw new RuntimeException(e);
         }
         tvActividades.getItems().addAll(listaActividades);
+    }
+
+    private void llenarTablaActividadesAsignadas() {
+        ActividadDAO actividadDAO = new ActividadDAO();
+        tvActividades.getItems().clear();
+        System.out.println(SingletonLogin.getInstance().getNombreProyectoActual());
+        List<Actividad> listaActividades;
+        try {
+            listaActividades = actividadDAO.obtenerActividadesAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tvActividades.getItems().addAll(listaActividades);
+    }
+
+    @FXML
+    private void cbSeleccionFiltro() {
+        String filtro = cbFiltroActividades.getSelectionModel().getSelectedItem();
+        switch (filtro) {
+            case "Asignadas":
+                llenarTablaActividadesAsignadas();
+                btnAsignarActividad.setVisible(false);
+                break;
+            case "No Asignadas":
+                llenarTablaActividadesNoAsignadas();
+                btnAsignarActividad.setVisible(true);
+                break;
+        }
     }
 
     @Override
