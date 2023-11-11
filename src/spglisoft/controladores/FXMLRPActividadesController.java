@@ -143,6 +143,9 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     @FXML
     private void btnAsignarActividad() {
-        MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600);
+        if (tvActividades.getSelectionModel().getSelectedItem() != null) {
+            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+            MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600, actividad);
+        }
     }
 }

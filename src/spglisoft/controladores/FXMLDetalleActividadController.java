@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import spglisoft.modelo.pojo.Actividad;
 import spglisoft.utils.Constantes;
 import spglisoft.utils.SingletonLogin;
-import sun.applet.Main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,10 +31,10 @@ public class FXMLDetalleActividadController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        llenarInformacion();
+        inicializarInformacion();
     }
 
-    private void llenarInformacion() {
+    private void inicializarInformacion() {
         Actividad actividad = (Actividad) MainStage.getUserData();
         lblTitulo.setText(actividad.getTitulo());
         lblEstado.setText(actividad.getEstado());
