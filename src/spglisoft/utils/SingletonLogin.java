@@ -13,6 +13,7 @@ import spglisoft.modelo.pojo.Usuario;
 public class SingletonLogin {
     private static SingletonLogin instance;
     private Usuario user;
+    private String nombreProyectoActual;
     
     public static SingletonLogin getInstance() {
         if (instance == null) {
@@ -31,5 +32,13 @@ public class SingletonLogin {
 
     public void setUser(Usuario user) {
         this.user = user;
+    }
+
+    public String getNombreProyectoActual() {
+        return nombreProyectoActual;
+    }
+
+    public void setNombreProyectoActual(String nombreProyectoActual) {
+        this.nombreProyectoActual = nombreProyectoActual;
     }
 }

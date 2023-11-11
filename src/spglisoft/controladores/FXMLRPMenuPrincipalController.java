@@ -16,6 +16,7 @@ import spglisoft.utils.SingletonLogin;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,29 +44,28 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     private void llenarTablaProyectos() {
         ProyectoDAO proyectoDAO = new ProyectoDAO();
         tablaProyectos.getItems().clear();
+        List<Proyecto> listaProyectos = null;
+        int userID = SingletonLogin.getInstance().getUser().getUserId();
+
         try {
-            int userID = SingletonLogin.getInstance().getUser().getUserId();
-            tablaProyectos.getItems().addAll(proyectoDAO.obtenerProyectosPorIDUsuario(userID));
+            listaProyectos = proyectoDAO.obtenerProyectosPorIDUsuario(userID);
         } catch (SQLException ex) {
+            ex.printStackTrace();
         }
+        tablaProyectos.getItems().addAll(listaProyectos);
     }
 
     @FXML
     private void btnDetails() {
-        try {
+        SingletonLogin.getInstance().setNombreProyectoActual(tablaProyectos.getSelectionModel().getSelectedItem().getNombreProyecto());
+        if (tablaProyectos.getSelectionModel().getSelectedItem() != null) {
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     @FXML
     private void btnLogOut() {
         SingletonLogin.cleanDetails();
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLLogin.fxml", 600, 400);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLLogin.fxml", 600, 400);
     }
 }

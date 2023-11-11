@@ -9,10 +9,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import spglisoft.modelo.dao.ActividadDAO;
 import spglisoft.modelo.pojo.Actividad;
+import spglisoft.utils.SingletonLogin;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +41,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
-
+        llenarTablaActividadesNoAsignadas();
     }
 
     private void formatearTabla() {
@@ -47,8 +51,17 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
     }
 
-    private void llenarTabla() {
-
+    private void llenarTablaActividadesNoAsignadas() {
+        ActividadDAO actividadDAO = new ActividadDAO();
+        tvActividades.getItems().clear();
+        System.out.println(SingletonLogin.getInstance().getNombreProyectoActual());
+        List<Actividad> listaActividades;
+        try {
+            listaActividades = actividadDAO.obtenerActividadesNoAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tvActividades.getItems().addAll(listaActividades);
     }
 
     @Override
@@ -85,10 +98,6 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     @FXML
     private void btnAsignarActividad() {
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600);
     }
 }

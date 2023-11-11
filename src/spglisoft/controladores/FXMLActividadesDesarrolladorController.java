@@ -45,10 +45,6 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     @FXML
     private void btnVerDetalleActividad() {
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600);
     }
 }

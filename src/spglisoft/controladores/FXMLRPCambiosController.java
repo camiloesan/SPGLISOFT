@@ -46,10 +46,6 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
 
     @FXML
     private void btnVerDetalleCambio() {
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLDetalleCambio.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPActividadesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLDetalleCambio.fxml", 1000, 600);
     }
 }

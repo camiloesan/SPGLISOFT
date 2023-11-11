@@ -20,7 +20,7 @@ import spglisoft.modelo.pojo.Proyecto;
 public class ProyectoDAO implements IProyecto {
 
     @Override
-    public List obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
+    public List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         List<Proyecto> proyectosList = null;
         

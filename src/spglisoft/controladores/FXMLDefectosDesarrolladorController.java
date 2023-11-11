@@ -17,11 +17,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
 
     @FXML
     public void btnVerDetalleDefecto() {
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLDetalleDefecto.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLDetalleDefecto.fxml", 1000, 600);
     }
 
     @Override

@@ -17,10 +17,6 @@ public class FXMLDetalleDefectoController implements Initializable {
 
     @FXML
     private void btnRegresar() {
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLDefectosDesarrollador.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPActividadesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLDefectosDesarrollador.fxml", 1000, 600);
     }
 }
