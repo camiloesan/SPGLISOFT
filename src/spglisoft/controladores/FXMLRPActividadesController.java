@@ -82,7 +82,6 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     private void llenarTablaActividadesAsignadas() {
         ActividadDAO actividadDAO = new ActividadDAO();
         tvActividades.getItems().clear();
-        System.out.println(SingletonLogin.getInstance().getNombreProyectoActual());
         List<Actividad> listaActividades;
         try {
             listaActividades = actividadDAO.obtenerActividadesAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
@@ -136,7 +135,10 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     @FXML
     private void btnVerDetalleActividad() {
-
+        if (tvActividades.getSelectionModel().getSelectedItem() != null) {
+            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+            MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600, actividad);
+        }
     }
 
     @FXML

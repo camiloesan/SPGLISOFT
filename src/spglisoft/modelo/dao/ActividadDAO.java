@@ -31,6 +31,7 @@ public class ActividadDAO implements IActividad {
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
             actividad.setEstado(resultSet.getString("estado"));
             actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo_minutos"));
+            actividad.setDescripcion(resultSet.getString("descripcion"));
             listaActividades.add(actividad);
         }
 
@@ -57,6 +58,7 @@ public class ActividadDAO implements IActividad {
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
             actividad.setEstado(resultSet.getString("estado"));
             actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo_minutos"));
+            actividad.setDescripcion(resultSet.getString("descripcion"));
             listaActividades.add(actividad);
         }
 

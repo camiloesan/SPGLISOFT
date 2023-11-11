@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDefectosDesarrolladorController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
@@ -81,7 +84,6 @@
                      <columns>
                         <TableColumn prefWidth="75.0" text="Tìtulo" />
                         <TableColumn prefWidth="75.0" text="Fecha del reporte" />
-                        <TableColumn prefWidth="75.0" text="Estado" />
                      </columns>
                      <VBox.margin>
                         <Insets left="25.0" right="25.0" />

@@ -9,8 +9,17 @@ public class Actividad {
     private String fechaFin;
     private String estado;
     private int esfuerzoMinutos;
+    private String descripcion;
 
     public Actividad() {
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getIdActividad() {
