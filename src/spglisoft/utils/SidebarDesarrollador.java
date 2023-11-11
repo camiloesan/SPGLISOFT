@@ -19,6 +19,10 @@ public class SidebarDesarrollador {
         MainStage.changeView("/spglisoft/vistas/FXMLDefectosDesarrollador.fxml", 1000, 600);
     }
 
+    public static void irMenuSolicituesCambio() {
+
+    }
+
     public static void irMenuInformacionProyecto() {
 
     }

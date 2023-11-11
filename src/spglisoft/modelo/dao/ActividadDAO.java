@@ -61,12 +61,32 @@ public class ActividadDAO implements IActividad {
             actividad.setDescripcion(resultSet.getString("descripcion"));
             listaActividades.add(actividad);
         }
-
         return listaActividades;
     }
 
     @Override
-    public List<Actividad> obtenerActividadesAsignadasPorDesarrollador(String nombreProyecto) throws SQLException {
-        return null;
+    public List<Actividad> obtenerActividadesAsignadasPorDesarrollador(int idDesarrollador) throws SQLException {
+        String query = "SELECT * FROM actividades " +
+                "WHERE id_desarrollador = ?";
+        Connection connection = ConexionBD.obtenerConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, idDesarrollador);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Actividad> listaActividades = new ArrayList<>();
+        while(resultSet.next()) {
+            Actividad actividad = new Actividad();
+            actividad.setIdActividad(resultSet.getInt("id_actividad"));
+            actividad.setNombreProyecto(resultSet.getString("nombre_proyecto"));
+            actividad.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
+            actividad.setTitulo(resultSet.getString("titulo"));
+            actividad.setFechaInicio(resultSet.getString("fecha_inicio"));
+            actividad.setFechaFin(resultSet.getString("fecha_fin"));
+            actividad.setEstado(resultSet.getString("estado"));
+            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo_minutos"));
+            actividad.setDescripcion(resultSet.getString("descripcion"));
+            listaActividades.add(actividad);
+        }
+        return listaActividades;
     }
 }

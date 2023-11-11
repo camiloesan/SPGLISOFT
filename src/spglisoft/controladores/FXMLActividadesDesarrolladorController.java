@@ -6,13 +6,58 @@ package spglisoft.controladores;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import spglisoft.modelo.dao.ActividadDAO;
+import spglisoft.modelo.pojo.Actividad;
+import spglisoft.utils.SingletonLogin;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
+    @FXML
+    private TableView<Actividad> tvActividades;
+
+    @FXML
+    private TableColumn<Actividad, String> colFechaInicio;
+
+    @FXML
+    private TableColumn<Actividad, String> colEstado;
+
+    @FXML
+    private TableColumn<Actividad, String> colTitulo;
+
+    @FXML
+    private TableColumn<Actividad, String> colFechaFin;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        formatearTabla();
+        llenarTablaActividades();
+    }
+
+    private void formatearTabla() {
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("FechaInicio"));
+        colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+    }
+
+    private void llenarTablaActividades() {
+        ActividadDAO actividadDAO = new ActividadDAO();
+        tvActividades.getItems().clear();
+        List<Actividad> listaActividades;
+        try {
+            listaActividades = actividadDAO
+                    .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getUser().getUserId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        tvActividades.getItems().addAll(listaActividades);
     }
 
     @Override
@@ -31,6 +76,11 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     @Override
+    public void btnSolicitudesCambio() {
+
+    }
+
+    @Override
     public void btnInformacionProyecto() {
 
     }
@@ -42,6 +92,9 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     @FXML
     private void btnVerDetalleActividad() {
-        MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600);
+        if (tvActividades.getSelectionModel().getSelectedItem() != null) {
+            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+            MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600, actividad);
+        }
     }
 }

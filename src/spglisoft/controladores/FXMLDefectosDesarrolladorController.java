@@ -33,6 +33,11 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
     }
 
     @Override
+    public void btnSolicitudesCambio() {
+
+    }
+
+    @Override
     public void btnInformacionProyecto() {
 
     }
