@@ -6,6 +6,7 @@ package spglisoft.controladores;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,10 +45,15 @@ public class FXMLAsignarActividadController implements Initializable {
     @FXML
     private TableColumn<Usuario, String> colMatricula;
 
+    @FXML
+    private Label lblTitulo;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
         llenarTabla();
+        Actividad actividad = (Actividad) MainStage.getUserData();
+        lblTitulo.setText("Asignar Desarrollador Actividad [" + actividad.getTitulo() + "]");
     }
 
     private void formatearTabla() {
@@ -74,7 +80,7 @@ public class FXMLAsignarActividadController implements Initializable {
     @FXML
     private void btnAsignarActividad() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Actividad actividad = (Actividad)MainStage.getUserData();
+        Actividad actividad = (Actividad) MainStage.getUserData();
         if (tvDesarrolladores.getSelectionModel().getSelectedItem() != null) {
             Usuario usuario = tvDesarrolladores.getSelectionModel().getSelectedItem();
             try {

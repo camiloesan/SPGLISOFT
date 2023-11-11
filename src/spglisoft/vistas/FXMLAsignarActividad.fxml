@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Label text="Asignar Desarrollador a Actividad">
+                  <Label fx:id="lblTitulo" text="Asignar Desarrollador a Actividad">
                      <font>
                         <Font size="18.0" />
                      </font>
