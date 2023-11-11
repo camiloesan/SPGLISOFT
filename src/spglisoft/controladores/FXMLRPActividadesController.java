@@ -4,8 +4,11 @@
  */
 package spglisoft.controladores;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -35,10 +38,21 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     @FXML
     private TableColumn<Actividad, String> colFechaFin;
 
+    @FXML
+    private ComboBox<String> cbFiltroActividades;
+
+    private final static ObservableList<String> observableListCbFiltroActividades =
+            FXCollections.observableArrayList("Asignadas" ,"No Asignadas");
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
+        formatearComboFiltro();
         llenarTablaActividadesNoAsignadas();
+    }
+
+    public void formatearComboFiltro() {
+        cbFiltroActividades.getItems().addAll(observableListCbFiltroActividades);
     }
 
     private void formatearTabla() {

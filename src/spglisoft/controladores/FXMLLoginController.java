@@ -73,7 +73,7 @@ public class FXMLLoginController {
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Alerta");
-                alert.setContentText("Numero de personal o contraseña incorrectos");
+                alert.setContentText("Correo electrónico o contraseña incorrectos");
                 alert.showAndWait();
             }
         } catch (SQLException ex) {
