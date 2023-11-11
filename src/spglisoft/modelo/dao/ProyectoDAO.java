@@ -4,14 +4,15 @@
  */
 package spglisoft.modelo.dao;
 
+import spglisoft.modelo.ConexionBD;
+import spglisoft.modelo.pojo.Proyecto;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import spglisoft.modelo.ConexionBD;
-import spglisoft.modelo.pojo.Proyecto;
 
 /**
  *
@@ -20,7 +21,7 @@ import spglisoft.modelo.pojo.Proyecto;
 public class ProyectoDAO implements IProyecto {
 
     @Override
-    public List obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
+    public List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         List<Proyecto> proyectosList = null;
         

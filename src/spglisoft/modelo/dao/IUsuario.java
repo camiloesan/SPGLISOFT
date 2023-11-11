@@ -4,8 +4,9 @@
  */
 package spglisoft.modelo.dao;
 
-import java.sql.SQLException;
 import spglisoft.modelo.pojo.Usuario;
+
+import java.sql.SQLException;
 
 /**
  *

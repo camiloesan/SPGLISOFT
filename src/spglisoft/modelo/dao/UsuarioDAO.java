@@ -4,12 +4,13 @@
  */
 package spglisoft.modelo.dao;
 
+import spglisoft.modelo.ConexionBD;
+import spglisoft.modelo.pojo.Usuario;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import spglisoft.modelo.ConexionBD;
-import spglisoft.modelo.pojo.Usuario;
 
 /**
  *

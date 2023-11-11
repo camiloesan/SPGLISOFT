@@ -28,10 +28,14 @@ public class MainStage extends Application {
         return fxmlLoader.load();
     }
     
-    public static void changeView(String url, int width, int height) throws IOException {
+    public static void changeView(String url, int width, int height) {
         Stage currentStage = (Stage) scene.getWindow();
         configureStage(currentStage, width, height);
-        MainStage.setRoot(url);
+        try {
+            MainStage.setRoot(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     private static void configureStage(Stage stage, int width, int height) {
