@@ -4,14 +4,15 @@
  */
 package spglisoft.modelo.dao;
 
+import spglisoft.modelo.ConexionBD;
+import spglisoft.modelo.pojo.Proyecto;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import spglisoft.modelo.ConexionBD;
-import spglisoft.modelo.pojo.Proyecto;
 
 /**
  *
@@ -20,16 +21,17 @@ import spglisoft.modelo.pojo.Proyecto;
 public class ProyectoDAO implements IProyecto {
 
     @Override
-    public List getProyectosList() throws SQLException {
+    public List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         List<Proyecto> proyectosList = null;
         
         if (conexionBD != null) {
             String query = "SELECT nombre_proyecto, descripcion, fecha_inicio,"
-                    + "fecha_fin, estado FROM proyectos";
-            
+                    + "fecha_fin, estado FROM proyectos WHERE id_usuario_responsable = ?";
+
             PreparedStatement preparedStatement = conexionBD.
                     prepareStatement(query);
+            preparedStatement.setInt(1, idUsuarioResponsable);
             ResultSet resultSet = preparedStatement.executeQuery();
             
             proyectosList = new ArrayList<>();
@@ -41,7 +43,6 @@ public class ProyectoDAO implements IProyecto {
                 
                 proyectosList.add(proyecto);
             }
-            
             conexionBD.close();
         }
         

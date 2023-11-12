@@ -4,12 +4,15 @@
  */
 package spglisoft.modelo.dao;
 
+import spglisoft.modelo.ConexionBD;
+import spglisoft.modelo.pojo.Usuario;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import spglisoft.modelo.ConexionBD;
-import spglisoft.modelo.pojo.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -36,7 +39,6 @@ public class UsuarioDAO implements IUsuario {
 
             conexionBD.close();
         }
-        
         return isValid;
     }    
 
@@ -47,7 +49,6 @@ public class UsuarioDAO implements IUsuario {
         
         if (conexionBD != null) {
             String query = "SELECT * FROM usuarios WHERE email = (?)";
-
             PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
             preparedStatement.setString(1, email);
 
@@ -62,7 +63,6 @@ public class UsuarioDAO implements IUsuario {
                 user.setMatricula(resultSet.getString("matricula"));
                 user.setTipoUsuario(resultSet.getString("tipo_usuario"));
             }
-
             conexionBD.close();
         }
         sesion = user;
@@ -71,5 +71,43 @@ public class UsuarioDAO implements IUsuario {
     
     public static Usuario getSesion(){
         return sesion;
+    }
+
+    @Override
+    public List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
+        String query = "SELECT p.id_usuario AS id_usuario, nombre, apellido_paterno, apellido_materno, matricula " +
+                "FROM usuarios INNER JOIN participantes p " +
+                "WHERE tipo_usuario = 'desarrollador' AND nombre_proyecto = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setString(1, nombreProyecto);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        while (resultSet.next()) {
+            Usuario usuario = new Usuario();
+            usuario.setUserId(resultSet.getInt("id_usuario"));
+            usuario.setNombre(resultSet.getString("nombre"));
+            usuario.setApellidoPaterno(resultSet.getString("apellido_paterno"));
+            usuario.setApellidoMaterno(resultSet.getString("apellido_materno"));
+            usuario.setMatricula(resultSet.getString("matricula"));
+            listaUsuarios.add(usuario);
+        }
+        conexionBD.close();
+        return listaUsuarios;
+    }
+
+    @Override
+    public void asignarActividadADesarrollador(int idActividad, int idUsuario) throws SQLException {
+        String query = "UPDATE actividades " +
+                "SET id_desarrollador = (?) " +
+                "WHERE id_actividad = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setInt(1, idUsuario);
+        preparedStatement.setInt(2, idActividad);
+
+        preparedStatement.execute();
+        conexionBD.close();
     }
 }

@@ -12,7 +12,6 @@ import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.SingletonLogin;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -32,27 +31,15 @@ public class FXMLLoginController {
     private void redirigirAEscena(Usuario usuario) {
         switch (usuario.getTipoUsuario()) {
             case "administrador":
-                try {
                 MainStage.changeView("/spglisoft/vistas/FXMLGestionUsuarios.fxml", 1000, 600);
-            } catch (IOException e) {
-                e.getMessage();
-            }
             break;
 
             case "representante_proyecto":
-                try {
                 MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
-            } catch (IOException e) {
-                e.getMessage();
-            }
             break;
 
             case "desarrollador":
-                try {
                 MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
-            } catch (IOException e) {
-                e.getMessage();
-            }
         }
     }
     
@@ -88,7 +75,7 @@ public class FXMLLoginController {
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Alerta");
-                alert.setContentText("Numero de personal o contraseña incorrectos");
+                alert.setContentText("Correo electrónico o contraseña incorrectos");
                 alert.showAndWait();
             }
         } catch (SQLException ex) {

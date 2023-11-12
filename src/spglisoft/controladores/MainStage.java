@@ -28,15 +28,35 @@ public class MainStage extends Application {
         return fxmlLoader.load();
     }
     
-    public static void changeView(String url, int width, int height) throws IOException {
+    public static void changeView(String url, int width, int height) {
         Stage currentStage = (Stage) scene.getWindow();
-        configureStage(currentStage, width, height);
-        MainStage.setRoot(url);
+        configureStage(currentStage, width, height, null);
+        try {
+            MainStage.setRoot(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void changeView(String url, int width, int height, Object obj) {
+        Stage currentStage = (Stage) scene.getWindow();
+        configureStage(currentStage, width, height, obj);
+        try {
+            MainStage.setRoot(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Object getUserData() {
+        Stage currentStage = (Stage) scene.getWindow();
+        return currentStage.getUserData();
     }
     
-    private static void configureStage(Stage stage, int width, int height) {
+    private static void configureStage(Stage stage, int width, int height, Object obj) {
         stage.setWidth(width);
         stage.setHeight(height);
+        stage.setUserData(obj);
         stage.centerOnScreen();
     }
     

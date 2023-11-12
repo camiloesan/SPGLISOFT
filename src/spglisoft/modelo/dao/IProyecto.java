@@ -12,5 +12,5 @@ import java.util.List;
  * @author camilo
  */
 public interface IProyecto {
-    List getProyectosList() throws SQLException;
+    List obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException;
 }

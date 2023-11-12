@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetalleActividadController">
    <children>
@@ -33,12 +32,12 @@
                   <Label text="Fecha fin:" GridPane.rowIndex="3" />
                   <Label text="Estado:" GridPane.rowIndex="4" />
                   <Label text="Descripción:" GridPane.rowIndex="5" />
-                  <Label text="placeholder descripción" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="lblDescripcion" text="placeholder descripción" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="lblTitulo" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lblEsfuerzo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblFechaInicio" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblFechaFin" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lblEstado" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
                <columnConstraints>
                   <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="467.93463134765625" minWidth="10.0" prefWidth="285.2439880371094" />

@@ -1,9 +1,9 @@
 package spglisoft.controladores;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -22,7 +22,6 @@ import spglisoft.modelo.pojo.Participantes;
 import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.Utilidades;
 
-
 public class FXMLDefectosDesarrolladorController implements Initializable, ISidebarDesarrollador {
     
     @Override
@@ -32,11 +31,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
 
     @FXML
     public void btnVerDetalleDefecto() {
-        try {
-            MainStage.changeView("/spglisoft/vistas/FXMLDetalleDefecto.fxml", 1000, 600);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLRPMenuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLDetalleDefecto.fxml", 1000, 600);
     }
 
     @Override
@@ -53,6 +48,11 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
     @Override
     @FXML
     public void btnDefectos() {
+
+    }
+
+    @Override
+    public void btnSolicitudesCambio() {
 
     }
 
