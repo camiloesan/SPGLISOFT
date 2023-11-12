@@ -89,15 +89,15 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </TableView>
-                  <HBox alignment="TOP_RIGHT">
+                  <HBox alignment="TOP_RIGHT" spacing="20.0">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#btRegistrarDefecto" text="Registrar defecto" />
                         <Button mnemonicParsing="false" onAction="#btnVerDetalleDefecto" text="Ver detalle" />
                      </children>
                      <padding>
                         <Insets right="25.0" />
                      </padding>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#btRegistrarDefecto" text="Registrar defecto" />
                </children>
             </VBox>
          </children>

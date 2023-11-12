@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import spglisoft.modelo.ConexionBD;
-import spglisoft.modelo.ResultadoOperacion;
 import spglisoft.modelo.pojo.Participantes;
 import spglisoft.modelo.pojo.Usuario;
 
@@ -20,11 +19,11 @@ import spglisoft.modelo.pojo.Usuario;
 public class ParticipantesDAO {
     public static Participantes obtenerProyecto(Usuario usuario) throws SQLException{
         Connection conexionBD = ConexionBD.obtenerConnection();
-        Participantes participantes = null;
+        Participantes participantes = new Participantes();
         if (conexionBD != null) {
             try {
                 String consulta = "SELECT id_participante, id_usuario, nombre_proyecto"
-                        + "FROM participantes WHERE id_usuario = ?";
+                        + " FROM participantes WHERE id_usuario = ?";
                 PreparedStatement prepararConsulta = conexionBD.prepareStatement(consulta);
                 prepararConsulta.setInt(1, usuario.getUserId());
                 ResultSet resultadoConsulta = prepararConsulta.executeQuery();

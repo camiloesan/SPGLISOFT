@@ -15,8 +15,6 @@ public class Defecto {
     private String nombreProyecto;
     private String titulo;
     private String descripcion;
-    private String estado;
-    private int esfuerzoEstimado;
     private Date fechaReporte;
     private String tipo;
 
@@ -28,8 +26,6 @@ public class Defecto {
         this.nombreProyecto = nombreProyecto;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.estado = estado;
-        this.esfuerzoEstimado = esfuerzoEstimado;
         this.fechaReporte = fechaReporte;
         this.tipo = tipo;
     }
@@ -65,23 +61,7 @@ public class Defecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public int getEsfuerzoEstimado() {
-        return esfuerzoEstimado;
-    }
-
-    public void setEsfuerzoEstimado(int esfuerzoEstimado) {
-        this.esfuerzoEstimado = esfuerzoEstimado;
-    }
-
+    
     public Date getFechaReporte() {
         return fechaReporte;
     }

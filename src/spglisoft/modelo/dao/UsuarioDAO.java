@@ -16,6 +16,9 @@ import spglisoft.modelo.pojo.Usuario;
  * @author camilo
  */
 public class UsuarioDAO implements IUsuario {
+    
+    private static Usuario sesion;
+    
     @Override
     public boolean sonCredencialesValidas(String email, String password) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
@@ -62,7 +65,11 @@ public class UsuarioDAO implements IUsuario {
 
             conexionBD.close();
         }
-        
+        sesion = user;
         return user;
+    }
+    
+    public static Usuario getSesion(){
+        return sesion;
     }
 }

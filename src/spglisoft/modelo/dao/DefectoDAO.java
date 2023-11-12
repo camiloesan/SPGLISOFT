@@ -18,28 +18,25 @@ import spglisoft.modelo.pojo.Participantes;
  */
 public class DefectoDAO {
     public static ResultadoOperacion registrarDefecto(Defecto defecto, Participantes participantes) throws SQLException{
-        ResultadoOperacion resultado = new ResultadoOperacion(true, "Error en la consulta", -1);
+        ResultadoOperacion resultado = new ResultadoOperacion(true, "Error al registrar el defecto", -1);
         Connection conexionBD = ConexionBD.obtenerConnection();
         if (conexionBD != null) {
             try {
-                String query = "INSERT INTO defectos(nombre_proyecto, titulo, descripcion, estado, "
-                        + "esfuerzo_estimado_minutos, fecha_reporte, tipo) VALUES (?,?,?,?,?,?,?)";
+                String query = "INSERT INTO defectos(nombre_proyecto, titulo, descripcion, "
+                        + "fecha_reporte, tipo) VALUES (?,?,?,CURDATE(),?)";
                 PreparedStatement prepararConsulta = conexionBD.prepareCall(query);
                 prepararConsulta.setString(1, participantes.getNombreProyecto());
                 prepararConsulta.setString(2, defecto.getTitulo());
                 prepararConsulta.setString(3, defecto.getDescripcion());
-                prepararConsulta.setString(4, defecto.getEstado());
-                prepararConsulta.setInt(5, defecto.getEsfuerzoEstimado());
-                prepararConsulta.setDate(6, defecto.getFechaReporte());
-                prepararConsulta.setString(7, defecto.getTipo());
+                prepararConsulta.setString(4, defecto.getTipo());
                 int filasAfectadas = prepararConsulta.executeUpdate();
-                if (filasAfectadas > 1) {
+                if (filasAfectadas > 0) {
                     resultado.setError(false);
                     resultado.setMensaje("Defecto registrado");
                     resultado.setFilasAfectadas(filasAfectadas);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw e;
             } finally {
                 conexionBD.close();
             }
