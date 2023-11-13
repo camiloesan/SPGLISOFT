@@ -97,7 +97,7 @@ public class FXMLRegistrarDefectoController implements Initializable {
                     cerrarStage();
                 }
             } catch (SQLException e) {
-                
+                e.printStackTrace();
             }
         }
     }

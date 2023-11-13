@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDefectosDesarrolladorController">
    <children>
@@ -41,6 +42,12 @@
                      </cursor>
                   </Label>
                   <Separator layoutX="70.0" layoutY="350.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
+                  <Label layoutX="85.0" layoutY="303.0" onMouseClicked="#btnSolicitudesCambio" text="Solicitudes de Cambio" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <Separator layoutX="70.0" layoutY="345.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
                   <Label layoutX="67.0" layoutY="373.0" text="Información del Proyecto" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -84,6 +91,7 @@
                         <TableColumn prefWidth="75.0" text="Tìtulo" />
                         <TableColumn prefWidth="75.0" text="Fecha del reporte" />
                         <TableColumn prefWidth="75.0" text="Tipo de defecto" />
+
                      </columns>
                      <VBox.margin>
                         <Insets left="25.0" right="25.0" />

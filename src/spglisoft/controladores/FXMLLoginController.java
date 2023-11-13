@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import spglisoft.utils.Utilidades;
 
 public class FXMLLoginController {
     @FXML
@@ -71,6 +72,8 @@ public class FXMLLoginController {
         
         try {
             if (usersDAO.sonCredencialesValidas(email, password)) {
+                Utilidades.mostrarAlertaSimple("Autenticacion", "Bienvenido a SPGLISOFT",
+                        Alert.AlertType.INFORMATION);
                 redirigirAEscena(Objects.requireNonNull(sessionUser()));
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
