@@ -10,13 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import spglisoft.modelo.dao.ActividadDAO;
 import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Actividad;
 import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
-import sun.applet.Main;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -81,7 +79,7 @@ public class FXMLAsignarActividadController implements Initializable {
     private void btnAsignarActividad() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Actividad actividad = (Actividad) MainStage.getUserData();
-        if (tvDesarrolladores.getSelectionModel().getSelectedItem() != null) {
+        if (esElementoSeleccionado()) {
             Usuario usuario = tvDesarrolladores.getSelectionModel().getSelectedItem();
             try {
                 usuarioDAO.asignarActividadADesarrollador(actividad.getIdActividad(), usuario.getUserId());
@@ -91,7 +89,13 @@ public class FXMLAsignarActividadController implements Initializable {
                 Alertas.mostrarAlertaErrorConexionBD();
                 e.printStackTrace();
             }
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
         }
+    }
+
+    private boolean esElementoSeleccionado() {
+        return tvDesarrolladores.getSelectionModel().getSelectedItem() != null;
     }
 
     @FXML

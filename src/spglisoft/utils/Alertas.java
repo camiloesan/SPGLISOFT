@@ -22,4 +22,11 @@ public class Alertas {
         alert.setContentText("Se ha realizado la operación correctamente");
         alert.showAndWait();
     }
+
+    public static void mostrarAlertaElementoNoSeleccionado() {
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Selecciona elemento de la tabla");
+        alert.setContentText("Debes seleccionar un elemento de la tabla para continuar");
+        alert.showAndWait();
+    }
 }

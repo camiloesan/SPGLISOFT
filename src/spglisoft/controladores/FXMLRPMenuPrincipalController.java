@@ -11,10 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.ProyectoDAO;
 import spglisoft.modelo.pojo.Proyecto;
+import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,12 +43,12 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     private void llenarTablaProyectos() {
         ProyectoDAO proyectoDAO = new ProyectoDAO();
         tablaProyectos.getItems().clear();
-        List<Proyecto> listaProyectos = null;
+        List<Proyecto> listaProyectos = new ArrayList<>();
         int userID = SingletonLogin.getInstance().getUser().getUserId();
-
         try {
             listaProyectos = proyectoDAO.obtenerProyectosPorIDUsuario(userID);
         } catch (SQLException ex) {
+            Alertas.mostrarAlertaErrorConexionBD();
             ex.printStackTrace();
         }
         tablaProyectos.getItems().addAll(listaProyectos);
@@ -57,6 +59,8 @@ public class FXMLRPMenuPrincipalController implements Initializable {
         if (tablaProyectos.getSelectionModel().getSelectedItem() != null) {
             SingletonLogin.getInstance().setNombreProyectoActual(tablaProyectos.getSelectionModel().getSelectedItem().getNombreProyecto());
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
         }
     }
     

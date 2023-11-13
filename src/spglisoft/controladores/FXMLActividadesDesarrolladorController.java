@@ -11,10 +11,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.ActividadDAO;
 import spglisoft.modelo.pojo.Actividad;
+import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,12 +52,13 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     private void llenarTablaActividades() {
         ActividadDAO actividadDAO = new ActividadDAO();
         tvActividades.getItems().clear();
-        List<Actividad> listaActividades;
+        List<Actividad> listaActividades = new ArrayList<>();
         try {
             listaActividades = actividadDAO
                     .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getUser().getUserId());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Alertas.mostrarAlertaErrorConexionBD();
+            e.printStackTrace();
         }
         tvActividades.getItems().addAll(listaActividades);
     }
@@ -92,9 +95,15 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     @FXML
     private void btnVerDetalleActividad() {
-        if (tvActividades.getSelectionModel().getSelectedItem() != null) {
+        if (esElementoSeleccionado()) {
             Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
             MainStage.changeView("/spglisoft/vistas/FXMLDetalleActividad.fxml", 1000, 600, actividad);
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
         }
+    }
+
+    private boolean esElementoSeleccionado() {
+        return tvActividades.getSelectionModel().getSelectedItem() != null;
     }
 }
