@@ -70,6 +70,8 @@ CREATE TABLE solicitudes_cambios (
     descripcion nvarchar(64) not null,
     fechaSolicitud date not null,
     accion_propuesta nvarchar(1000) not null,
+    razon_cambio nvarchar (300),
+    impacto nvarchar(30),
     estado enum('aceptado', 'rechazado', 'no_asignado'),
     PRIMARY KEY(id_solicitud),
     UNIQUE (id_solicitud)
