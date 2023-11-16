@@ -4,9 +4,12 @@ import spglisoft.modelo.ConexionBD;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import spglisoft.modelo.ResultadoOperacion;
 import spglisoft.modelo.pojo.Participantes;
+import spglisoft.modelo.pojo.Proyecto;
 import spglisoft.modelo.pojo.SolicitudCambio;
 
 public class SolicitudCambioDAO implements ISolicitudCambio {
@@ -53,5 +56,37 @@ public class SolicitudCambioDAO implements ISolicitudCambio {
             }
         }
         return resultado;
+    }
+    
+    public static ArrayList<SolicitudCambio> obtenerSolicitudes(Proyecto proyecto) throws SQLException {
+        ArrayList<SolicitudCambio> solicitudes = null;
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        if (conexionBD != null) {
+            try {
+                String consulta = "SELECT * FROM solicitudes_cambios WHERE nombre_proyecto = ?";
+                PreparedStatement obtenerSolicitudes = conexionBD.prepareStatement(consulta);
+                obtenerSolicitudes.setString(1, proyecto.getNombreProyecto());
+                ResultSet resultadoConsulta = obtenerSolicitudes.executeQuery();
+                solicitudes = new ArrayList<>();
+                while (resultadoConsulta.next()) {
+                    SolicitudCambio solicitud = new SolicitudCambio();
+                    solicitud.setIdSolicitud(resultadoConsulta.getInt("id_solicitud"));
+                    solicitud.setNombreProyecto(resultadoConsulta.getString("nombre_proyecto"));
+                    solicitud.setIdProponente(resultadoConsulta.getInt("id_proponente"));
+                    solicitud.setTitulo(resultadoConsulta.getString("titulo"));
+                    solicitud.setDescripcion(resultadoConsulta.getString("descripcion"));
+                    solicitud.setFechaSolicitud(resultadoConsulta.getDate("fechaSolicitud"));
+                    solicitud.setAccionPropuesta(resultadoConsulta.getString("accion_propuesta"));
+                    solicitud.setImpacto(resultadoConsulta.getString("impacto"));
+                    solicitud.setRazonCambio(resultadoConsulta.getString("razon_cambio"));
+                    solicitudes.add(solicitud);
+                }
+            } catch (SQLException e) {
+                throw e;
+            } finally {
+                conexionBD.close();
+            }
+        }
+        return solicitudes;
     }
 }

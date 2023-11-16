@@ -26,4 +26,8 @@ public class SidebarRepresentante {
     public static void irMenuProyectos() {
         MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
     }
+    
+    public static void irConsultarActividades() {
+        MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
+    }
 }

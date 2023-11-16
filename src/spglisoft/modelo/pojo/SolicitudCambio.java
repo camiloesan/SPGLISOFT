@@ -96,5 +96,4 @@ public class SolicitudCambio {
         this.razonCambio = razonCambio;
     }
     
-    
 }

@@ -21,6 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
 
@@ -111,6 +112,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
+    @FXML
     public void btnCambios() {
         spglisoft.utils.SidebarRepresentante.irMenuCambios();
     }
@@ -147,5 +149,10 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
             Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
             MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600, actividad);
         }
+    }
+
+    @FXML
+    private void testConsultarSolicitudes(MouseEvent event) {
+        spglisoft.utils.SidebarRepresentante.irConsultarActividades();
     }
 }
