@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/modelo/ResultadoOperacion.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/modelo/dao/DefectoDAO.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/vistas/FXMLRegistrarDefecto.fxml</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/modelo/pojo/Participantes.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/modelo/dao/ParticipantesDAO.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/controladores/FXMLRegistrarSolicitudCambioController.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/modelo/dao/SolicitudCambioDAO.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/modelo/pojo/SolicitudCambio.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/controladores/FXMLSolicitudesCambioController.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/controladores/FXMLLoginController.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/controladores/FXMLDefectosDesarrolladorController.java</file>
             <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/controladores/FXMLRegistrarDefectoController.java</file>
+            <file>file:/C:/Users/lecap/Desktop/SPGLISOFT/src/spglisoft/utils/SidebarDesarrollador.java</file>
         </group>
     </open-files>
 </project-private>

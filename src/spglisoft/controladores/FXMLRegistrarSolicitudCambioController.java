@@ -47,7 +47,7 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     @FXML
     private ComboBox <String>cbImpactoCambio;
     @FXML
-    private TextArea taAcccionPropuesta;
+    private TextArea taAccionPropuesta;
     @FXML
     private TextArea taDescripcionCambio;
     @FXML
@@ -71,7 +71,7 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     }
     
     private void registrarSolicitud(Participantes participantes, SolicitudCambio solicitud){
-        if (tfTitulo.getText().trim().isEmpty() || taAcccionPropuesta.getText().trim().isEmpty()
+        if (tfTitulo.getText().trim().isEmpty() || taAccionPropuesta.getText().trim().isEmpty()
                 || taDescripcionCambio.getText().trim().isEmpty() || taRazonCambio.getText().trim().isEmpty()){
             Utilidades.mostrarAlertaSimple("Formulario", 
                     "Campos faltantes", Alert.AlertType.INFORMATION);
@@ -95,7 +95,7 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     private void btRegistrarSolicitud(ActionEvent event) {
         String titulo = tfTitulo.getText();
         String descripcion = taDescripcionCambio.getText();
-        String accionPropuesta = taAcccionPropuesta.getText();
+        String accionPropuesta = taAccionPropuesta.getText();
         String razonCambio = taRazonCambio.getText();
         String impacto = cbImpactoCambio.getValue();
         SolicitudCambio nuevaSolicitud = new SolicitudCambio();

@@ -8,41 +8,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRegistrarDefectoController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRegistrarDefectoController">
    <children>
-      <Pane prefHeight="88.0" prefWidth="800.0" style="-fx-background-color: #18529D;">
+      <HBox layoutX="14.0" layoutY="88.0" prefHeight="0.0" prefWidth="200.0">
          <children>
-            <Label layoutX="14.0" layoutY="22.0" text="Registrar defecto" textFill="WHITE">
+            <Label text="Nombre">
                <font>
-                  <Font size="30.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="71.0" fitWidth="80.0" layoutX="715.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/bugicon.png" />
-               </image>
-            </ImageView>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="115.0" prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="tfNombreDefecto" prefHeight="25.0" prefWidth="291.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="140.0" prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <Label text="Descripcion">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="167.0" prefHeight="130.0" prefWidth="660.0">
+         <children>
+            <TextArea fx:id="taDescripcion" prefHeight="130.0" prefWidth="650.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="300.0" prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <Label text="Tipo de defecto">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="327.0" prefHeight="27.0" prefWidth="200.0">
+         <children>
+            <ComboBox fx:id="cbTipoDefecto" prefWidth="150.0" />
+         </children>
+      </HBox>
+      <Pane prefHeight="80.0" prefWidth="700.0" style="-fx-background-color: #18529D;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="700.0">
+               <children>
+                  <Label text="Registrar defecto" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </Pane>
-      <Label layoutX="14.0" layoutY="118.0" text="Nombre">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tfNombreDefecto" layoutX="14.0" layoutY="145.0" prefHeight="25.0" prefWidth="318.0" />
-      <Label layoutX="14.0" layoutY="189.0" text="Descripcion">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="taDescripcion" layoutX="14.0" layoutY="216.0" prefHeight="200.0" prefWidth="769.0" />
-      <ComboBox fx:id="cbTipoDefecto" layoutX="14.0" layoutY="454.0" prefWidth="150.0" />
-      <Label layoutX="14.0" layoutY="427.0" text="Tipo de defecto">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="541.0" layoutY="537.0" mnemonicParsing="false" onAction="#btRegistrarDefecto" text="Registrar defecto" />
-      <Button layoutX="679.0" layoutY="537.0" mnemonicParsing="false" onAction="#btVolver" prefHeight="25.0" prefWidth="107.0" text="Volver" />
+      <HBox alignment="CENTER_RIGHT" layoutX="14.0" layoutY="405.0" prefHeight="80.0" prefWidth="660.0" spacing="20.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#btRegistrarDefecto" text="Registrar defecto" />
+            <Button mnemonicParsing="false" onAction="#btVolver" prefHeight="25.0" prefWidth="107.0" text="Volver" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
