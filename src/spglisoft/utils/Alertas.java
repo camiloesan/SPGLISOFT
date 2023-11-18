@@ -29,4 +29,11 @@ public class Alertas {
         alert.setContentText("Debes seleccionar un elemento de la tabla para continuar");
         alert.showAndWait();
     }
+
+    public static void mostrarAlertaLoginFallido() {
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Credenciales no válidas");
+        alert.setContentText("El correo o contraseña son incorrectos, inténtalo de nuevo");
+        alert.showAndWait();
+    }
 }

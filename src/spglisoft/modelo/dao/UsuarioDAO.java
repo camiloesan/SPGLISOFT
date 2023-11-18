@@ -18,9 +18,8 @@ import java.util.List;
  *
  * @author camilo
  */
-public class UsuarioDAO implements IUsuario {
-    @Override
-    public boolean sonCredencialesValidas(String email, String password) throws SQLException {
+public class UsuarioDAO {
+    public static boolean sonCredencialesValidas(String email, String password) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         boolean isValid = false;
         
@@ -39,8 +38,7 @@ public class UsuarioDAO implements IUsuario {
         return isValid;
     }    
 
-    @Override
-    public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
+    public static Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         Usuario user = null;
         
@@ -65,8 +63,7 @@ public class UsuarioDAO implements IUsuario {
         return user;
     }
 
-    @Override
-    public List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
+    public static List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
         String query = "SELECT p.id_usuario AS id_usuario, nombre, apellido_paterno, apellido_materno, matricula " +
                 "FROM usuarios INNER JOIN participantes p " +
                 "WHERE tipo_usuario = 'desarrollador' AND nombre_proyecto = (?)";
@@ -89,8 +86,7 @@ public class UsuarioDAO implements IUsuario {
         return listaUsuarios;
     }
 
-    @Override
-    public void asignarActividadADesarrollador(int idActividad, int idUsuario) throws SQLException {
+    public static void asignarActividadADesarrollador(int idActividad, int idUsuario) throws SQLException {
         String query = "UPDATE actividades " +
                 "SET id_desarrollador = (?) " +
                 "WHERE id_actividad = (?)";

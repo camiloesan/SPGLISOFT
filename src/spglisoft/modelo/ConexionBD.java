@@ -15,17 +15,14 @@ import java.sql.SQLException;
  * @author camilo
  */
 public class ConexionBD {
-    public static final String URL_CONEXION = "jdbc:mysql://" + Constantes.HOSTNAME + ":"
-            + Constantes.PUERTO + "/" + Constantes.NOMBRE_BD + "?allowPublicKeyRetrieval=true&useSSL=false";
+    public static final String URL_CONEXION = "jdbc:mysql://"
+            + Constantes.HOSTNAME + ":"
+            + Constantes.PUERTO 
+            + "/"
+            + Constantes.NOMBRE_BD
+            + "?allowPublicKeyRetrieval=true&useSSL=false";
 
-    public static Connection obtenerConnection() {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(URL_CONEXION, Constantes.USUARIO, Constantes.PASSWORD);
-        } catch (SQLException s) {
-            s.printStackTrace();
-        }
-
-        return connection;
+    public static Connection obtenerConnection() throws SQLException {
+        return DriverManager.getConnection(URL_CONEXION, Constantes.USUARIO, Constantes.PASSWORD);
     }
 }

@@ -18,10 +18,8 @@ import java.util.List;
  *
  * @author camilo
  */
-public class ProyectoDAO implements IProyecto {
-
-    @Override
-    public List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
+public class ProyectoDAO {
+    public static List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         List<Proyecto> proyectosList = null;
         
@@ -45,7 +43,6 @@ public class ProyectoDAO implements IProyecto {
             }
             conexionBD.close();
         }
-        
         return proyectosList;
     }
 }

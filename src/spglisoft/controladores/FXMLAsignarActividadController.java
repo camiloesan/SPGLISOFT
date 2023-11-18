@@ -22,34 +22,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * FXML Controller class
- *
- * @author camilo
- */
 public class FXMLAsignarActividadController implements Initializable {
     @FXML
     private TableView<Usuario> tvDesarrolladores;
-
     @FXML
     private TableColumn<Usuario, String> colApellidoPaterno;
-
     @FXML
     private TableColumn<Usuario, String> colNombre;
-
     @FXML
     private TableColumn<Usuario, String> colApellidoMaterno;
-
     @FXML
     private TableColumn<Usuario, String> colMatricula;
-
     @FXML
     private Label lblTitulo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        inicializarInformacion();
         formatearTabla();
         llenarTabla();
+    }
+
+    private void inicializarInformacion() {
         Actividad actividad = (Actividad) MainStage.getUserData();
         lblTitulo.setText("Asignar Desarrollador Actividad [" + actividad.getTitulo() + "]");
     }
@@ -62,32 +56,28 @@ public class FXMLAsignarActividadController implements Initializable {
     }
 
     private void llenarTabla() {
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         tvDesarrolladores.getItems().clear();
         List<Usuario> listaDesarrolladores = new ArrayList<>();
         try {
-            listaDesarrolladores = usuarioDAO
+            listaDesarrolladores = UsuarioDAO
                     .obtenerDesarrolladoresPorProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
-            e.printStackTrace();
         }
         tvDesarrolladores.getItems().addAll(listaDesarrolladores);
     }
 
     @FXML
     private void btnAsignarActividad() {
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         Actividad actividad = (Actividad) MainStage.getUserData();
         if (esElementoSeleccionado()) {
             Usuario usuario = tvDesarrolladores.getSelectionModel().getSelectedItem();
             try {
-                usuarioDAO.asignarActividadADesarrollador(actividad.getIdActividad(), usuario.getUserId());
+                UsuarioDAO.asignarActividadADesarrollador(actividad.getIdActividad(), usuario.getUserId());
                 Alertas.mostrarAlertaExito();
                 MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
             } catch (SQLException e) {
                 Alertas.mostrarAlertaErrorConexionBD();
-                e.printStackTrace();
             }
         } else {
             Alertas.mostrarAlertaElementoNoSeleccionado();

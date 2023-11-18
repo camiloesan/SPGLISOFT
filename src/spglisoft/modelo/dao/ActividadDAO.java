@@ -10,9 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActividadDAO implements IActividad {
-    @Override
-    public List<Actividad> obtenerActividadesAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+public class ActividadDAO {
+    public static List<Actividad> obtenerActividadesAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
         String query = "SELECT * FROM actividades " +
                 "WHERE nombre_proyecto = ? AND id_desarrollador IS NOT NULL";
         Connection connection = ConexionBD.obtenerConnection();
@@ -38,8 +37,7 @@ public class ActividadDAO implements IActividad {
         return listaActividades;
     }
 
-    @Override
-    public List<Actividad> obtenerActividadesNoAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+    public static List<Actividad> obtenerActividadesNoAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
         String query = "SELECT * FROM actividades " +
                 "WHERE nombre_proyecto = ? AND id_desarrollador IS NULL";
         Connection connection = ConexionBD.obtenerConnection();
@@ -64,8 +62,7 @@ public class ActividadDAO implements IActividad {
         return listaActividades;
     }
 
-    @Override
-    public List<Actividad> obtenerActividadesAsignadasPorDesarrollador(int idDesarrollador) throws SQLException {
+    public static List<Actividad> obtenerActividadesAsignadasPorDesarrollador(int idDesarrollador) throws SQLException {
         String query = "SELECT * FROM actividades " +
                 "WHERE id_desarrollador = ?";
         Connection connection = ConexionBD.obtenerConnection();

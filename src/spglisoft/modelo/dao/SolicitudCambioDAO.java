@@ -6,9 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SolicitudCambioDAO implements ISolicitudCambio {
-    @Override
-    public void actualizarEstadoSolicitud(String estado, int idSolicitud) throws SQLException {
+public class SolicitudCambioDAO {
+    public static void actualizarEstadoSolicitud(String estado, int idSolicitud) throws SQLException {
         String query = "UPDATE solicitudes_cambios " +
                 "SET estado = ? " +
                 "WHERE id_solicitud = ?";

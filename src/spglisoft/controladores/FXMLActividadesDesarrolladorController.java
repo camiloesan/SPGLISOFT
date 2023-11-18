@@ -23,16 +23,12 @@ import java.util.ResourceBundle;
 public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
     @FXML
     private TableView<Actividad> tvActividades;
-
     @FXML
     private TableColumn<Actividad, String> colFechaInicio;
-
     @FXML
     private TableColumn<Actividad, String> colEstado;
-
     @FXML
     private TableColumn<Actividad, String> colTitulo;
-
     @FXML
     private TableColumn<Actividad, String> colFechaFin;
 
@@ -50,15 +46,13 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     private void llenarTablaActividades() {
-        ActividadDAO actividadDAO = new ActividadDAO();
         tvActividades.getItems().clear();
         List<Actividad> listaActividades = new ArrayList<>();
         try {
-            listaActividades = actividadDAO
+            listaActividades = ActividadDAO
                     .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getUser().getUserId());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
-            e.printStackTrace();
         }
         tvActividades.getItems().addAll(listaActividades);
     }
