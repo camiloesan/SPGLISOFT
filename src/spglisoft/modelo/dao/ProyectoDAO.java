@@ -20,28 +20,28 @@ import java.util.List;
  */
 public class ProyectoDAO {
     public static List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
-        Connection conexionBD = ConexionBD.obtenerConnection();
-        List<Proyecto> proyectosList = null;
-        
-        if (conexionBD != null) {
+        List<Proyecto> proyectosList = new ArrayList<>();
+        try {
             String query = "SELECT nombre_proyecto, descripcion, fecha_inicio,"
                     + "fecha_fin, estado FROM proyectos WHERE id_usuario_responsable = ?";
-
+            Connection conexionBD = ConexionBD.obtenerConnection();
             PreparedStatement preparedStatement = conexionBD.
                     prepareStatement(query);
             preparedStatement.setInt(1, idUsuarioResponsable);
             ResultSet resultSet = preparedStatement.executeQuery();
-            
+
             proyectosList = new ArrayList<>();
             while (resultSet.next()) {
                 Proyecto proyecto = new Proyecto();
                 proyecto.setNombreProyecto(resultSet.
                         getString("nombre_proyecto"));
                 proyecto.setEstado(resultSet.getString("estado"));
-                
+
                 proyectosList.add(proyecto);
             }
             conexionBD.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return proyectosList;
     }
