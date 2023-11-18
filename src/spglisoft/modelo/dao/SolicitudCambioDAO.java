@@ -8,18 +8,14 @@ import java.sql.SQLException;
 
 public class SolicitudCambioDAO {
     public static void actualizarEstadoSolicitud(String estado, int idSolicitud) throws SQLException {
-        try {
-            Connection conexionBD = ConexionBD.obtenerConnection();
-            String query = "UPDATE solicitudes_cambios " +
-                    "SET estado = ? " +
-                    "WHERE id_solicitud = ?";
-            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-            preparedStatement.setString(1, estado);
-            preparedStatement.setInt(2, idSolicitud);
-            preparedStatement.execute();
-            conexionBD.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        String query = "UPDATE solicitudes_cambios " +
+                "SET estado = ? " +
+                "WHERE id_solicitud = ?";
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setString(1, estado);
+        preparedStatement.setInt(2, idSolicitud);
+        preparedStatement.execute();
+        conexionBD.close();
     }
 }
