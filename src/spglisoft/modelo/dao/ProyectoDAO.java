@@ -18,34 +18,27 @@ import java.util.List;
  *
  * @author camilo
  */
-public class ProyectoDAO implements IProyecto {
-
-    @Override
-    public List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
+public class ProyectoDAO {
+    public static List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
+        List<Proyecto> proyectosList = new ArrayList<>();
+        String query = "SELECT nombre_proyecto, descripcion, fecha_inicio,"
+                + "fecha_fin, estado FROM proyectos WHERE id_usuario_responsable = ?";
         Connection conexionBD = ConexionBD.obtenerConnection();
-        List<Proyecto> proyectosList = null;
-        
-        if (conexionBD != null) {
-            String query = "SELECT nombre_proyecto, descripcion, fecha_inicio,"
-                    + "fecha_fin, estado FROM proyectos WHERE id_usuario_responsable = ?";
+        PreparedStatement preparedStatement = conexionBD.
+                prepareStatement(query);
+        preparedStatement.setInt(1, idUsuarioResponsable);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-            PreparedStatement preparedStatement = conexionBD.
-                    prepareStatement(query);
-            preparedStatement.setInt(1, idUsuarioResponsable);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            
-            proyectosList = new ArrayList<>();
-            while (resultSet.next()) {
-                Proyecto proyecto = new Proyecto();
-                proyecto.setNombreProyecto(resultSet.
-                        getString("nombre_proyecto"));
-                proyecto.setEstado(resultSet.getString("estado"));
-                
-                proyectosList.add(proyecto);
-            }
-            conexionBD.close();
+        proyectosList = new ArrayList<>();
+        while (resultSet.next()) {
+            Proyecto proyecto = new Proyecto();
+            proyecto.setNombreProyecto(resultSet.
+                    getString("nombre_proyecto"));
+            proyecto.setEstado(resultSet.getString("estado"));
+
+            proyectosList.add(proyecto);
         }
-        
+        conexionBD.close();
         return proyectosList;
     }
 }

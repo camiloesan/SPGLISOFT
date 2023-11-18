@@ -33,7 +33,6 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
 
     @FXML
     private void btnGuardar() {
-        SolicitudCambioDAO solicitudCambioDAO = new SolicitudCambioDAO();
         String estado = "no_asignado";
         switch (cbEstadoSolicitud.getSelectionModel().getSelectedItem()) {
             case "Aceptado":
@@ -49,7 +48,7 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
 
         Object todoObj = MainStage.getUserData();//REMINDER TO GET THE OBJECT SOLICITUDCAMBIO
         try {
-            solicitudCambioDAO.actualizarEstadoSolicitud(estado, 1); //TEMPORAL FIXXXXXXXXX
+            SolicitudCambioDAO.actualizarEstadoSolicitud(estado, 1); //TEMPORAL FIXXXXXXXXX
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
             e.printStackTrace();

@@ -70,27 +70,25 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     private void llenarTablaActividadesNoAsignadas() {
-        ActividadDAO actividadDAO = new ActividadDAO();
         tvActividades.getItems().clear();
         List<Actividad> listaActividades = new ArrayList<>();
         try {
-            listaActividades = actividadDAO.obtenerActividadesNoAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+            listaActividades = ActividadDAO
+                    .obtenerActividadesNoAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
-            e.printStackTrace();
         }
         tvActividades.getItems().addAll(listaActividades);
     }
 
     private void llenarTablaActividadesAsignadas() {
-        ActividadDAO actividadDAO = new ActividadDAO();
         tvActividades.getItems().clear();
         List<Actividad> listaActividades = new ArrayList<>();
         try {
-            listaActividades = actividadDAO.obtenerActividadesAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+            listaActividades = ActividadDAO
+                    .obtenerActividadesAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
-            e.printStackTrace();
         }
         tvActividades.getItems().addAll(listaActividades);
     }

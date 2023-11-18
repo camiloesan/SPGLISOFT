@@ -41,12 +41,11 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     }
     
     private void llenarTablaProyectos() {
-        ProyectoDAO proyectoDAO = new ProyectoDAO();
         tablaProyectos.getItems().clear();
         List<Proyecto> listaProyectos = new ArrayList<>();
         int userID = SingletonLogin.getInstance().getUser().getUserId();
         try {
-            listaProyectos = proyectoDAO.obtenerProyectosPorIDUsuario(userID);
+            listaProyectos = ProyectoDAO.obtenerProyectosPorIDUsuario(userID);
         } catch (SQLException ex) {
             Alertas.mostrarAlertaErrorConexionBD();
             ex.printStackTrace();

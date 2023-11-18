@@ -10,17 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActividadDAO implements IActividad {
-    @Override
-    public List<Actividad> obtenerActividadesAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+public class ActividadDAO {
+    public static List<Actividad> obtenerActividadesAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+        List<Actividad> listaActividades = new ArrayList<>();
+        Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT * FROM actividades " +
                 "WHERE nombre_proyecto = ? AND id_desarrollador IS NOT NULL";
-        Connection connection = ConexionBD.obtenerConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setString(1, nombreProyecto);
-        ResultSet resultSet = preparedStatement.executeQuery();
 
-        List<Actividad> listaActividades = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()) {
             Actividad actividad = new Actividad();
             actividad.setIdActividad(resultSet.getInt("id_actividad"));
@@ -34,21 +33,20 @@ public class ActividadDAO implements IActividad {
             actividad.setDescripcion(resultSet.getString("descripcion"));
             listaActividades.add(actividad);
         }
-
+        conexionBD.close();
         return listaActividades;
     }
 
-    @Override
-    public List<Actividad> obtenerActividadesNoAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+    public static List<Actividad> obtenerActividadesNoAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+        List<Actividad> listaActividades = new ArrayList<>();
+        Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT * FROM actividades " +
                 "WHERE nombre_proyecto = ? AND id_desarrollador IS NULL";
-        Connection connection = ConexionBD.obtenerConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setString(1, nombreProyecto);
-        ResultSet resultSet = preparedStatement.executeQuery();
 
-        List<Actividad> listaActividades = new ArrayList<>();
-        while(resultSet.next()) {
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
             Actividad actividad = new Actividad();
             actividad.setIdActividad(resultSet.getInt("id_actividad"));
             actividad.setNombreProyecto(resultSet.getString("nombre_proyecto"));
@@ -61,19 +59,20 @@ public class ActividadDAO implements IActividad {
             actividad.setDescripcion(resultSet.getString("descripcion"));
             listaActividades.add(actividad);
         }
+        conexionBD.close();
         return listaActividades;
     }
 
-    @Override
-    public List<Actividad> obtenerActividadesAsignadasPorDesarrollador(int idDesarrollador) throws SQLException {
+    public static List<Actividad> obtenerActividadesAsignadasPorDesarrollador(int idDesarrollador) throws SQLException {
+        List<Actividad> listaActividades = new ArrayList<>();
+        Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT * FROM actividades " +
                 "WHERE id_desarrollador = ?";
-        Connection connection = ConexionBD.obtenerConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idDesarrollador);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        List<Actividad> listaActividades = new ArrayList<>();
         while(resultSet.next()) {
             Actividad actividad = new Actividad();
             actividad.setIdActividad(resultSet.getInt("id_actividad"));
@@ -87,6 +86,7 @@ public class ActividadDAO implements IActividad {
             actividad.setDescripcion(resultSet.getString("descripcion"));
             listaActividades.add(actividad);
         }
+        conexionBD.close();
         return listaActividades;
     }
 }

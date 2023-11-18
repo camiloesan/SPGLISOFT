@@ -5,17 +5,15 @@
 package spglisoft.controladores;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Usuario;
+import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 
 import java.sql.SQLException;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FXMLLoginController {
     @FXML
@@ -28,10 +26,6 @@ public class FXMLLoginController {
     
     private void redirigirAEscena(Usuario usuario) {
         switch (usuario.getTipoUsuario()) {
-            case "administrador":
-                MainStage.changeView("/spglisoft/vistas/FXMLGestionUsuarios.fxml", 1000, 600);
-            break;
-
             case "representante_proyecto":
                 MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
             break;
@@ -42,42 +36,37 @@ public class FXMLLoginController {
     }
     
     private Usuario sessionUser() {
-        UsuarioDAO usersDAO = new UsuarioDAO();
         String email = tfEmail.getText();
-        Usuario user = new Usuario();
+        Usuario usuario = new Usuario();
         
         try {
-            user = usersDAO.obtenerUsuarioPorEmail(email);
+            usuario = UsuarioDAO.obtenerUsuarioPorEmail(email);
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Alertas.mostrarAlertaErrorConexionBD();
         }
         
-        if (user != null) {
+        if (usuario != null) {
             SingletonLogin singletonLogin;
             singletonLogin = SingletonLogin.getInstance();   
-            singletonLogin.setUser(user);
-            return user;
+            singletonLogin.setUser(usuario);
+            return usuario;
         }
         return null;
     }
     
     @FXML
     private void btnLogin() {
-        UsuarioDAO usersDAO = new UsuarioDAO();
         String email = tfEmail.getText();
         String password = tfPassword.getText();
         
         try {
-            if (usersDAO.sonCredencialesValidas(email, password)) {
+            if (UsuarioDAO.sonCredencialesValidas(email, password)) {
                 redirigirAEscena(Objects.requireNonNull(sessionUser()));
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Alerta");
-                alert.setContentText("Correo electrónico o contraseña incorrectos");
-                alert.showAndWait();
+                Alertas.mostrarAlertaLoginFallido();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Alertas.mostrarAlertaErrorConexionBD();
         }
     }
 }

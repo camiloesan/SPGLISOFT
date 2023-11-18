@@ -13,19 +13,14 @@ import java.util.ResourceBundle;
 public class FXMLDetalleActividadController implements Initializable {
     @FXML
     private Label lblFechaInicio;
-
     @FXML
     private Label lblEstado;
-
     @FXML
     private Label lblFechaFin;
-
     @FXML
     private Label lblDescripcion;
-
     @FXML
     private Label lblEsfuerzo;
-
     @FXML
     private Label lblTitulo;
 

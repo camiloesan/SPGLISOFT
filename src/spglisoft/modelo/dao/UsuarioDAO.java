@@ -18,55 +18,46 @@ import java.util.List;
  *
  * @author camilo
  */
-public class UsuarioDAO implements IUsuario {
-    @Override
-    public boolean sonCredencialesValidas(String email, String password) throws SQLException {
-        Connection conexionBD = ConexionBD.obtenerConnection();
+public class UsuarioDAO {
+    public static boolean sonCredencialesValidas(String email, String password) throws SQLException {
         boolean isValid = false;
-        
-        if (conexionBD != null) {
-            String query = "SELECT 1 FROM usuarios WHERE email=(?) AND contrasena=(SHA2(?, 256))";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        String query = "SELECT 1 FROM usuarios WHERE email=(?) AND contrasena=(SHA2(?, 256))";
 
-            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        isValid = resultSet.next();
 
-            isValid = resultSet.next();
-
-            conexionBD.close();
-        }
+        conexionBD.close();
         return isValid;
     }    
 
-    @Override
-    public Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
-        Connection conexionBD = ConexionBD.obtenerConnection();
+    public static Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
         Usuario user = null;
-        
-        if (conexionBD != null) {
-            String query = "SELECT * FROM usuarios WHERE email = (?)";
-            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-            preparedStatement.setString(1, email);
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        String query = "SELECT * FROM usuarios WHERE email = (?)";
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setString(1, email);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            user = new Usuario();
-            while (resultSet.next()) {
-                user.setUserId(resultSet.getInt("id_usuario"));
-                user.setNombre(resultSet.getString("nombre"));
-                user.setApellidoPaterno(resultSet.getString("apellido_paterno"));
-                user.setApellidoMaterno(resultSet.getString("apellido_materno"));
-                user.setEmail(resultSet.getString("email"));
-                user.setMatricula(resultSet.getString("matricula"));
-                user.setTipoUsuario(resultSet.getString("tipo_usuario"));
-            }
-            conexionBD.close();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        user = new Usuario();
+        while (resultSet.next()) {
+            user.setUserId(resultSet.getInt("id_usuario"));
+            user.setNombre(resultSet.getString("nombre"));
+            user.setApellidoPaterno(resultSet.getString("apellido_paterno"));
+            user.setApellidoMaterno(resultSet.getString("apellido_materno"));
+            user.setEmail(resultSet.getString("email"));
+            user.setMatricula(resultSet.getString("matricula"));
+            user.setTipoUsuario(resultSet.getString("tipo_usuario"));
         }
+        conexionBD.close();
         return user;
     }
 
-    @Override
-    public List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
+    public static List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
+        List<Usuario> listaUsuarios = new ArrayList<>();
         String query = "SELECT p.id_usuario AS id_usuario, nombre, apellido_paterno, apellido_materno, matricula " +
                 "FROM usuarios INNER JOIN participantes p " +
                 "WHERE tipo_usuario = 'desarrollador' AND nombre_proyecto = (?)";
@@ -75,7 +66,6 @@ public class UsuarioDAO implements IUsuario {
         preparedStatement.setString(1, nombreProyecto);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        List<Usuario> listaUsuarios = new ArrayList<>();
         while (resultSet.next()) {
             Usuario usuario = new Usuario();
             usuario.setUserId(resultSet.getInt("id_usuario"));
@@ -89,8 +79,7 @@ public class UsuarioDAO implements IUsuario {
         return listaUsuarios;
     }
 
-    @Override
-    public void asignarActividadADesarrollador(int idActividad, int idUsuario) throws SQLException {
+    public static void asignarActividadADesarrollador(int idActividad, int idUsuario) throws SQLException {
         String query = "UPDATE actividades " +
                 "SET id_desarrollador = (?) " +
                 "WHERE id_actividad = (?)";
