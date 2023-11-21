@@ -80,6 +80,7 @@ public class SolicitudCambioDAO implements ISolicitudCambio {
                     solicitud.setImpacto(resultadoConsulta.getString("impacto"));
                     solicitud.setRazonCambio(resultadoConsulta.getString("razon_cambio"));
                     solicitudes.add(solicitud);
+                    System.out.println("Se anadio una solicitud en el DAO");
                 }
             } catch (SQLException e) {
                 throw e;

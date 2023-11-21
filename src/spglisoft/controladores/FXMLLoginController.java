@@ -72,7 +72,7 @@ public class FXMLLoginController {
         
         try {
             if (usersDAO.sonCredencialesValidas(email, password)) {
-                Utilidades.mostrarAlertaSimple("Autenticacion", "Bienvenido a SPGLISOFT",
+                Utilidades.mostrarAlertaSimple("Candy candy", "Bienvenido a SPGLISOFT",
                         Alert.AlertType.INFORMATION);
                 redirigirAEscena(Objects.requireNonNull(sessionUser()));
             } else {

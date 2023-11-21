@@ -80,7 +80,7 @@
                   <TableView fx:id="tvSolicitudesCambio" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="tcSolicitudes" prefWidth="555.0" text="Solicitudes de cambio" />
-                        <TableColumn fx:id="tcDetalles" prefWidth="193.0" />
+                        <TableColumn fx:id="tcDetalles" prefWidth="193.0" text="Ver detalles" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
