@@ -21,13 +21,14 @@ import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Proyecto;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.modelo.pojo.Usuario;
+import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 public class FXMLConsultarSolicitudesController implements Initializable {
     
     private Proyecto proyecto;
     private ObservableList<SolicitudCambio> listaSolicitudes;
-
+    
     @FXML
     private ComboBox<?> cbFiltro;
     @FXML
@@ -56,26 +57,12 @@ public class FXMLConsultarSolicitudesController implements Initializable {
     private void cbSeleccionFiltro(ActionEvent event) {
     }
     
-    public void inicializarInformacion(){
+    public void inicializar(Usuario responsable) {
         try {
-            Usuario responsable = UsuarioDAO.getSesion();
+            //Usuario responsable = UsuarioDAO.getSesion();
             this.proyecto = ProyectoDAO.obtenerProyectoResponsable(responsable);
-            listaSolicitudes = FXCollections.observableArrayList();
-            ArrayList<SolicitudCambio> listaBD = SolicitudCambioDAO.obtenerSolicitudes(proyecto);
-            listaSolicitudes.addAll(listaBD);
-            tvSolicitudesCambio.setItems(listaSolicitudes);
-        } catch (SQLException e) {
-            Utilidades.mostrarAlertaSimple("Error", "No se puede cargar la tabla",
-                    Alert.AlertType.ERROR);
-        } catch (Exception ex){
-            System.out.println("Error en el metodo inicializar");
-        }
-    }
-    
-    public void inicializar() {
-        try {
-            Usuario responsable = UsuarioDAO.getSesion();
-            this.proyecto = ProyectoDAO.obtenerProyectoResponsable(responsable);
+            cargarDatosLista();
+            System.out.println("EN EL INIZIALIZAR");
         } catch (Exception e) {
             System.out.println("Error inicializar");
         }
@@ -84,7 +71,8 @@ public class FXMLConsultarSolicitudesController implements Initializable {
     private void cargarDatosLista() {
         try {
             listaSolicitudes = FXCollections.observableArrayList();
-            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO.obtenerSolicitudes(proyecto);
+            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO
+                    .obtenerSolicitudes(SingletonLogin.getInstance().getNombreProyectoActual());
             listaSolicitudes.addAll(solicitudesBD);
             tvSolicitudesCambio.setItems(listaSolicitudes);
         } catch (Exception e) {
@@ -95,6 +83,6 @@ public class FXMLConsultarSolicitudesController implements Initializable {
     
     private void configurarTabla(){
         this.tcSolicitudes.setCellValueFactory(new PropertyValueFactory("titulo"));
-        //this.tcDetalles.setCellFactory(new PropertyValueFactory("detalles"));
+        //this.tcDetalles.setCellFactory(new PropertyValueFactory("titulo"));
     }
 }

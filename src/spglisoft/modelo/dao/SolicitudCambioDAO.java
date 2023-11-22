@@ -58,14 +58,14 @@ public class SolicitudCambioDAO implements ISolicitudCambio {
         return resultado;
     }
     
-    public static ArrayList<SolicitudCambio> obtenerSolicitudes(Proyecto proyecto) throws SQLException {
-        ArrayList<SolicitudCambio> solicitudes = null;
+    public static ArrayList<SolicitudCambio> obtenerSolicitudes(String proyecto) throws SQLException {
+        ArrayList<SolicitudCambio> solicitudes = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         if (conexionBD != null) {
             try {
                 String consulta = "SELECT * FROM solicitudes_cambios WHERE nombre_proyecto = ?";
                 PreparedStatement obtenerSolicitudes = conexionBD.prepareStatement(consulta);
-                obtenerSolicitudes.setString(1, proyecto.getNombreProyecto());
+                obtenerSolicitudes.setString(1, proyecto);
                 ResultSet resultadoConsulta = obtenerSolicitudes.executeQuery();
                 solicitudes = new ArrayList<>();
                 while (resultadoConsulta.next()) {

@@ -40,11 +40,16 @@ public class SidebarRepresentante {
     
     public static void irConsultarSolicitudesCambio() {
         try {
-            FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml");
-            Parent vista = loader.load();
-            FXMLConsultarSolicitudesController controlador = loader.getController();
-            controlador.inicializarInformacion();
-            
+            Usuario responsable = UsuarioDAO.getSesion();
+            if (responsable != null) {
+                FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml");
+                Parent vista = loader.load();
+                FXMLConsultarSolicitudesController controlador = loader.getController();
+                controlador.inicializar(responsable);
+                System.out.println("Responsable no es null");
+            } else {
+                System.out.println("Is null");
+            }
             MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
         } catch (Exception e) {
         }

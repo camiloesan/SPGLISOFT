@@ -25,8 +25,8 @@ public class FXMLLoginController {
     PasswordField tfPassword;
     
     public void initialize() {
-        tfEmail.setText("frank@gmail.com");
-        tfPassword.setText("frank");
+        tfEmail.setText("sujey@gmail.com");
+        tfPassword.setText("sujey");
     }
     
     private void redirigirAEscena(Usuario usuario) {
