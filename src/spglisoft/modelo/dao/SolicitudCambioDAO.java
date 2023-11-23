@@ -80,7 +80,6 @@ public class SolicitudCambioDAO implements ISolicitudCambio {
                     solicitud.setImpacto(resultadoConsulta.getString("impacto"));
                     solicitud.setRazonCambio(resultadoConsulta.getString("razon_cambio"));
                     solicitudes.add(solicitud);
-                    System.out.println("Se anadio una solicitud en el DAO");
                 }
             } catch (SQLException e) {
                 throw e;
@@ -89,5 +88,27 @@ public class SolicitudCambioDAO implements ISolicitudCambio {
             }
         }
         return solicitudes;
+    }
+    
+    public static String obtenerSolicitante(int idSolicitante) throws SQLException{
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        String nombreSolicitante = null;
+        if (conexionBD != null) {
+            try {
+                String consulta = "SELECT CONCAT(nombre,' ',apellido_paterno,' ',apellido_materno) AS nombre_completo "
+                        + "FROM usuarios WHERE id_usuario = ?";
+                PreparedStatement obtenerSolicitante = conexionBD.prepareStatement(consulta);
+                obtenerSolicitante.setInt(1, idSolicitante);
+                ResultSet resultado = obtenerSolicitante.executeQuery();
+                if (resultado.next()) {
+                    nombreSolicitante = resultado.getString("nombre_completo");
+                }
+            } catch (SQLException e) {
+                throw e;
+            } finally {
+                conexionBD.close();
+            }
+        }
+        return nombreSolicitante;
     }
 }

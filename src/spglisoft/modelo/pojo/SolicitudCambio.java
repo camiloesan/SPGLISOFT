@@ -5,6 +5,7 @@
 package spglisoft.modelo.pojo;
 
 import java.sql.Date;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -20,6 +21,7 @@ public class SolicitudCambio {
     private String accionPropuesta;
     private String impacto;
     private String razonCambio;
+    private Button button;
 
     public SolicitudCambio() {
     }
@@ -28,6 +30,14 @@ public class SolicitudCambio {
         return idSolicitud;
     }
 
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+    
     public void setIdSolicitud(int idSolicitud) {
         this.idSolicitud = idSolicitud;
     }
