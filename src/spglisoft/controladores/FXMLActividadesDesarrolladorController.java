@@ -74,7 +74,7 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     @Override
     public void btnSolicitudesCambio() {
-
+        spglisoft.utils.SidebarDesarrollador.irMenuSolicituesCambio();
     }
 
     @Override

@@ -1,6 +1,13 @@
 package spglisoft.utils;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import spglisoft.controladores.FXMLConsultarSolicitudesController;
 import spglisoft.controladores.MainStage;
+import spglisoft.modelo.dao.ProyectoDAO;
+import spglisoft.modelo.dao.UsuarioDAO;
+import spglisoft.modelo.pojo.Proyecto;
+import spglisoft.modelo.pojo.Usuario;
 
 public class SidebarRepresentante {
     public static void irMenuActividades() {
@@ -25,5 +32,26 @@ public class SidebarRepresentante {
 
     public static void irMenuProyectos() {
         MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
+    }
+    
+    public static void irConsultarActividades() {
+        MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
+    }
+    
+    public static void irConsultarSolicitudesCambio() {
+        try {
+            Usuario responsable = UsuarioDAO.getSesion();
+            if (responsable != null) {
+                FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml");
+                Parent vista = loader.load();
+                FXMLConsultarSolicitudesController controlador = loader.getController();
+                controlador.inicializar(responsable);
+                System.out.println("Responsable no es null");
+            } else {
+                System.out.println("Is null");
+            }
+            MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
+        } catch (Exception e) {
+        }
     }
 }

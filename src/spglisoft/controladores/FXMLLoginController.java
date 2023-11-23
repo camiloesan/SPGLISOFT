@@ -5,15 +5,17 @@
 package spglisoft.controladores;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Usuario;
-import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FXMLLoginController {
     @FXML
@@ -36,6 +38,7 @@ public class FXMLLoginController {
     }
     
     private Usuario sessionUser() {
+        UsuarioDAO usersDAO = new UsuarioDAO();
         String email = tfEmail.getText();
         Usuario usuario = new Usuario();
         
@@ -56,6 +59,7 @@ public class FXMLLoginController {
     
     @FXML
     private void btnLogin() {
+        UsuarioDAO usersDAO = new UsuarioDAO();
         String email = tfEmail.getText();
         String password = tfPassword.getText();
         

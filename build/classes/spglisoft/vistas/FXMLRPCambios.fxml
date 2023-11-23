@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="spglisoft.controladores.FXMLRPCambiosController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRPCambiosController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
          <children>
@@ -75,8 +69,15 @@
                         <Insets bottom="30.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0" promptText="Seleccionar filtro" />
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <HBox>
+                     <children>
+                        <ComboBox prefWidth="150.0" promptText="Seleccionar filtro" />
+                     </children>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                  </HBox>
+                  <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn prefWidth="75.0" text="Título" />
                         <TableColumn prefWidth="75.0" text="Fecha Inicio" />
@@ -90,14 +91,17 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </TableView>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                     <buttons>
-                        <Button mnemonicParsing="false" text="Ver detalle" />
-                     </buttons>
+                  <HBox alignment="TOP_RIGHT" spacing="15.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#btnVerDetalleCambio" text="Ver detalle" />
+                     </children>
                      <padding>
                         <Insets right="25.0" />
                      </padding>
-                  </ButtonBar>
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
          </children>

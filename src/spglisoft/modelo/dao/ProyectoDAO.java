@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import spglisoft.modelo.pojo.Usuario;
 
 /**
  *
@@ -40,5 +41,31 @@ public class ProyectoDAO {
         }
         conexionBD.close();
         return proyectosList;
+    }
+    
+    public static Proyecto obtenerProyectoResponsable(Usuario responsable) throws SQLException {
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        Proyecto proyecto = new Proyecto();
+        if (conexionBD != null) {
+            try {
+                String consulta = "SELECT * FROM proyectos WHERE id_usuario_responsable = ?";
+                PreparedStatement obtenerProyecto = conexionBD.prepareStatement(consulta);
+                obtenerProyecto.setInt(1, responsable.getUserId());
+                ResultSet resultadoConsulta = obtenerProyecto.executeQuery();
+                if (resultadoConsulta.next()) {
+                    proyecto.setNombreProyecto(resultadoConsulta.getString("nombre_proyecto"));
+                    proyecto.setDescripcion(resultadoConsulta.getString("descripcion"));
+                    proyecto.setFechaInicio(resultadoConsulta.getString("fecha_inicio"));
+                    proyecto.setFechaFin(resultadoConsulta.getString("fecha_fin"));
+                    proyecto.setEstado(resultadoConsulta.getString("estado"));
+                    proyecto.setUsuarioResponsable(resultadoConsulta.getInt("id_usuario_responsable"));
+                }
+            } catch (SQLException e) {
+                throw e;
+            } finally { 
+                conexionBD.close();
+            }
+        }
+        return proyecto;
     }
 }

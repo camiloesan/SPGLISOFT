@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
 
@@ -157,5 +158,11 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     private boolean esElementoSeleccionado() {
         return tvActividades.getSelectionModel().getSelectedItem() != null;
+    }
+
+    @FXML
+    private void testConsultarSolicitudes(MouseEvent event) {
+        //spglisoft.utils.SidebarRepresentante.irConsultarActividades();
+        spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 }

@@ -56,6 +56,10 @@ public class UsuarioDAO {
         return user;
     }
 
+    public static Usuario getSesion(){
+        return sesion;
+    }
+
     public static List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
         List<Usuario> listaUsuarios = new ArrayList<>();
         String query = "SELECT p.id_usuario AS id_usuario, nombre, apellido_paterno, apellido_materno, matricula " +
