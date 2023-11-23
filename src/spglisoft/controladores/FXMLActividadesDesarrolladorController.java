@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 
 public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
     @FXML
@@ -63,11 +64,13 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     @Override
+    @FXML
     public void btnCambios() {
 
     }
 
     @Override
+    @FXML
     public void btnDefectos() {
         spglisoft.utils.SidebarDesarrollador.irMenuDefectos();
     }
@@ -83,6 +86,7 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     @Override
+    @FXML
     public void btnCerrarSesion() {
         spglisoft.utils.SidebarDesarrollador.cerrarSesionDesarrollador();
     }
@@ -99,5 +103,9 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     private boolean esElementoSeleccionado() {
         return tvActividades.getSelectionModel().getSelectedItem() != null;
+    }
+
+    @FXML
+    private void btnTerminarActividad(ActionEvent event) {
     }
 }

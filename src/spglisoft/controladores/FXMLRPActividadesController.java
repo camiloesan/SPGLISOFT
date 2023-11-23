@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
 
@@ -48,7 +49,11 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     private ComboBox<String> cbFiltroActividades;
 
     private final static ObservableList<String> observableListCbFiltroActividades =
-            FXCollections.observableArrayList("Asignadas" ,"No Asignadas");
+            FXCollections.observableArrayList("Asignadas" ,"No Asignadas", "Concluidas");
+    @FXML
+    private Button btnDesasignarActividad;
+    @FXML
+    private Button btnEliminarActividad;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,10 +105,19 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
             case "Asignadas":
                 llenarTablaActividadesAsignadas();
                 btnAsignarActividad.setVisible(false);
+                btnDesasignarActividad.setVisible(true);
+                btnEliminarActividad.setVisible(false);
                 break;
             case "No Asignadas":
                 llenarTablaActividadesNoAsignadas();
                 btnAsignarActividad.setVisible(true);
+                btnDesasignarActividad.setVisible(false);
+                btnEliminarActividad.setVisible(true);
+                break;
+            case "Concluidas":
+                btnAsignarActividad.setVisible(false);
+                btnAsignarActividad.setVisible(false);
+                btnEliminarActividad.setVisible(false);
                 break;
         }
     }
@@ -113,6 +127,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
+    @FXML
     public void btnCambios() {
         spglisoft.utils.SidebarRepresentante.irMenuCambios();
     }
@@ -122,7 +137,9 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
+    @FXML
     public void btnDesarrolladores() {
+        spglisoft.utils.SidebarRepresentante.irMenuDesarrolladores();
     }
 
     @Override
@@ -157,5 +174,13 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     private boolean esElementoSeleccionado() {
         return tvActividades.getSelectionModel().getSelectedItem() != null;
+    }
+
+    @FXML
+    private void btnDesasignarActividad(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnEliminarActividad(ActionEvent event) {
     }
 }

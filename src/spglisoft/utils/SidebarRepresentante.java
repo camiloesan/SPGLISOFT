@@ -16,7 +16,7 @@ public class SidebarRepresentante {
     }
 
     public static void irMenuDesarrolladores() {
-
+        MainStage.changeView("/spglisoft/vistas/FXMLRPDesarrolladores.fxml", 1000, 600);
     }
 
     public static void irMenuInformacionProyeto() {
