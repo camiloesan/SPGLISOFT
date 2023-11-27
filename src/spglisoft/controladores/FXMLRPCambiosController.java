@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.input.MouseEvent;
 
 public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons {
     @Override
@@ -16,6 +17,7 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
     }
 
     @Override
+    @FXML
     public void btnActividades() {
         spglisoft.utils.SidebarRepresentante.irMenuActividades();
     }
@@ -37,6 +39,7 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
     }
 
     @Override
+    @FXML
     public void btnRegresar() {
         spglisoft.utils.SidebarRepresentante.irMenuProyectos();
     }
@@ -44,5 +47,10 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
     @FXML
     private void btnVerDetalleCambio() {
         MainStage.changeView("/spglisoft/vistas/FXMLDetalleCambio.fxml", 1000, 600);
+    }
+
+    @FXML
+    private void irSolicitudesCambio(MouseEvent event) {
+        spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 }

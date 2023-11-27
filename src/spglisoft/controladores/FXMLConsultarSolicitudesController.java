@@ -58,9 +58,6 @@ public class FXMLConsultarSolicitudesController implements Initializable {
         cbFiltro.setValue(" ");
     }
 
-    @FXML
-    private void btnCambios(MouseEvent event) {
-    }
 
     @FXML
     private void btnRegresar(MouseEvent event) {
@@ -123,7 +120,6 @@ public class FXMLConsultarSolicitudesController implements Initializable {
                 {
                     button.setOnAction(event -> {
                         SolicitudCambio solicitud = getTableView().getItems().get(getIndex());
-                        System.out.println("Detalles de la solicitud: " + solicitud.getTitulo());
                         irConsultarDetalles(solicitud);
                     });
                 }
@@ -153,7 +149,7 @@ public class FXMLConsultarSolicitudesController implements Initializable {
             
             Stage escenario = new Stage();
             escenario.setScene(escena);
-            escenario.setTitle("Consultar detalles de la solicitud de cambio");
+            escenario.setTitle("Detalles de la solicitud de cambio");
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         } catch (IOException e) {
@@ -161,5 +157,15 @@ public class FXMLConsultarSolicitudesController implements Initializable {
                     Alert.AlertType.ERROR);
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void irActividades(MouseEvent event) {
+        spglisoft.utils.SidebarRepresentante.irConsultarActividades();
+    }
+
+    @FXML
+    private void irCambios(MouseEvent event) {
+        spglisoft.utils.SidebarRepresentante.irMenuCambios();
     }
 }

@@ -153,7 +153,11 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     @FXML
     private void testConsultarSolicitudes(MouseEvent event) {
-        //spglisoft.utils.SidebarRepresentante.irConsultarActividades();
+        //spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
+    }
+
+    @FXML
+    private void irSolicitudesCambio(MouseEvent event) {
         spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 }
