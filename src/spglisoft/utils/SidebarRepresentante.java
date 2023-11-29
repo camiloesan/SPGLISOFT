@@ -43,10 +43,9 @@ public class SidebarRepresentante {
             Usuario responsable = UsuarioDAO.getSesion();
             if (responsable != null) {
                 FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml");
-                Parent vista = loader.load();
+                Parent vista = loader.load();   
                 FXMLConsultarSolicitudesController controlador = loader.getController();
                 controlador.inicializar(responsable);
-                System.out.println("Responsable no es null");
             } else {
                 System.out.println("Is null");
             }
