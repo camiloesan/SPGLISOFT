@@ -49,7 +49,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     private ComboBox<String> cbFiltroActividades;
 
     private final static ObservableList<String> observableListCbFiltroActividades =
-            FXCollections.observableArrayList("Asignadas" ,"No Asignadas");
+            FXCollections.observableArrayList("Asignadas", "No Asignadas");
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,7 +65,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     private void formatearTabla() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("FechaInicio"));
+        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
     }
