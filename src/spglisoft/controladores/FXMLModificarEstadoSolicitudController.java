@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
+import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.Alertas;
 
 import java.net.URL;
@@ -15,6 +16,7 @@ import java.util.ResourceBundle;
 public class FXMLModificarEstadoSolicitudController implements Initializable {
     @FXML
     ComboBox<String> cbEstadoSolicitud;
+    SolicitudCambio solicitudCambio;
 
     private final static ObservableList<String> observableListCbEstadosSolicitud =
             FXCollections.observableArrayList("Aceptado" ,"Rechazado", "Sin asignar");
@@ -22,8 +24,12 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         formatearCbEstadoSolicitud();
+        inicializarInformacion();
+    }
 
-        //todo get data
+    private void inicializarInformacion() {
+        solicitudCambio = (SolicitudCambio) MainStage.getUserData();
+        cbEstadoSolicitud.getSelectionModel().select(solicitudCambio.getEstado());
     }
 
     private void formatearCbEstadoSolicitud() {
@@ -46,9 +52,8 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
                 break;
         }
 
-        Object todoObj = MainStage.getUserData();//REMINDER TO GET THE OBJECT SOLICITUDCAMBIO
         try {
-            SolicitudCambioDAO.actualizarEstadoSolicitud(estado, 1); //TEMPORAL FIXXXXXXXXX
+            SolicitudCambioDAO.actualizarEstadoSolicitud(estado, solicitudCambio.getIdSolicitud());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
             e.printStackTrace();

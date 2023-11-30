@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import javafx.scene.input.MouseEvent;
 
 public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons {
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }

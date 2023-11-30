@@ -21,9 +21,18 @@ public class SolicitudCambio {
     private String accionPropuesta;
     private String impacto;
     private String razonCambio;
+    private String estado;
     private Button button;
 
     public SolicitudCambio() {
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getIdSolicitud() {

@@ -29,6 +29,7 @@ import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.Proyecto;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.modelo.pojo.Usuario;
+import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
@@ -156,6 +157,16 @@ public class FXMLConsultarSolicitudesController implements Initializable {
             Utilidades.mostrarAlertaSimple("Error", " No se pueden mostrar los detalles",
                     Alert.AlertType.ERROR);
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnModificarEstadoSolicitud() {
+        if (tvSolicitudesCambio.getSelectionModel().getSelectedItem() != null) {
+            SolicitudCambio solicitud = tvSolicitudesCambio.getSelectionModel().getSelectedItem();
+            MainStage.changeView("/spglisoft/vistas/FXMLModificarEstadoSolicitud.fxml", 1000, 600, solicitud);
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
         }
     }
 

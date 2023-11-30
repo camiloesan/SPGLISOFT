@@ -19,8 +19,10 @@ import java.util.List;
  * @author camilo
  */
 public class UsuarioDAO {
+    public static Usuario sesion;
+
     public static boolean sonCredencialesValidas(String email, String password) throws SQLException {
-        boolean isValid = false;
+        boolean isValid;
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT 1 FROM usuarios WHERE email=(?) AND contrasena=(SHA2(?, 256))";
 
@@ -35,7 +37,7 @@ public class UsuarioDAO {
     }    
 
     public static Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
-        Usuario user = null;
+        Usuario user;
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT * FROM usuarios WHERE email = (?)";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
