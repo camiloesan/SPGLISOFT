@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import spglisoft.modelo.pojo.Desarrollador;
+import spglisoft.modelo.pojo.Representante;
 
 /**
  *
@@ -20,7 +22,49 @@ import java.util.List;
  */
 public class UsuarioDAO {
     public static Usuario sesion;
-
+    
+    public static Desarrollador iniciarSesionDesarrollador(String matricula, String contrasena) throws SQLException{
+        Desarrollador desarrollador = new Desarrollador();
+        try {
+            Connection conexionBD = ConexionBD.obtenerConnection();
+            String query = "SELECT * FROM desarrollador WHERE matricula = ? AND contrasena = ?";
+            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+            preparedStatement.setString(1, matricula);
+            preparedStatement.setString(2, contrasena);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado.next()) {
+                desarrollador.setIdDesarrollador(resultado.getInt("id_desarrollador"));
+                desarrollador.setNombre(resultado.getString("nombre"));
+                desarrollador.setApellidoPaterno(resultado.getString("apellido_paterno"));
+                desarrollador.setApellidoMaterno(resultado.getString("apellido_materno"));
+                desarrollador.setMatricula(resultado.getString("matricula"));
+                desarrollador.setIdProyecto(resultado.getInt("id_proyecto"));
+                desarrollador.setSemestre(resultado.getInt("semestre"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return desarrollador;
+    }
+    
+    private static Representante iniciarSesionRepresentante(String numeroPersonal, String contrasena) throws SQLException{
+        Representante representante = new Representante();
+        try {
+            Connection conexionBD = ConexionBD.obtenerConnection();
+            String query = "SELECT * FROM representante_proyecto WHERE numero_personal = ? AND contrasena = ?";
+            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+            preparedStatement.setString(1, numeroPersonal);
+            preparedStatement.setString(2, contrasena);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado.next()) {
+                representante.setIdRepresentante(resultado.getInt("id_representante"));
+                representante.setNombre(resultado.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return representante;
+    }
     public static boolean sonCredencialesValidas(String email, String password) throws SQLException {
         boolean isValid;
         Connection conexionBD = ConexionBD.obtenerConnection();

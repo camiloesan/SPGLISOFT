@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class FXMLLoginController {
+    
+    String formato = "zs[a-zA-Z0-9]+";
+    
     @FXML
     TextField tfEmail;
     @FXML
@@ -69,4 +72,14 @@ public class FXMLLoginController {
             Alertas.mostrarAlertaErrorConexionBD();
         }
     }
+    
+    private void iniciarSesion(){
+       
+    }
+    
+    private boolean camposVacios(){
+        return tfEmail.getText().trim().isEmpty() || tfPassword.getText().trim().isEmpty();
+    }
+    
+    
 }
