@@ -23,7 +23,7 @@ public class ProyectoDAO {
     public static List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
         List<Proyecto> proyectosList = new ArrayList<>();
         String query = "SELECT nombre_proyecto, descripcion, fecha_inicio,"
-                + "fecha_fin, estado FROM proyectos WHERE id_usuario_responsable = ?";
+                + "fecha_fin, estado_proyecto FROM proyecto WHERE id_representante = ?";
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement preparedStatement = conexionBD.
                 prepareStatement(query);
@@ -35,7 +35,7 @@ public class ProyectoDAO {
             Proyecto proyecto = new Proyecto();
             proyecto.setNombreProyecto(resultSet.
                     getString("nombre_proyecto"));
-            proyecto.setEstado(resultSet.getString("estado"));
+            proyecto.setEstado(resultSet.getInt("estado_proyecto"));
 
             proyectosList.add(proyecto);
         }
@@ -48,7 +48,7 @@ public class ProyectoDAO {
         Proyecto proyecto = new Proyecto();
         if (conexionBD != null) {
             try {
-                String consulta = "SELECT * FROM proyectos WHERE id_usuario_responsable = ?";
+                String consulta = "SELECT * FROM proyecto WHERE id_representante = ?";
                 PreparedStatement obtenerProyecto = conexionBD.prepareStatement(consulta);
                 obtenerProyecto.setInt(1, responsable.getUserId());
                 ResultSet resultadoConsulta = obtenerProyecto.executeQuery();
@@ -57,8 +57,8 @@ public class ProyectoDAO {
                     proyecto.setDescripcion(resultadoConsulta.getString("descripcion"));
                     proyecto.setFechaInicio(resultadoConsulta.getString("fecha_inicio"));
                     proyecto.setFechaFin(resultadoConsulta.getString("fecha_fin"));
-                    proyecto.setEstado(resultadoConsulta.getString("estado"));
-                    proyecto.setUsuarioResponsable(resultadoConsulta.getInt("id_usuario_responsable"));
+                    proyecto.setEstado(resultadoConsulta.getInt("estado_proyecto"));
+                    proyecto.setUsuarioResponsable(resultadoConsulta.getInt("id_representante"));
                 }
             } catch (SQLException e) {
                 throw e;

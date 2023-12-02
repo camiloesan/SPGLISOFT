@@ -33,7 +33,7 @@ public class Alertas {
     public static void mostrarAlertaLoginFallido() {
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Credenciales no válidas");
-        alert.setContentText("El correo o contraseña son incorrectos, inténtalo de nuevo");
+        alert.setContentText("Los datos son incorrectos, intententelo de nuevo");
         alert.showAndWait();
     }
 }

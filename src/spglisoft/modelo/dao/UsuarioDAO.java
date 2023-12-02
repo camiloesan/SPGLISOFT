@@ -22,6 +22,8 @@ import spglisoft.modelo.pojo.Representante;
  */
 public class UsuarioDAO {
     public static Usuario sesion;
+    private static Desarrollador sesionDesarrollador;
+    private static Representante sesionRepresentante;
     
     public static Desarrollador iniciarSesionDesarrollador(String matricula, String contrasena) throws SQLException{
         Desarrollador desarrollador = new Desarrollador();
@@ -44,10 +46,15 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             throw e;
         }
+        sesionDesarrollador = desarrollador;
         return desarrollador;
     }
     
-    private static Representante iniciarSesionRepresentante(String numeroPersonal, String contrasena) throws SQLException{
+    public static Desarrollador getSesionDesarrollador(){
+        return sesionDesarrollador;
+    }
+    
+    public static Representante iniciarSesionRepresentante(String numeroPersonal, String contrasena) throws SQLException{
         Representante representante = new Representante();
         try {
             Connection conexionBD = ConexionBD.obtenerConnection();
@@ -59,12 +66,21 @@ public class UsuarioDAO {
             if (resultado.next()) {
                 representante.setIdRepresentante(resultado.getInt("id_representante"));
                 representante.setNombre(resultado.getString("nombre"));
+                representante.setApellidoPaterno(resultado.getString("apellido_paterno"));
+                representante.setApellidoMaterno(resultado.getString("apellido_materno"));
+                representante.setNumeroPersonal(resultado.getString("numero_personal"));
             }
         } catch (SQLException e) {
             throw e;
         }
+        sesionRepresentante = representante;
         return representante;
     }
+    
+    public static Representante getSesionRepresentante(){
+        return sesionRepresentante;
+    }
+    
     public static boolean sonCredencialesValidas(String email, String password) throws SQLException {
         boolean isValid;
         Connection conexionBD = ConexionBD.obtenerConnection();

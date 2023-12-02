@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import spglisoft.modelo.dao.UsuarioDAO;
 
 public class FXMLRPMenuPrincipalController implements Initializable {
 
@@ -43,9 +44,10 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     private void llenarTablaProyectos() {
         tablaProyectos.getItems().clear();
         List<Proyecto> listaProyectos = new ArrayList<>();
-        int userID = SingletonLogin.getInstance().getUser().getUserId();
+        //int userID = SingletonLogin.getInstance().getUser().getUserId();
+        int id_representante = UsuarioDAO.getSesionRepresentante().getIdRepresentante();
         try {
-            listaProyectos = ProyectoDAO.obtenerProyectosPorIDUsuario(userID);
+            listaProyectos = ProyectoDAO.obtenerProyectosPorIDUsuario(id_representante);
         } catch (SQLException ex) {
             Alertas.mostrarAlertaErrorConexionBD();
             ex.printStackTrace();

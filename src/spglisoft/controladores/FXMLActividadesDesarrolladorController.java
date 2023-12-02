@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import spglisoft.modelo.dao.UsuarioDAO;
 
 public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
     @FXML
@@ -49,10 +50,15 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
         tvActividades.getItems().clear();
         List<Actividad> listaActividades = new ArrayList<>();
         try {
+            /*
             listaActividades = ActividadDAO
-                    .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getUser().getUserId());
+                    .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getDesarrollador().getIdDesarrollador());
+            */
+            listaActividades = ActividadDAO.obtenerActividadesAsignadasPorDesarrollador(UsuarioDAO.getSesionDesarrollador().getIdDesarrollador());
+            
         } catch (SQLException e) {
-            Alertas.mostrarAlertaErrorConexionBD();
+            //Alertas.mostrarAlertaErrorConexionBD();
+            e.printStackTrace();
         }
         tvActividades.getItems().addAll(listaActividades);
     }

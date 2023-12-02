@@ -37,10 +37,10 @@ public class SolicitudCambioDAO {
                 PreparedStatement consulta = conexionBD.prepareCall(query);
                 consulta.setString(1, participantes.getNombreProyecto());
                 consulta.setInt(2, participantes.getIdUsuario());
-                consulta.setString(3, solicitud.getTitulo());
+                consulta.setString(3, solicitud.getNombreSolicitud());
                 consulta.setString(4, solicitud.getDescripcion());
                 consulta.setString(5, solicitud.getAccionPropuesta());
-                consulta.setString(6, solicitud.getImpacto());
+                consulta.setInt(6, solicitud.getIdImpacto());
                 consulta.setString(7, solicitud.getRazonCambio());
                 int filasAfectadas = consulta.executeUpdate();
                 if (filasAfectadas > 0) {
@@ -57,26 +57,26 @@ public class SolicitudCambioDAO {
         return resultado;
     }
     
-    public static ArrayList<SolicitudCambio> obtenerSolicitudes(String proyecto) throws SQLException {
+    public static ArrayList<SolicitudCambio> obtenerSolicitudes(int idProyecto) throws SQLException {
         ArrayList<SolicitudCambio> solicitudes = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         if (conexionBD != null) {
             try {
-                String consulta = "SELECT * FROM solicitudes_cambios WHERE nombre_proyecto = ?";
+                String consulta = "SELECT * FROM solicitud_cambio WHERE id_proyecto = ?";
                 PreparedStatement obtenerSolicitudes = conexionBD.prepareStatement(consulta);
-                obtenerSolicitudes.setString(1, proyecto);
+                obtenerSolicitudes.setInt(1, idProyecto);
                 ResultSet resultadoConsulta = obtenerSolicitudes.executeQuery();
                 solicitudes = new ArrayList<>();
                 while (resultadoConsulta.next()) {
                     SolicitudCambio solicitud = new SolicitudCambio();
                     solicitud.setIdSolicitud(resultadoConsulta.getInt("id_solicitud"));
-                    solicitud.setNombreProyecto(resultadoConsulta.getString("nombre_proyecto"));
-                    solicitud.setIdProponente(resultadoConsulta.getInt("id_proponente"));
-                    solicitud.setTitulo(resultadoConsulta.getString("titulo"));
+                    solicitud.setIdProyecto(resultadoConsulta.getInt("id_proyecto"));
+                    solicitud.setIdDesarrollador(resultadoConsulta.getInt("id_desarrollador"));
+                    solicitud.setNombreSolicitud(resultadoConsulta.getString("nombre_solicitud"));
                     solicitud.setDescripcion(resultadoConsulta.getString("descripcion"));
-                    solicitud.setFechaSolicitud(resultadoConsulta.getDate("fechaSolicitud"));
+                    solicitud.setFechaSolicitud(resultadoConsulta.getDate("fecha_solicitud"));
                     solicitud.setAccionPropuesta(resultadoConsulta.getString("accion_propuesta"));
-                    solicitud.setImpacto(resultadoConsulta.getString("impacto"));
+                    solicitud.setIdImpacto(resultadoConsulta.getInt("id_impacto_cambio"));
                     solicitud.setRazonCambio(resultadoConsulta.getString("razon_cambio"));
                     solicitudes.add(solicitud);
                 }

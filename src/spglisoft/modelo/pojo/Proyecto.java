@@ -13,7 +13,7 @@ public class Proyecto {
     private String descripcion;
     private String fechaInicio;
     private String fechaFin;
-    private String estado;
+    private int estado;
     private int usuarioResponsable;
 
     public Proyecto() {
@@ -51,11 +51,11 @@ public class Proyecto {
         this.fechaFin = fechaFin;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

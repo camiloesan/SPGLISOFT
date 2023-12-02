@@ -13,15 +13,16 @@ import javafx.scene.control.Button;
  */
 public class SolicitudCambio {
     private int idSolicitud;
-    private String nombreProyecto;
-    private int idProponente;
-    private String titulo;
+    private int idProyecto;
+    private int idDesarrollador;
+    private String nombreSolicitud;
     private String descripcion;
     private Date fechaSolicitud;
     private String accionPropuesta;
-    private String impacto;
+    private int idImpacto;
     private String razonCambio;
     private String estado;
+    
     private Button button;
 
     public SolicitudCambio() {
@@ -51,30 +52,14 @@ public class SolicitudCambio {
         this.idSolicitud = idSolicitud;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
+    public int getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
-
-    public int getIdProponente() {
-        return idProponente;
-    }
-
-    public void setIdProponente(int idProponente) {
-        this.idProponente = idProponente;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -98,21 +83,37 @@ public class SolicitudCambio {
     public void setAccionPropuesta(String accionPropuesta) {
         this.accionPropuesta = accionPropuesta;
     }
-
-    public String getImpacto() {
-        return impacto;
-    }
-
-    public void setImpacto(String impacto) {
-        this.impacto = impacto;
-    }
-
+    
     public String getRazonCambio() {
         return razonCambio;
     }
 
     public void setRazonCambio(String razonCambio) {
         this.razonCambio = razonCambio;
+    }
+
+    public int getIdDesarrollador() {
+        return idDesarrollador;
+    }
+
+    public void setIdDesarrollador(int idDesarrollador) {
+        this.idDesarrollador = idDesarrollador;
+    }
+
+    public String getNombreSolicitud() {
+        return nombreSolicitud;
+    }
+
+    public void setNombreSolicitud(String nombreSolicitud) {
+        this.nombreSolicitud = nombreSolicitud;
+    }
+
+    public int getIdImpacto() {
+        return idImpacto;
+    }
+
+    public void setIdImpacto(int Idimpacto) {
+        this.idImpacto = Idimpacto;
     }
     
 }
