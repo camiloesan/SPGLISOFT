@@ -2,6 +2,7 @@ package spglisoft.modelo.dao;
 
 import spglisoft.modelo.ConexionBD;
 import spglisoft.modelo.pojo.Actividad;
+import spglisoft.modelo.pojo.EstadoActividad;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,59 +12,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActividadDAO {
-    public static List<Actividad> obtenerActividadesAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+    public static List<Actividad> obtenerActividadesAsignadasPorIdProyecto(int idProyecto) throws SQLException {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT * FROM actividades " +
-                "WHERE nombre_proyecto = ? AND id_desarrollador IS NOT NULL";
+        String query = "SELECT id_actividad, id_proyecto, id_desarrollador, nombre, descripcion, " +
+                "esfuerzo, fecha_inicio, fecha_fin, e.estado as estado" +
+                " FROM actividad INNER JOIN estado_actividad e " +
+                "ON actividad.id_estado = e.id_estado_actividad " +
+                "WHERE id_proyecto = ? AND id_desarrollador IS NOT NULL";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setString(1, nombreProyecto);
+        preparedStatement.setInt(1, idProyecto);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()) {
             Actividad actividad = new Actividad();
             actividad.setIdActividad(resultSet.getInt("id_actividad"));
-            actividad.setNombreProyecto(resultSet.getString("nombre_proyecto"));
+            actividad.setIdProyecto(resultSet.getInt("id_proyecto"));
             actividad.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
-            actividad.setTitulo(resultSet.getString("titulo"));
+            actividad.setNombre(resultSet.getString("nombre"));
+            actividad.setDescripcion(resultSet.getString("descripcion"));
+            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo"));
             actividad.setFechaInicio(resultSet.getString("fecha_inicio"));
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
-            actividad.setEstado(resultSet.getString("estado"));
-            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo_minutos"));
-            actividad.setDescripcion(resultSet.getString("descripcion"));
+            actividad.setNombreEstado(resultSet.getString("estado"));
             listaActividades.add(actividad);
         }
         conexionBD.close();
         return listaActividades;
     }
 
-    public static List<Actividad> obtenerActividadesNoAsignadasPorNombreProyecto(String nombreProyecto) throws SQLException {
+    public static List<Actividad> obtenerActividadesNoAsignadasPorIdProyecto(int idProyecto) throws SQLException {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT * FROM actividad " +
+        String query = "SELECT id_actividad, id_proyecto, id_desarrollador, nombre, descripcion, " +
+                "esfuerzo, fecha_inicio, fecha_fin, e.estado as estado" +
+                " FROM actividad INNER JOIN estado_actividad e " +
+                "ON actividad.id_estado = e.id_estado_actividad " +
                 "WHERE id_proyecto = ? AND id_desarrollador IS NULL";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setString(1, nombreProyecto);
+        preparedStatement.setInt(1, idProyecto);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Actividad actividad = new Actividad();
             actividad.setIdActividad(resultSet.getInt("id_actividad"));
-            actividad.setNombreProyecto(resultSet.getString("id_proyecto"));
+            actividad.setIdProyecto(resultSet.getInt("id_proyecto"));
             actividad.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
-            actividad.setTitulo(resultSet.getString("nombre"));
+            actividad.setNombre(resultSet.getString("nombre"));
+            actividad.setDescripcion(resultSet.getString("descripcion"));
+            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo"));
             actividad.setFechaInicio(resultSet.getString("fecha_inicio"));
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
-            actividad.setEstado(resultSet.getString("id_estado"));
-            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo"));
-            actividad.setDescripcion(resultSet.getString("descripcion"));
+            actividad.setNombreEstado(resultSet.getString("estado"));
             listaActividades.add(actividad);
         }
         conexionBD.close();
         return listaActividades;
     }
 
-    public static List<Actividad> obtenerActividadesAsignadasPorDesarrollador(int idDesarrollador) throws SQLException {
+    public static List<Actividad> obtenerActividadesAsignadasPorIdDesarrollador(int idDesarrollador) throws SQLException {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT * FROM actividad " +
@@ -76,17 +83,34 @@ public class ActividadDAO {
         while(resultSet.next()) {
             Actividad actividad = new Actividad();
             actividad.setIdActividad(resultSet.getInt("id_actividad"));
-            actividad.setNombreProyecto(resultSet.getString("id_proyecto"));
+            actividad.setIdProyecto(resultSet.getInt("id_proyecto"));
             actividad.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
-            actividad.setTitulo(resultSet.getString("nombre"));
+            actividad.setNombre(resultSet.getString("nombre"));
+            actividad.setDescripcion(resultSet.getString("descripcion"));
+            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo"));
             actividad.setFechaInicio(resultSet.getString("fecha_inicio"));
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
-            actividad.setEstado(resultSet.getString("id_estado"));
-            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo"));
-            actividad.setDescripcion(resultSet.getString("descripcion"));
+            actividad.setIdEstado(resultSet.getInt("id_estado"));
             listaActividades.add(actividad);
         }
         conexionBD.close();
         return listaActividades;
+    }
+
+    public static ArrayList<EstadoActividad> obtenerEstadosActividad() throws SQLException {
+        ArrayList<EstadoActividad> listaEstadosActividad = new ArrayList<>();
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        String query = "SELECT * FROM estado_actividad";
+
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()) {
+            EstadoActividad estadoActividad = new EstadoActividad();
+            estadoActividad.setIdEstado(resultSet.getInt("id_estado_actividad"));
+            estadoActividad.setEstado(resultSet.getString("estado"));
+            listaEstadosActividad.add(estadoActividad);
+        }
+        conexionBD.close();
+        return listaEstadosActividad;
     }
 }

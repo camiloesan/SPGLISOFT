@@ -2,16 +2,46 @@ package spglisoft.modelo.pojo;
 
 public class Actividad {
     private int idActividad;
-    private String nombreProyecto;
+    private int idProyecto;
     private int idDesarrollador;
-    private String titulo;
+    private String nombre;
     private String fechaInicio;
     private String fechaFin;
-    private String estado;
+    private int idEstado;
+    private String nombreEstado;
     private int esfuerzoMinutos;
     private String descripcion;
 
+    public Actividad(int idActividad, int idProyecto, int idDesarrollador, String nombre, String fechaInicio, String fechaFin, int idEstado, String nombreEstado, int esfuerzoMinutos, String descripcion) {
+        this.idActividad = idActividad;
+        this.idProyecto = idProyecto;
+        this.idDesarrollador = idDesarrollador;
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.idEstado = idEstado;
+        this.nombreEstado = nombreEstado;
+        this.esfuerzoMinutos = esfuerzoMinutos;
+        this.descripcion = descripcion;
+    }
+
     public Actividad() {
+    }
+
+    public String getNombreEstado() {
+        return nombreEstado;
+    }
+
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
+    }
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     public String getDescripcion() {
@@ -30,14 +60,6 @@ public class Actividad {
         this.idActividad = idActividad;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
-    }
-
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
-    }
-
     public int getIdDesarrollador() {
         return idDesarrollador;
     }
@@ -46,12 +68,12 @@ public class Actividad {
         this.idDesarrollador = idDesarrollador;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getFechaInicio() {
@@ -70,12 +92,12 @@ public class Actividad {
         this.fechaFin = fechaFin;
     }
 
-    public String getEstado() {
-        return estado;
+    public int getIdEstado() {
+        return idEstado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setIdEstado(int idEstado) {
+        this.idEstado = idEstado;
     }
 
     public int getEsfuerzoMinutos() {

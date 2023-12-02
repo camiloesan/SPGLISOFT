@@ -8,12 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import spglisoft.modelo.dao.UsuarioDAO;
-import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.Alertas;
+import spglisoft.utils.Constantes;
 import spglisoft.utils.SingletonLogin;
 
 import java.sql.SQLException;
-import java.util.Objects;
 import javafx.scene.control.Alert;
 import spglisoft.modelo.pojo.Desarrollador;
 import spglisoft.modelo.pojo.Representante;
@@ -31,63 +30,8 @@ public class FXMLLoginController {
     public void initialize() {
     }
     
-    /*
-    private void redirigirAEscena(Usuario usuario) {
-        switch (usuario.getTipoUsuario()) {
-            case "representante_proyecto":
-                MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
-            break;
-
-            case "desarrollador":
-                MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
-        }
-    }
-    
-    private Usuario sessionUser() {
-        String email = tfEmail.getText();
-        Usuario usuario = null;
-        
-        try {
-            usuario = UsuarioDAO.obtenerUsuarioPorEmail(email);
-        } catch (SQLException ex) {
-            Alertas.mostrarAlertaErrorConexionBD();
-        }
-        
-        if (usuario != null) {
-            SingletonLogin singletonLogin;
-            singletonLogin = SingletonLogin.getInstance();   
-            singletonLogin.setUser(usuario);
-            return usuario;
-        }
-        return null;
-    }
-    */
-    
-    private void cambiarEscenaDesarrollador(){
-        MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
-    }
-    
-    private void cambiarEscenaRepresentante(){
-        MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
-    }
-    
     @FXML
     private void btnLogin() {
-        /*
-        String email = tfEmail.getText();
-        String password = tfPassword.getText();
-        
-        try {
-            if (UsuarioDAO.sonCredencialesValidas(email, password)) {
-                redirigirAEscena(Objects.requireNonNull(sessionUser()));
-            } else {
-                Alertas.mostrarAlertaLoginFallido();
-            }
-        } catch (SQLException ex) {
-            Alertas.mostrarAlertaErrorConexionBD();
-        }
-        */
-        
         iniciarSesion();
     }
     
@@ -98,15 +42,13 @@ public class FXMLLoginController {
             if (esMatricula()) {
                 try {
                     Desarrollador desarrollador = UsuarioDAO.iniciarSesionDesarrollador(usuario, contrasena);
-                    if (!(desarrollador == null)) {
-                        System.out.println("El desarrollador no es null");
-                        MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
-                        SingletonLogin singletonLogin;
-                        singletonLogin = SingletonLogin.getInstance();   
+                    if (desarrollador != null) {
+                        SingletonLogin singletonLogin = SingletonLogin.getInstance();
                         singletonLogin.setDesarrollador(desarrollador);
+                        singletonLogin.setTipoUsuario(Constantes.USUARIO_DESARROLLADOR);
+                        MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
                     } else {
                         Alertas.mostrarAlertaLoginFallido();
-                        System.out.println("el desarrollador es null");
                     }
                 } catch (SQLException e) {
                     Alertas.mostrarAlertaErrorConexionBD();
@@ -114,11 +56,11 @@ public class FXMLLoginController {
             } else if (usuario.matches("\\d+")) {
                 try {
                     Representante representante = UsuarioDAO.iniciarSesionRepresentante(usuario, contrasena);
-                    if (!(representante == null)) {
-                        MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
-                        SingletonLogin singletonLogin;
-                        singletonLogin = SingletonLogin.getInstance();   
+                    if (representante != null) {
+                        SingletonLogin singletonLogin = SingletonLogin.getInstance();
                         singletonLogin.setRepresentante(representante);
+                        singletonLogin.setTipoUsuario(Constantes.USUARIO_REPRESENTANTE);
+                        MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
                     } else {
                         Alertas.mostrarAlertaLoginFallido();
                     }

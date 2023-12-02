@@ -100,10 +100,10 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
         String impacto = cbImpactoCambio.getValue();
         SolicitudCambio nuevaSolicitud = new SolicitudCambio();
         nuevaSolicitud.setAccionPropuesta(accionPropuesta);
-        nuevaSolicitud.setImpacto(impacto);
+        //nuevaSolicitud.setImpacto(impacto);
         nuevaSolicitud.setRazonCambio(razonCambio);
         nuevaSolicitud.setDescripcion(descripcion);
-        nuevaSolicitud.setTitulo(titulo);
+        //nuevaSolicitud.setTitulo(titulo);
         
         registrarSolicitud(participantes, nuevaSolicitud);
     }

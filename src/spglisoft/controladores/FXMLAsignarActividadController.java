@@ -12,7 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Actividad;
-import spglisoft.modelo.pojo.Usuario;
+import spglisoft.modelo.pojo.Desarrollador;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 
@@ -24,15 +24,15 @@ import java.util.ResourceBundle;
 
 public class FXMLAsignarActividadController implements Initializable {
     @FXML
-    private TableView<Usuario> tvDesarrolladores;
+    private TableView<Desarrollador> tvDesarrolladores;
     @FXML
-    private TableColumn<Usuario, String> colApellidoPaterno;
+    private TableColumn<Desarrollador, String> colApellidoPaterno;
     @FXML
-    private TableColumn<Usuario, String> colNombre;
+    private TableColumn<Desarrollador, String> colNombre;
     @FXML
-    private TableColumn<Usuario, String> colApellidoMaterno;
+    private TableColumn<Desarrollador, String> colApellidoMaterno;
     @FXML
-    private TableColumn<Usuario, String> colMatricula;
+    private TableColumn<Desarrollador, String> colMatricula;
     @FXML
     private Label lblTitulo;
 
@@ -45,7 +45,7 @@ public class FXMLAsignarActividadController implements Initializable {
 
     private void inicializarInformacion() {
         Actividad actividad = (Actividad) MainStage.getUserData();
-        lblTitulo.setText("Asignar Desarrollador Actividad [" + actividad.getTitulo() + "]");
+        lblTitulo.setText("Asignar Desarrollador Actividad [" + actividad.getNombre() + "]");
     }
 
     private void formatearTabla() {
@@ -57,10 +57,10 @@ public class FXMLAsignarActividadController implements Initializable {
 
     private void llenarTabla() {
         tvDesarrolladores.getItems().clear();
-        List<Usuario> listaDesarrolladores = new ArrayList<>();
+        List<Desarrollador> listaDesarrolladores = new ArrayList<>();
         try {
             listaDesarrolladores = UsuarioDAO
-                    .obtenerDesarrolladoresPorProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+                    .obtenerDesarrolladoresPorIdProyecto(SingletonLogin.getInstance().getIdProyectoActual());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
         }
@@ -71,9 +71,10 @@ public class FXMLAsignarActividadController implements Initializable {
     private void btnAsignarActividad() {
         Actividad actividad = (Actividad) MainStage.getUserData();
         if (esElementoSeleccionado()) {
-            Usuario usuario = tvDesarrolladores.getSelectionModel().getSelectedItem();
+            Desarrollador desarrollador = tvDesarrolladores.getSelectionModel().getSelectedItem();
             try {
-                UsuarioDAO.asignarActividadADesarrollador(actividad.getIdActividad(), usuario.getUserId());
+                UsuarioDAO.asignarActividadADesarrollador(actividad.getIdActividad(),
+                        desarrollador.getIdDesarrollador());
                 Alertas.mostrarAlertaExito();
                 MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
             } catch (SQLException e) {

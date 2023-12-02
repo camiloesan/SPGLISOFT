@@ -25,8 +25,8 @@ public class UsuarioDAO {
     private static Desarrollador sesionDesarrollador;
     private static Representante sesionRepresentante;
     
-    public static Desarrollador iniciarSesionDesarrollador(String matricula, String contrasena) throws SQLException{
-        Desarrollador desarrollador = new Desarrollador();
+    public static Desarrollador iniciarSesionDesarrollador(String matricula, String contrasena) throws SQLException {
+        Desarrollador desarrollador = null;
         try {
             Connection conexionBD = ConexionBD.obtenerConnection();
             String query = "SELECT * FROM desarrollador WHERE matricula = ? AND contrasena = ?";
@@ -35,6 +35,7 @@ public class UsuarioDAO {
             preparedStatement.setString(2, contrasena);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado.next()) {
+                desarrollador = new Desarrollador();
                 desarrollador.setIdDesarrollador(resultado.getInt("id_desarrollador"));
                 desarrollador.setNombre(resultado.getString("nombre"));
                 desarrollador.setApellidoPaterno(resultado.getString("apellido_paterno"));
@@ -43,8 +44,9 @@ public class UsuarioDAO {
                 desarrollador.setIdProyecto(resultado.getInt("id_proyecto"));
                 desarrollador.setSemestre(resultado.getInt("semestre"));
             }
+            conexionBD.close();
         } catch (SQLException e) {
-            throw e;
+            e.printStackTrace();
         }
         sesionDesarrollador = desarrollador;
         return desarrollador;
@@ -55,7 +57,7 @@ public class UsuarioDAO {
     }
     
     public static Representante iniciarSesionRepresentante(String numeroPersonal, String contrasena) throws SQLException{
-        Representante representante = new Representante();
+        Representante representante = null;
         try {
             Connection conexionBD = ConexionBD.obtenerConnection();
             String query = "SELECT * FROM representante_proyecto WHERE numero_personal = ? AND contrasena = ?";
@@ -64,14 +66,16 @@ public class UsuarioDAO {
             preparedStatement.setString(2, contrasena);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado.next()) {
+                representante = new Representante();
                 representante.setIdRepresentante(resultado.getInt("id_representante"));
                 representante.setNombre(resultado.getString("nombre"));
                 representante.setApellidoPaterno(resultado.getString("apellido_paterno"));
                 representante.setApellidoMaterno(resultado.getString("apellido_materno"));
                 representante.setNumeroPersonal(resultado.getString("numero_personal"));
             }
+            conexionBD.close();
         } catch (SQLException e) {
-            throw e;
+            e.printStackTrace();
         }
         sesionRepresentante = representante;
         return representante;
@@ -80,78 +84,40 @@ public class UsuarioDAO {
     public static Representante getSesionRepresentante(){
         return sesionRepresentante;
     }
-    
-    public static boolean sonCredencialesValidas(String email, String password) throws SQLException {
-        boolean isValid;
-        Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT 1 FROM usuarios WHERE email=(?) AND contrasena=(SHA2(?, 256))";
-
-        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setString(1, email);
-        preparedStatement.setString(2, password);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        isValid = resultSet.next();
-
-        conexionBD.close();
-        return isValid;
-    }    
-
-    public static Usuario obtenerUsuarioPorEmail(String email) throws SQLException {
-        Usuario user;
-        Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT * FROM usuarios WHERE email = (?)";
-        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setString(1, email);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-        user = new Usuario();
-        while (resultSet.next()) {
-            user.setUserId(resultSet.getInt("id_usuario"));
-            user.setNombre(resultSet.getString("nombre"));
-            user.setApellidoPaterno(resultSet.getString("apellido_paterno"));
-            user.setApellidoMaterno(resultSet.getString("apellido_materno"));
-            user.setEmail(resultSet.getString("email"));
-            user.setMatricula(resultSet.getString("matricula"));
-            user.setTipoUsuario(resultSet.getString("tipo_usuario"));
-        }
-        conexionBD.close();
-        return user;
-    }
 
     public static Usuario getSesion(){
         return sesion;
     }
 
-    public static List<Usuario> obtenerDesarrolladoresPorProyecto(String nombreProyecto) throws SQLException {
-        List<Usuario> listaUsuarios = new ArrayList<>();
-        String query = "SELECT p.id_usuario AS id_usuario, nombre, apellido_paterno, apellido_materno, matricula " +
-                "FROM usuarios INNER JOIN participantes p " +
-                "WHERE tipo_usuario = 'desarrollador' AND nombre_proyecto = (?)";
+    public static List<Desarrollador> obtenerDesarrolladoresPorIdProyecto(int idProyecto) throws SQLException {
+        List<Desarrollador> listaUsuarios = new ArrayList<>();
+        String query = "SELECT id_desarrollador, nombre, apellido_paterno, apellido_materno, matricula, semestre " +
+                "FROM desarrollador WHERE id_proyecto = (?)";
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setString(1, nombreProyecto);
+        preparedStatement.setInt(1, idProyecto);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Usuario usuario = new Usuario();
-            usuario.setUserId(resultSet.getInt("id_usuario"));
-            usuario.setNombre(resultSet.getString("nombre"));
-            usuario.setApellidoPaterno(resultSet.getString("apellido_paterno"));
-            usuario.setApellidoMaterno(resultSet.getString("apellido_materno"));
-            usuario.setMatricula(resultSet.getString("matricula"));
-            listaUsuarios.add(usuario);
+            Desarrollador desarrollador = new Desarrollador();
+            desarrollador.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
+            desarrollador.setNombre(resultSet.getString("nombre"));
+            desarrollador.setApellidoPaterno(resultSet.getString("apellido_paterno"));
+            desarrollador.setApellidoMaterno(resultSet.getString("apellido_materno"));
+            desarrollador.setMatricula(resultSet.getString("matricula"));
+            listaUsuarios.add(desarrollador);
         }
         conexionBD.close();
         return listaUsuarios;
     }
 
-    public static void asignarActividadADesarrollador(int idActividad, int idUsuario) throws SQLException {
-        String query = "UPDATE actividades " +
-                "SET id_desarrollador = (?) " +
+    public static void asignarActividadADesarrollador(int idActividad, int idDesarrollador) throws SQLException {
+        String query = "UPDATE actividad " +
+                "SET id_desarrollador = (?), id_estado = 1 " +
                 "WHERE id_actividad = (?)";
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setInt(1, idUsuario);
+        preparedStatement.setInt(1, idDesarrollador);
         preparedStatement.setInt(2, idActividad);
 
         preparedStatement.execute();

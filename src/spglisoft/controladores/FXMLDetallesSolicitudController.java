@@ -12,9 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.SolicitudCambio;
 
 /**
@@ -62,12 +60,12 @@ public class FXMLDetallesSolicitudController implements Initializable {
     public void iniciarInformacion(SolicitudCambio solicitud) {
         try {
             this.solicitud = solicitud;
-            this.nombreSolicitante = SolicitudCambioDAO.obtenerSolicitante(solicitud.getIdProponente());
+            //this.nombreSolicitante = SolicitudCambioDAO.obtenerSolicitante(solicitud.getIdProponente());
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
             String fechaString = formato.format(solicitud.getFechaSolicitud());
-            lbTituloSolicitud.setText(solicitud.getTitulo());
-            lbImpactoCambio.setText("Impacto del cambio: " + solicitud.getImpacto());
-            lbNombreSolicitante.setText("Nombre del solcititante: " + nombreSolicitante);
+            //lbTituloSolicitud.setText(solicitud.getTitulo());
+            //lbImpactoCambio.setText("Impacto del cambio: " + solicitud.getImpacto());
+            lbNombreSolicitante.setText("Nombre del solicitante: " + nombreSolicitante);
             lbFechaSolicitud.setText("Fecha de registro de la solicitud: " + fechaString);
             taDescripcion.setText(solicitud.getDescripcion());
             taRazonCambio.setText(solicitud.getRazonCambio());

@@ -64,10 +64,10 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     private void formatearTabla() {
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
     }
 
     private void llenarTablaActividadesNoAsignadas() {
@@ -75,7 +75,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
         List<Actividad> listaActividades = new ArrayList<>();
         try {
             listaActividades = ActividadDAO
-                    .obtenerActividadesNoAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+                    .obtenerActividadesNoAsignadasPorIdProyecto(SingletonLogin.getInstance().getIdProyectoActual());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
         }
@@ -87,7 +87,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
         List<Actividad> listaActividades = new ArrayList<>();
         try {
             listaActividades = ActividadDAO
-                    .obtenerActividadesAsignadasPorNombreProyecto(SingletonLogin.getInstance().getNombreProyectoActual());
+                    .obtenerActividadesAsignadasPorIdProyecto(SingletonLogin.getInstance().getIdProyectoActual());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
         }

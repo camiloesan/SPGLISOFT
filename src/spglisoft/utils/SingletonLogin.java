@@ -6,7 +6,6 @@ package spglisoft.utils;
 
 import spglisoft.modelo.pojo.Desarrollador;
 import spglisoft.modelo.pojo.Representante;
-import spglisoft.modelo.pojo.Usuario;
 
 /**
  *
@@ -14,10 +13,10 @@ import spglisoft.modelo.pojo.Usuario;
  */
 public class SingletonLogin {
     private static SingletonLogin instance;
-    private Usuario user;
+    private String tipoUsuario;
     private Desarrollador desarrollador;
     private Representante representante;
-    private String nombreProyectoActual;
+    private int idProyectoActual;
     
     public static SingletonLogin getInstance() {
         if (instance == null) {
@@ -30,12 +29,20 @@ public class SingletonLogin {
         instance = null;
     }
 
-    public Usuario getUser() {
-        return user;
+    public int getIdProyectoActual() {
+        return idProyectoActual;
     }
 
-    public void setUser(Usuario user) {
-        this.user = user;
+    public void setIdProyectoActual(int idProyectoActual) {
+        this.idProyectoActual = idProyectoActual;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
     
     public Desarrollador getDesarrollador(){
@@ -52,12 +59,5 @@ public class SingletonLogin {
 
     public void setRepresentante(Representante representante){
         this.representante = representante;
-    }
-    public String getNombreProyectoActual() {
-        return nombreProyectoActual;
-    }
-
-    public void setNombreProyectoActual(String nombreProyectoActual) {
-        this.nombreProyectoActual = nombreProyectoActual;
     }
 }

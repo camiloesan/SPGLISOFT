@@ -38,19 +38,17 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     
     private void formatearTabla() {
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombreProyecto"));
-        columnaEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        columnaEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
     }
     
     private void llenarTablaProyectos() {
         tablaProyectos.getItems().clear();
         List<Proyecto> listaProyectos = new ArrayList<>();
-        //int userID = SingletonLogin.getInstance().getUser().getUserId();
-        int id_representante = UsuarioDAO.getSesionRepresentante().getIdRepresentante();
+        int idRepresentante = UsuarioDAO.getSesionRepresentante().getIdRepresentante();
         try {
-            listaProyectos = ProyectoDAO.obtenerProyectosPorIDUsuario(id_representante);
+            listaProyectos = ProyectoDAO.obtenerProyectosPorIdRepresentante(idRepresentante);
         } catch (SQLException ex) {
             Alertas.mostrarAlertaErrorConexionBD();
-            ex.printStackTrace();
         }
         tablaProyectos.getItems().addAll(listaProyectos);
     }
@@ -58,7 +56,7 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     @FXML
     private void btnDetails() {
         if (tablaProyectos.getSelectionModel().getSelectedItem() != null) {
-            SingletonLogin.getInstance().setNombreProyectoActual(tablaProyectos.getSelectionModel().getSelectedItem().getNombreProyecto());
+            SingletonLogin.getInstance().setIdProyectoActual(tablaProyectos.getSelectionModel().getSelectedItem().getIdProyecto());
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
         } else {
             Alertas.mostrarAlertaElementoNoSeleccionado();

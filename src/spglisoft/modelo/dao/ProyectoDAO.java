@@ -20,23 +20,22 @@ import spglisoft.modelo.pojo.Usuario;
  * @author camilo
  */
 public class ProyectoDAO {
-    public static List<Proyecto> obtenerProyectosPorIDUsuario(int idUsuarioResponsable) throws SQLException {
+    public static List<Proyecto> obtenerProyectosPorIdRepresentante(int idUsuarioResponsable) throws SQLException {
         List<Proyecto> proyectosList = new ArrayList<>();
-        String query = "SELECT nombre_proyecto, descripcion, fecha_inicio,"
-                + "fecha_fin, estado_proyecto FROM proyecto WHERE id_representante = ?";
+        String query = "SELECT id_proyecto, nombre_proyecto, e.estado_proyecto as estado " +
+                "FROM proyecto INNER JOIN estado_proyecto e " +
+                "on proyecto.estado_proyecto = e.id_estado_proyecto" +
+                " where id_representante = (?);";
         Connection conexionBD = ConexionBD.obtenerConnection();
-        PreparedStatement preparedStatement = conexionBD.
-                prepareStatement(query);
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idUsuarioResponsable);
-        ResultSet resultSet = preparedStatement.executeQuery();
 
-        proyectosList = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Proyecto proyecto = new Proyecto();
-            proyecto.setNombreProyecto(resultSet.
-                    getString("nombre_proyecto"));
-            proyecto.setEstado(resultSet.getInt("estado_proyecto"));
-
+            proyecto.setIdProyecto(resultSet.getInt("id_proyecto"));
+            proyecto.setNombreProyecto(resultSet.getString("nombre_proyecto"));
+            proyecto.setNombreEstado(resultSet.getString("estado"));
             proyectosList.add(proyecto);
         }
         conexionBD.close();
@@ -57,11 +56,11 @@ public class ProyectoDAO {
                     proyecto.setDescripcion(resultadoConsulta.getString("descripcion"));
                     proyecto.setFechaInicio(resultadoConsulta.getString("fecha_inicio"));
                     proyecto.setFechaFin(resultadoConsulta.getString("fecha_fin"));
-                    proyecto.setEstado(resultadoConsulta.getInt("estado_proyecto"));
+                    proyecto.setIdEstado(resultadoConsulta.getInt("estado_proyecto"));
                     proyecto.setUsuarioResponsable(resultadoConsulta.getInt("id_representante"));
                 }
             } catch (SQLException e) {
-                throw e;
+                e.printStackTrace();
             } finally { 
                 conexionBD.close();
             }

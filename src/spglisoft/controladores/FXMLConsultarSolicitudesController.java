@@ -100,7 +100,7 @@ public class FXMLConsultarSolicitudesController implements Initializable {
         try {
             listaSolicitudes = FXCollections.observableArrayList();
             ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO
-                    .obtenerSolicitudes(SingletonLogin.getInstance().getNombreProyectoActual());
+                    .obtenerSolicitudes(SingletonLogin.getInstance().getIdProyectoActual());
             listaSolicitudes.addAll(solicitudesBD);
             tvSolicitudesCambio.setItems(listaSolicitudes);
         } catch (Exception e) {

@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.ActividadDAO;
 import spglisoft.modelo.pojo.Actividad;
 import spglisoft.utils.Alertas;
-import spglisoft.utils.SingletonLogin;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -40,7 +39,7 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     private void formatearTabla() {
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("FechaInicio"));
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
@@ -54,11 +53,9 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
             listaActividades = ActividadDAO
                     .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getDesarrollador().getIdDesarrollador());
             */
-            listaActividades = ActividadDAO.obtenerActividadesAsignadasPorDesarrollador(UsuarioDAO.getSesionDesarrollador().getIdDesarrollador());
-            
+            listaActividades = ActividadDAO.obtenerActividadesAsignadasPorIdDesarrollador(UsuarioDAO.getSesionDesarrollador().getIdDesarrollador());
         } catch (SQLException e) {
-            //Alertas.mostrarAlertaErrorConexionBD();
-            e.printStackTrace();
+            Alertas.mostrarAlertaErrorConexionBD();
         }
         tvActividades.getItems().addAll(listaActividades);
     }
