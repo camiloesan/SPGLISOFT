@@ -23,6 +23,11 @@ public class ConexionBD {
             + "?allowPublicKeyRetrieval=true&useSSL=false";
 
     public static Connection obtenerConnection() throws SQLException {
+        try {
+            Class.forName(Constantes.DRIVER);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return DriverManager.getConnection(URL_CONEXION, Constantes.USUARIO, Constantes.PASSWORD);
     }
 }
