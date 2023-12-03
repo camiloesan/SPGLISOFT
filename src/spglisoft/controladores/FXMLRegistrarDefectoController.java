@@ -6,6 +6,7 @@ package spglisoft.controladores;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,11 +20,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spglisoft.modelo.ResultadoOperacion;
 import spglisoft.modelo.dao.DefectoDAO;
-import spglisoft.modelo.dao.ParticipantesDAO;
-import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Defecto;
-import spglisoft.modelo.pojo.Participantes;
-import spglisoft.modelo.pojo.Usuario;
+import spglisoft.modelo.pojo.Desarrollador;
+import spglisoft.modelo.pojo.TipoDefecto;
+import spglisoft.utils.Alertas;
+import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 /**
@@ -33,18 +34,15 @@ import spglisoft.utils.Utilidades;
  */
 public class FXMLRegistrarDefectoController implements Initializable {
     
-    private Participantes participantes;
-    private Usuario sesion;
-    ObservableList<String> opciones = FXCollections.observableArrayList(
-            "Javascript",
-            "Interfaz");
+    private Desarrollador desarrollador;
+    private ObservableList<TipoDefecto> tiposDefectos = FXCollections.observableArrayList();
 
     @FXML
     private TextField tfNombreDefecto;
     @FXML
     private TextArea taDescripcion;
     @FXML
-    private ComboBox<String> cbTipoDefecto;
+    private ComboBox<TipoDefecto> cbTipoDefecto;
 
     /**
      * Initializes the controller class.
@@ -52,20 +50,15 @@ public class FXMLRegistrarDefectoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        cbTipoDefecto.setItems(opciones);
-        cbTipoDefecto.setValue("JavaScript");
+        cargarInformacionTipoDefecto();
+        if (!tiposDefectos.isEmpty()) {
+            cbTipoDefecto.setValue(tiposDefectos.get(0));
+        }
     }    
 
     @FXML
     private void btRegistrarDefecto(ActionEvent event) {
-        String titulo = tfNombreDefecto.getText();
-        String descripcion = taDescripcion.getText();
-        String tipoDefecto = cbTipoDefecto.getValue();
-        Defecto nuevoDefecto = new Defecto();
-        nuevoDefecto.setTitulo(titulo);
-        nuevoDefecto.setDescripcion(descripcion);
-        nuevoDefecto.setTipo(tipoDefecto);
-        registrarDefecto(nuevoDefecto, participantes);
+        registro();
     }
 
     @FXML
@@ -75,35 +68,61 @@ public class FXMLRegistrarDefectoController implements Initializable {
         cerrarStage();
     }
     
-    public void inicializarDatos(){
-        try {
-            this.sesion = UsuarioDAO.getSesion();
-            this.participantes = ParticipantesDAO.obtenerProyecto(sesion);
-        } catch (SQLException e) {
-            System.out.println("Error");
-        } 
+    private void registro(){
+        TipoDefecto tipoDefecto = (TipoDefecto) cbTipoDefecto.getSelectionModel().getSelectedItem();
+        String nombreDefecto = tfNombreDefecto.getText();
+        String descripcion = taDescripcion.getText();
+        int idTipoDefecto = tipoDefecto.getIdTipoDefecto();
+        
+        Defecto nuevoDefecto = new Defecto();
+        nuevoDefecto.setIdProyecto(desarrollador.getIdProyecto());
+        nuevoDefecto.setIdDesarrollador(desarrollador.getIdDesarrollador());
+        nuevoDefecto.setNombreDefectoString(nombreDefecto);
+        nuevoDefecto.setDescripcion(descripcion);
+        nuevoDefecto.setTipoDefecto(idTipoDefecto);
+        
+        registrarNuevoDefecto(nuevoDefecto);
     }
     
-    private void registrarDefecto(Defecto defecto, Participantes participantes){
-        if (tfNombreDefecto.getText().trim().isEmpty() || taDescripcion.getText().trim().isEmpty()) {
-            Utilidades.mostrarAlertaSimple("Formulario", 
-                    "Campos faltantes", Alert.AlertType.INFORMATION);
-        }else{
+    private void registrarNuevoDefecto(Defecto defecto){
+        if (!camposFaltantes()) {
+            ResultadoOperacion resultado = new ResultadoOperacion();
             try {
-                ResultadoOperacion resultadoRegistro = DefectoDAO.registrarDefecto(defecto, participantes);
-                if (!resultadoRegistro.isError()) {
-                    Utilidades.mostrarAlertaSimple("Registro", resultadoRegistro.getMensaje(),
+                resultado = DefectoDAO.registrarNuevoDefecto(defecto);
+                if (!resultado.isError()) {
+                    Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
                             Alert.AlertType.INFORMATION);
                     cerrarStage();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
+                        Alert.AlertType.ERROR);
             }
+        } else {
+            Alertas.mostrarAlertaCamposFaltantes();
         }
+    }
+    
+    public void iniciarDatos(){
+        this.desarrollador = SingletonLogin.getInstance().getDesarrollador();
     }
     
     private void cerrarStage(){
             Stage escenario = (Stage) tfNombreDefecto.getScene().getWindow();
             escenario.close();
         }
+    
+    private void cargarInformacionTipoDefecto(){
+        try {
+            List<TipoDefecto> lista = DefectoDAO.obtenerTiposDefecto();
+            tiposDefectos.addAll(lista);
+            cbTipoDefecto.setItems(tiposDefectos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private boolean camposFaltantes(){
+        return tfNombreDefecto.getText().trim().isEmpty() || taDescripcion.getText().trim().isEmpty();
+    }
 }

@@ -67,7 +67,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
             Parent vista = loader.load();
             Scene escena = new Scene(vista);
             FXMLRegistrarDefectoController controlador = loader.getController();
-            controlador.inicializarDatos();
+            controlador.iniciarDatos();
             
             Stage escenario = new Stage();
             escenario.setScene(escena);

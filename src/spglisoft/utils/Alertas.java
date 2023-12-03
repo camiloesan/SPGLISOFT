@@ -36,4 +36,11 @@ public class Alertas {
         alert.setContentText("Los datos son incorrectos, intententelo de nuevo");
         alert.showAndWait();
     }
+    
+    public static void mostrarAlertaCamposFaltantes(){
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Registro");
+        alert.setContentText("Campos faltantes");
+        alert.showAndWait();
+    }
 }

@@ -21,33 +21,19 @@ public class SolicitudCambio {
     private String accionPropuesta;
     private int idImpacto;
     private String razonCambio;
-    private String estado;
-    
+    private int idEstado;
+    private Date fechaRevision;
+    private int desarrolladorAsignado;
+    private int idRepresentante;
     private Button button;
 
     public SolicitudCambio() {
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public int getIdSolicitud() {
         return idSolicitud;
     }
 
-    public Button getButton() {
-        return button;
-    }
-
-    public void setButton(Button button) {
-        this.button = button;
-    }
-    
     public void setIdSolicitud(int idSolicitud) {
         this.idSolicitud = idSolicitud;
     }
@@ -59,7 +45,23 @@ public class SolicitudCambio {
     public void setIdProyecto(int idProyecto) {
         this.idProyecto = idProyecto;
     }
-    
+
+    public int getIdDesarrollador() {
+        return idDesarrollador;
+    }
+
+    public void setIdDesarrollador(int idDesarrollador) {
+        this.idDesarrollador = idDesarrollador;
+    }
+
+    public String getNombreSolicitud() {
+        return nombreSolicitud;
+    }
+
+    public void setNombreSolicitud(String nombreSolicitud) {
+        this.nombreSolicitud = nombreSolicitud;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -83,7 +85,15 @@ public class SolicitudCambio {
     public void setAccionPropuesta(String accionPropuesta) {
         this.accionPropuesta = accionPropuesta;
     }
-    
+
+    public int getIdImpacto() {
+        return idImpacto;
+    }
+
+    public void setIdImpacto(int idImpacto) {
+        this.idImpacto = idImpacto;
+    }
+
     public String getRazonCambio() {
         return razonCambio;
     }
@@ -92,28 +102,44 @@ public class SolicitudCambio {
         this.razonCambio = razonCambio;
     }
 
-    public int getIdDesarrollador() {
-        return idDesarrollador;
+    public int getIdEstado() {
+        return idEstado;
     }
 
-    public void setIdDesarrollador(int idDesarrollador) {
-        this.idDesarrollador = idDesarrollador;
+    public void setIdEstado(int idEstado) {
+        this.idEstado = idEstado;
     }
 
-    public String getNombreSolicitud() {
-        return nombreSolicitud;
+    public Date getFechaRevision() {
+        return fechaRevision;
     }
 
-    public void setNombreSolicitud(String nombreSolicitud) {
-        this.nombreSolicitud = nombreSolicitud;
+    public void setFechaRevision(Date fechaRevision) {
+        this.fechaRevision = fechaRevision;
     }
 
-    public int getIdImpacto() {
-        return idImpacto;
+    public int getDesarrolladorAsignado() {
+        return desarrolladorAsignado;
     }
 
-    public void setIdImpacto(int Idimpacto) {
-        this.idImpacto = Idimpacto;
+    public void setDesarrolladorAsignado(int desarrolladorAsignado) {
+        this.desarrolladorAsignado = desarrolladorAsignado;
+    }
+
+    public int getIdRepresentante() {
+        return idRepresentante;
+    }
+
+    public void setIdRepresentante(int idRepresentante) {
+        this.idRepresentante = idRepresentante;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
     }
     
 }

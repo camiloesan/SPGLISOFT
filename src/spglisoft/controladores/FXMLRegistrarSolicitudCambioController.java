@@ -6,6 +6,7 @@ package spglisoft.controladores;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,12 +19,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spglisoft.modelo.ResultadoOperacion;
-import spglisoft.modelo.dao.ParticipantesDAO;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
-import spglisoft.modelo.dao.UsuarioDAO;
-import spglisoft.modelo.pojo.Participantes;
+import spglisoft.modelo.pojo.Desarrollador;
+import spglisoft.modelo.pojo.ImpactoSolicitud;
 import spglisoft.modelo.pojo.SolicitudCambio;
-import spglisoft.modelo.pojo.Usuario;
+import spglisoft.utils.Alertas;
+import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 /**
@@ -33,19 +34,13 @@ import spglisoft.utils.Utilidades;
  */
 public class FXMLRegistrarSolicitudCambioController implements Initializable {
     
-    private Usuario sesion;
-    private Participantes participantes;
-    ObservableList<String> opciones = FXCollections.observableArrayList(
-            "Bajo impacto",
-            "Moderado impacto",
-            "Alto impacto",
-            "Critico impacto",
-            "No aplicable");
-
+    private Desarrollador desarrollador;
+    private ObservableList<ImpactoSolicitud> listaCombo = FXCollections.observableArrayList();
+    
     @FXML
     private TextField tfTitulo;
     @FXML
-    private ComboBox <String>cbImpactoCambio;
+    private ComboBox <ImpactoSolicitud> cbImpactoCambio;
     @FXML
     private TextArea taAccionPropuesta;
     @FXML
@@ -59,8 +54,10 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        cbImpactoCambio.setItems(opciones);
-        cbImpactoCambio.setValue("Bajo impacto");
+        cargarInformacionImpacto();
+        if (!listaCombo.isEmpty()) {
+            cbImpactoCambio.setValue(listaCombo.get(0));
+        }
     }
 
     @FXML
@@ -70,15 +67,11 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
         cerrarStage();
     }
     
-    private void registrarSolicitud(Participantes participantes, SolicitudCambio solicitud){
-        if (tfTitulo.getText().trim().isEmpty() || taAccionPropuesta.getText().trim().isEmpty()
-                || taDescripcionCambio.getText().trim().isEmpty() || taRazonCambio.getText().trim().isEmpty()){
-            Utilidades.mostrarAlertaSimple("Formulario", 
-                    "Campos faltantes", Alert.AlertType.INFORMATION);
-        }else{
+    private void registrarNuevaSolicitud(SolicitudCambio solicitud){
+        if (!camposFaltantes()) {
             ResultadoOperacion resultado = new ResultadoOperacion();
             try {
-                resultado = SolicitudCambioDAO.registrarSolicitud(participantes, solicitud);
+                resultado = SolicitudCambioDAO.registrarSolicitud(solicitud);
                 if (!resultado.isError()) {
                     Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
                             Alert.AlertType.INFORMATION);
@@ -88,37 +81,61 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
                 Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
                         Alert.AlertType.ERROR);
             }
+        } else {
+            Alertas.mostrarAlertaCamposFaltantes();
         }
+    }
+    
+    private boolean camposFaltantes(){
+        return tfTitulo.getText().trim().isEmpty() || taAccionPropuesta.getText().trim().isEmpty()
+                || taDescripcionCambio.getText().trim().isEmpty() || taRazonCambio.getText().trim().isEmpty();
     }
 
     @FXML
     private void btRegistrarSolicitud(ActionEvent event) {
-        String titulo = tfTitulo.getText();
+       registro();
+    }
+    
+    private void registro(){
+        ImpactoSolicitud Impacto = (ImpactoSolicitud) cbImpactoCambio.getSelectionModel().getSelectedItem();
+        String nombre = tfTitulo.getText();
         String descripcion = taDescripcionCambio.getText();
         String accionPropuesta = taAccionPropuesta.getText();
         String razonCambio = taRazonCambio.getText();
-        String impacto = cbImpactoCambio.getValue();
-        SolicitudCambio nuevaSolicitud = new SolicitudCambio();
-        nuevaSolicitud.setAccionPropuesta(accionPropuesta);
-        //nuevaSolicitud.setImpacto(impacto);
-        nuevaSolicitud.setRazonCambio(razonCambio);
-        nuevaSolicitud.setDescripcion(descripcion);
-        //nuevaSolicitud.setTitulo(titulo);
+        int idImpacto = Impacto.getIdImpacto();
         
-        registrarSolicitud(participantes, nuevaSolicitud);
+        SolicitudCambio nuevaSolicitud = new SolicitudCambio();
+        
+        nuevaSolicitud.setNombreSolicitud(nombre);
+        nuevaSolicitud.setDescripcion(descripcion);
+        nuevaSolicitud.setAccionPropuesta(accionPropuesta);
+        nuevaSolicitud.setAccionPropuesta(accionPropuesta);
+        nuevaSolicitud.setRazonCambio(razonCambio);
+        nuevaSolicitud.setIdImpacto(idImpacto);
+        nuevaSolicitud.setIdProyecto(desarrollador.getIdProyecto());
+        nuevaSolicitud.setIdDesarrollador(desarrollador.getIdDesarrollador());
+        nuevaSolicitud.setIdEstado(2);
+        
+        registrarNuevaSolicitud(nuevaSolicitud);
     }
     
-    public void inicializarDatos(){
-        try {
-            this.sesion = UsuarioDAO.getSesion();
-            this.participantes = ParticipantesDAO.obtenerProyecto(sesion);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void iniciarDatos(){
+        this.desarrollador = SingletonLogin.getInstance().getDesarrollador();
     }
     
     private void cerrarStage(){
         Stage escenario = (Stage) tfTitulo.getScene().getWindow();
         escenario.close();
     }
+    
+    private void cargarInformacionImpacto(){
+        try {
+            List<ImpactoSolicitud> lista = SolicitudCambioDAO.obtenerImpactoSolicitud();
+            listaCombo.addAll(lista);
+            cbImpactoCambio.setItems(listaCombo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

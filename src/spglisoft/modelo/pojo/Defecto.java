@@ -11,23 +11,16 @@ import java.sql.Date;
  * @author lecap
  */
 public class Defecto {
+    
     private int idDefecto;
-    private String nombreProyecto;
-    private String titulo;
+    private int idProyecto;
+    private int idDesarrollador;
+    private String nombreDefectoString;
     private String descripcion;
     private Date fechaReporte;
-    private String tipo;
+    private int tipoDefecto;
 
     public Defecto() {
-    }
-
-    public Defecto(int idDefecto, String nombreProyecto, String titulo, String descripcion, String estado, int esfuerzoEstimado, Date fechaReporte, String tipo) {
-        this.idDefecto = idDefecto;
-        this.nombreProyecto = nombreProyecto;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fechaReporte = fechaReporte;
-        this.tipo = tipo;
     }
 
     public int getIdDefecto() {
@@ -38,20 +31,28 @@ public class Defecto {
         this.idDefecto = idDefecto;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
+    public int getIdProyecto() {
+        return idProyecto;
     }
 
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public int getIdDesarrollador() {
+        return idDesarrollador;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setIdDesarrollador(int idDesarrollador) {
+        this.idDesarrollador = idDesarrollador;
+    }
+
+    public String getNombreDefectoString() {
+        return nombreDefectoString;
+    }
+
+    public void setNombreDefectoString(String nombreDefectoString) {
+        this.nombreDefectoString = nombreDefectoString;
     }
 
     public String getDescripcion() {
@@ -61,7 +62,7 @@ public class Defecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     public Date getFechaReporte() {
         return fechaReporte;
     }
@@ -70,11 +71,12 @@ public class Defecto {
         this.fechaReporte = fechaReporte;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getTipoDefecto() {
+        return tipoDefecto;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoDefecto(int tipoDefecto) {
+        this.tipoDefecto = tipoDefecto;
     }
+    
 }

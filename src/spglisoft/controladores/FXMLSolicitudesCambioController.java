@@ -81,7 +81,7 @@ public class FXMLSolicitudesCambioController implements Initializable, ISidebarD
             Parent vista = loader.load();
             Scene escena = new Scene(vista);
             FXMLRegistrarSolicitudCambioController controlador = loader.getController();
-            controlador.inicializarDatos();
+            controlador.iniciarDatos();
             
             Stage escenario = new Stage();
             escenario.setScene(escena);

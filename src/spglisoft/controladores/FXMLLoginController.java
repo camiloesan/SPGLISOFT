@@ -11,7 +11,6 @@ import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.Constantes;
 import spglisoft.utils.SingletonLogin;
-
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
 import spglisoft.modelo.pojo.Desarrollador;
@@ -28,6 +27,8 @@ public class FXMLLoginController {
     PasswordField tfPassword;
     
     public void initialize() {
+        tfEmail.setText("zs21013861");
+        tfPassword.setText("groyper");
     }
     
     @FXML
