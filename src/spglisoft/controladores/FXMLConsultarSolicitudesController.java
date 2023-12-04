@@ -24,18 +24,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import spglisoft.modelo.dao.ProyectoDAO;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
-import spglisoft.modelo.pojo.Proyecto;
+import spglisoft.modelo.pojo.Representante;
 import spglisoft.modelo.pojo.SolicitudCambio;
-import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 public class FXMLConsultarSolicitudesController implements Initializable {
     
-    private Proyecto proyecto;
     private ObservableList<SolicitudCambio> listaSolicitudes;
     ObservableList<String> opciones = FXCollections.observableArrayList(
             "Mas recientes",
@@ -72,7 +69,6 @@ public class FXMLConsultarSolicitudesController implements Initializable {
         } else if ("Mas antiguas".equals(opcionSeleccionada)) {
             ordenarPorMasAntiguas();
         }
-        
     }
     
     private void ordenarPorMasRecientes(){
@@ -82,35 +78,34 @@ public class FXMLConsultarSolicitudesController implements Initializable {
     }
     
     private void ordenarPorMasAntiguas(){
-        ObservableList<SolicitudCambio> listaActual = FXCollections.observableArrayList(tvSolicitudesCambio.getItems());
+        ObservableList<SolicitudCambio> listaActual = FXCollections
+                .observableArrayList(tvSolicitudesCambio.getItems());
         listaActual.sort(Comparator.comparing(SolicitudCambio::getFechaSolicitud));
         tvSolicitudesCambio.setItems(listaActual);
     }
     
-    public void inicializar(Usuario responsable) {
+    public void iniciarDatos(Representante representante){
         try {
-            this.proyecto = ProyectoDAO.obtenerProyectoResponsable(responsable);
             cargarDatosLista();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
-    private void cargarDatosLista() {
+    private void cargarDatosLista(){
         try {
             listaSolicitudes = FXCollections.observableArrayList();
-            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO
-                    .obtenerSolicitudes(SingletonLogin.getInstance().getIdProyectoActual());
+            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO.obtenerSolicitudes(SingletonLogin
+                    .getInstance().getIdProyectoActual());
             listaSolicitudes.addAll(solicitudesBD);
             tvSolicitudesCambio.setItems(listaSolicitudes);
         } catch (Exception e) {
-            System.out.println("Error cargarDatosLista");
             e.printStackTrace();
         }
     }
     
     private void configurarTabla() {
-    tcSolicitudes.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+    tcSolicitudes.setCellValueFactory(new PropertyValueFactory<>("nombreSolicitud"));
 
     tcDetalles.setCellFactory(new Callback<TableColumn<SolicitudCambio, Button>, TableCell<SolicitudCambio, Button>>() {
         @Override
@@ -150,7 +145,7 @@ public class FXMLConsultarSolicitudesController implements Initializable {
             
             Stage escenario = new Stage();
             escenario.setScene(escena);
-            escenario.setTitle("Detalles de la solicitud de cambio");
+            escenario.setTitle("Detalles");
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         } catch (IOException e) {

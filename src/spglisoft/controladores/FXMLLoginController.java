@@ -27,7 +27,7 @@ public class FXMLLoginController {
     PasswordField tfPassword;
     
     public void initialize() {
-        tfEmail.setText("zs21013861");
+        tfEmail.setText("1500");
         tfPassword.setText("groyper");
     }
     
@@ -47,6 +47,7 @@ public class FXMLLoginController {
                         SingletonLogin singletonLogin = SingletonLogin.getInstance();
                         singletonLogin.setDesarrollador(desarrollador);
                         singletonLogin.setTipoUsuario(Constantes.USUARIO_DESARROLLADOR);
+                        Utilidades.mostrarAlertaSimple("Bienvenido", "Bienvenido al SPGLISOFT", Alert.AlertType.INFORMATION);
                         MainStage.changeView("/spglisoft/vistas/FXMLActividadesDesarrollador.fxml", 1000, 600);
                     } else {
                         Alertas.mostrarAlertaLoginFallido();
@@ -61,6 +62,7 @@ public class FXMLLoginController {
                         SingletonLogin singletonLogin = SingletonLogin.getInstance();
                         singletonLogin.setRepresentante(representante);
                         singletonLogin.setTipoUsuario(Constantes.USUARIO_REPRESENTANTE);
+                        Utilidades.mostrarAlertaSimple("Bienvenido", "Bienvenido al SPGLISOFT", Alert.AlertType.INFORMATION);
                         MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
                     } else {
                         Alertas.mostrarAlertaLoginFallido();

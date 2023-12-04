@@ -46,7 +46,6 @@ public class FXMLDetallesSolicitudController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
         taDescripcion.setEditable(false);
         taRazonCambio.setEditable(false);
         taAccionPropuesta.setEditable(false);
@@ -60,11 +59,11 @@ public class FXMLDetallesSolicitudController implements Initializable {
     public void iniciarInformacion(SolicitudCambio solicitud) {
         try {
             this.solicitud = solicitud;
-            //this.nombreSolicitante = SolicitudCambioDAO.obtenerSolicitante(solicitud.getIdProponente());
+            this.nombreSolicitante = solicitud.getNombreDesarrollador();
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
             String fechaString = formato.format(solicitud.getFechaSolicitud());
-            //lbTituloSolicitud.setText(solicitud.getTitulo());
-            //lbImpactoCambio.setText("Impacto del cambio: " + solicitud.getImpacto());
+            lbTituloSolicitud.setText("Nombre de la solicitud: " + solicitud.getNombreSolicitud());
+            lbImpactoCambio.setText("Impacto del cambio: " + solicitud.getImpacto());
             lbNombreSolicitante.setText("Nombre del solicitante: " + nombreSolicitante);
             lbFechaSolicitud.setText("Fecha de registro de la solicitud: " + fechaString);
             taDescripcion.setText(solicitud.getDescripcion());

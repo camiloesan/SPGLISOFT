@@ -25,6 +25,8 @@ public class SolicitudCambio {
     private Date fechaRevision;
     private int desarrolladorAsignado;
     private int idRepresentante;
+    private String nombreDesarrollador;
+    private String impacto;
     private Button button;
 
     public SolicitudCambio() {
@@ -134,6 +136,22 @@ public class SolicitudCambio {
         this.idRepresentante = idRepresentante;
     }
 
+    public String getNombreDesarrollador() {
+        return nombreDesarrollador;
+    }
+
+    public void setNombreDesarrollador(String nombreDesarrollador) {
+        this.nombreDesarrollador = nombreDesarrollador;
+    }
+
+    public String getImpacto() {
+        return impacto;
+    }
+
+    public void setImpacto(String impacto) {
+        this.impacto = impacto;
+    }
+    
     public Button getButton() {
         return button;
     }

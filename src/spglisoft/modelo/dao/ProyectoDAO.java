@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import spglisoft.modelo.pojo.Representante;
 import spglisoft.modelo.pojo.Usuario;
 
 /**
@@ -29,7 +30,6 @@ public class ProyectoDAO {
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idUsuarioResponsable);
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Proyecto proyecto = new Proyecto();
@@ -42,26 +42,27 @@ public class ProyectoDAO {
         return proyectosList;
     }
     
-    public static Proyecto obtenerProyectoResponsable(Usuario responsable) throws SQLException {
+    public static Proyecto obtenerProyecto(Representante representante) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
         Proyecto proyecto = new Proyecto();
         if (conexionBD != null) {
             try {
-                String consulta = "SELECT * FROM proyecto WHERE id_representante = ?";
-                PreparedStatement obtenerProyecto = conexionBD.prepareStatement(consulta);
-                obtenerProyecto.setInt(1, responsable.getUserId());
-                ResultSet resultadoConsulta = obtenerProyecto.executeQuery();
-                if (resultadoConsulta.next()) {
-                    proyecto.setNombreProyecto(resultadoConsulta.getString("nombre_proyecto"));
-                    proyecto.setDescripcion(resultadoConsulta.getString("descripcion"));
-                    proyecto.setFechaInicio(resultadoConsulta.getString("fecha_inicio"));
-                    proyecto.setFechaFin(resultadoConsulta.getString("fecha_fin"));
-                    proyecto.setIdEstado(resultadoConsulta.getInt("estado_proyecto"));
-                    proyecto.setUsuarioResponsable(resultadoConsulta.getInt("id_representante"));
+                String query = "SELECT * FROM proyecto WHERE id_representante = ?";
+                PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+                preparedStatement.setInt(1, representante.getIdRepresentante());
+                ResultSet resultado = preparedStatement.executeQuery();
+                if (resultado.next()) {
+                    proyecto.setIdProyecto(resultado.getInt("id_proyecto"));
+                    proyecto.setNombreProyecto(resultado.getString("nombre_proyecto"));
+                    proyecto.setDescripcion(resultado.getString("descripcion"));
+                    proyecto.setFechaInicio(resultado.getString("fecha_inicio"));
+                    proyecto.setFechaFin(resultado.getString("fecha_fin"));
+                    proyecto.setIdEstado(resultado.getInt("estado_proyecto"));
+                    proyecto.setUsuarioResponsable(resultado.getInt("id_representante"));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally { 
+            } finally {
                 conexionBD.close();
             }
         }
