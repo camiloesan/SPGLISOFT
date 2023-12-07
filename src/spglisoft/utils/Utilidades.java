@@ -6,8 +6,10 @@ package spglisoft.utils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -21,6 +23,15 @@ public class Utilidades {
         alertaSimple.setContentText(mensaje);
         alertaSimple.setHeaderText(null);
         alertaSimple.showAndWait();
+    }
+    
+    public static boolean mostrarAlertaConfirmacion(String titulo, String mensaje){
+        Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertaConfirmacion.setHeaderText(titulo);
+        alertaConfirmacion.setContentText(mensaje);
+        alertaConfirmacion.setHeaderText(null);
+        Optional<ButtonType>botonClic = alertaConfirmacion.showAndWait();
+        return (botonClic.get() == ButtonType.OK);
     }
     
     public static FXMLLoader cargarVista(String rutaFXML) throws IOException{

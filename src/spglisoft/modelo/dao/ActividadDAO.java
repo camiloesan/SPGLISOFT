@@ -74,7 +74,7 @@ public class ActividadDAO {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT * FROM actividad " +
-                "WHERE id_desarrollador = ?";
+                "WHERE id_desarrollador = ? AND id_estado = 2";
 
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idDesarrollador);
@@ -112,5 +112,40 @@ public class ActividadDAO {
         }
         conexionBD.close();
         return listaEstadosActividad;
+    }
+    
+    public static void eliminarActividad(int idActividad) throws SQLException{
+        String query = "DELETE FROM actividad " +
+                       "WHERE id_actividad = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement prepareStatement = conexionBD.prepareStatement(query);
+        prepareStatement.setInt(1, idActividad);
+        
+        prepareStatement.execute();
+        conexionBD.close();
+    }
+    
+    public static void desasignarActividad(int idActividad) throws SQLException{
+        String query = "UPDATE actividad " +
+                       "SET id_desarrollador = NULL, id_estado = 1 " +
+                       "WHERE id_actividad = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement prepareStatement = conexionBD.prepareStatement(query);
+        prepareStatement.setInt(1, idActividad);
+        
+        prepareStatement.execute();
+        conexionBD.close();
+    }
+    
+    public static void terminarActividad(int idActividad) throws SQLException{
+        String query = "UPDATE actividad " +
+                       "SET id_estado = 3 " +
+                       "WHERE id_actividad = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement prepareStatement = conexionBD.prepareStatement(query);
+        prepareStatement.setInt(1, idActividad);
+        
+        prepareStatement.execute();
+        conexionBD.close();
     }
 }

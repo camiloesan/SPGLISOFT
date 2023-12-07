@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
@@ -50,6 +51,10 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     private final static ObservableList<String> observableListCbFiltroActividades =
             FXCollections.observableArrayList("Asignadas", "No Asignadas");
+    @FXML
+    private Button btnEliminarActividad;
+    @FXML
+    private Button btnDesasignarActividad;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -101,10 +106,14 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
             case "Asignadas":
                 llenarTablaActividadesAsignadas();
                 btnAsignarActividad.setVisible(false);
+                btnDesasignarActividad.setVisible(true);
+                btnEliminarActividad.setVisible(false);
                 break;
             case "No Asignadas":
                 llenarTablaActividadesNoAsignadas();
                 btnAsignarActividad.setVisible(true);
+                btnDesasignarActividad.setVisible(false);
+                btnEliminarActividad.setVisible(true);
                 break;
         }
     }
@@ -114,6 +123,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
+    @FXML
     public void btnCambios() {
         spglisoft.utils.SidebarRepresentante.irMenuCambios();
     }
@@ -123,7 +133,9 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
+    @FXML
     public void btnDesarrolladores() {
+        spglisoft.utils.SidebarRepresentante.irMenuDesarrolladores();
     }
 
     @Override
@@ -168,5 +180,39 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     @FXML
     private void irSolicitudesCambio(MouseEvent event) {
         spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
+    }
+
+    @FXML
+    private void btnEliminarActividad(ActionEvent event) {
+        if(esElementoSeleccionado()){
+            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+            try{
+                ActividadDAO.eliminarActividad(actividad.getIdActividad());
+                Alertas.mostrarAlertaExito();
+                formatearTabla();
+                llenarTablaActividadesNoAsignadas();
+            } catch (SQLException e){
+                Alertas.mostrarAlertaElementoNoSeleccionado();
+            }
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
+        }
+    }
+
+    @FXML
+    private void btnDesasignarActividad(ActionEvent event) {
+        if(esElementoSeleccionado()){
+            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+            try{
+                ActividadDAO.desasignarActividad(actividad.getIdActividad());
+                Alertas.mostrarAlertaExito();
+                formatearTabla();
+                llenarTablaActividadesAsignadas();
+            } catch (SQLException e){
+                Alertas.mostrarAlertaElementoNoSeleccionado();
+            }
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
+        }
     }
 }

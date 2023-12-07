@@ -110,10 +110,56 @@ public class UsuarioDAO {
         conexionBD.close();
         return listaUsuarios;
     }
+    
+    public static List<Desarrollador> obtenerDesarrolladoresSinProyecto() throws SQLException{
+        List<Desarrollador> listaUsuarios = new ArrayList<>();
+        String query = "SELECT id_desarrollador, nombre, apellido_paterno, apellido_materno, matricula,semestre " +
+                "FROM desarrollador WHERE id_proyecto IS NULL ";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Desarrollador desarrollador = new Desarrollador();
+            desarrollador.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
+            desarrollador.setNombre(resultSet.getString("nombre"));
+            desarrollador.setApellidoPaterno(resultSet.getString("apellido_paterno"));
+            desarrollador.setApellidoMaterno(resultSet.getString("apellido_materno"));
+            desarrollador.setMatricula(resultSet.getString("matricula"));
+            listaUsuarios.add(desarrollador);
+        }
+        conexionBD.close();
+        return listaUsuarios;
+    }
+    
+    public static void eliminarDesarrolladorDelProyecto(int idDesarrollador) throws SQLException{
+        String query = "UPDATE desarrollador " +
+                       "SET id_proyecto = NULL " +
+                       "WHERE id_desarrollador = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setInt(1, idDesarrollador);
+        
+        preparedStatement.execute();
+        conexionBD.close();
+    }
+    
+    public static void añadirDesarrolladorProyecto(int idDesarrollador, int idProyecto) throws SQLException{
+        String query = "UPDATE desarrollador " +
+                       "SET id_proyecto = (?) " +
+                       "WHERE id_desarrollador = (?)";
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+        preparedStatement.setInt(1, idProyecto);
+        preparedStatement.setInt(2, idDesarrollador);
+        
+        preparedStatement.execute();
+        conexionBD.close();
+    }
 
     public static void asignarActividadADesarrollador(int idActividad, int idDesarrollador) throws SQLException {
         String query = "UPDATE actividad " +
-                "SET id_desarrollador = (?), id_estado = 1 " +
+                "SET id_desarrollador = (?), id_estado = 2 " +
                 "WHERE id_actividad = (?)";
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);

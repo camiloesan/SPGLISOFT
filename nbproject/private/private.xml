@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/modelo/pojo/TipoDefecto.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/modelo/dao/SolicitudCambioDAO.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/controladores/FXMLRegistrarDefectoController.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/controladores/FXMLDefectosDesarrolladorController.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/controladores/FXMLRegistrarSolicitudCambioController.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/modelo/dao/DefectoDAO.java</file>
-            <file>file:/C:/Users/lecap/Desktop/SPGLISOFTpre/src/spglisoft/modelo/pojo/Defecto.java</file>
+            <file>file:/C:/Users/conta/Desktop/UNIVERSIDAD%20VERACRUZANA/PRINCIPIOS%20DE%20CONSTRUCCIÓN%20DE%20SOFTWARE/SPGLISOFT%20PRE/SPGLISOFT/src/spglisoft/modelo/dao/ActividadDAO.java</file>
+            <file>file:/C:/Users/conta/Desktop/UNIVERSIDAD%20VERACRUZANA/PRINCIPIOS%20DE%20CONSTRUCCIÓN%20DE%20SOFTWARE/SPGLISOFT%20PRE/SPGLISOFT/src/spglisoft/controladores/FXMLActividadesDesarrolladorController.java</file>
         </group>
     </open-files>
 </project-private>

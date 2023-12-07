@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import spglisoft.modelo.dao.UsuarioDAO;
 
 public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
@@ -66,16 +67,19 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     @Override
+    @FXML
     public void btnCambios() {
 
     }
 
     @Override
+    @FXML
     public void btnDefectos() {
         spglisoft.utils.SidebarDesarrollador.irMenuDefectos();
     }
 
     @Override
+    @FXML
     public void btnSolicitudesCambio() {
         spglisoft.utils.SidebarDesarrollador.irMenuSolicituesCambio();
     }
@@ -86,6 +90,7 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
     }
 
     @Override
+    @FXML
     public void btnCerrarSesion() {
         spglisoft.utils.SidebarDesarrollador.cerrarSesionDesarrollador();
     }
@@ -102,5 +107,22 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     private boolean esElementoSeleccionado() {
         return tvActividades.getSelectionModel().getSelectedItem() != null;
+    }
+
+    @FXML
+    private void btnTerminarActivida(ActionEvent event) {
+        if(esElementoSeleccionado()){
+            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+            try{
+                ActividadDAO.terminarActividad(actividad.getIdActividad());
+                Alertas.mostrarAlertaExito();
+                formatearTabla();
+                llenarTablaActividades();
+            } catch (SQLException e){
+                Alertas.mostrarAlertaElementoNoSeleccionado();
+            }
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
+        }
     }
 }

@@ -32,7 +32,7 @@
                      </cursor>
                   </Label>
                   <Separator layoutX="70.0" layoutY="350.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
-                  <Label layoutX="67.0" layoutY="327.0" text="Desarrolladores" textFill="WHITE">
+                  <Label layoutX="67.0" layoutY="327.0" onMouseClicked="#btnDesarrolladores" text="Desarrolladores" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -94,6 +94,8 @@
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" spacing="15.0">
                      <children>
+                        <Button fx:id="btnEliminarActividad" mnemonicParsing="false" onAction="#btnEliminarActividad" text="Eliminar actividad" />
+                        <Button fx:id="btnDesasignarActividad" mnemonicParsing="false" onAction="#btnDesasignarActividad" text="Desasignar actividad" />
                         <Button mnemonicParsing="false" onAction="#btnVerDetalleActividad" text="Ver detalle" />
                         <Button fx:id="btnAsignarActividad" mnemonicParsing="false" onAction="#btnAsignarActividad" text="Asignar actividad" />
                      </children>
