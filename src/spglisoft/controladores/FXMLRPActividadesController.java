@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import spglisoft.modelo.dao.ActividadDAO;
 import spglisoft.modelo.pojo.Actividad;
+import spglisoft.modelo.pojo.EstadoActividad;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 
@@ -27,34 +28,25 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
-
     @FXML
     private TableView<Actividad> tvActividades;
-
     @FXML
     private TableColumn<Actividad, String> colFechaInicio;
-
     @FXML
     private TableColumn<Actividad, String> colEstado;
-
     @FXML
     private TableColumn<Actividad, String> colTitulo;
-
     @FXML
     private TableColumn<Actividad, String> colFechaFin;
-
     @FXML
     private Button btnAsignarActividad;
-
     @FXML
-    private ComboBox<String> cbFiltroActividades;
-
-    private final static ObservableList<String> observableListCbFiltroActividades =
-            FXCollections.observableArrayList("Asignadas", "No Asignadas");
+    private ComboBox<EstadoActividad> cbFiltroActividades;
     @FXML
     private Button btnEliminarActividad;
     @FXML
     private Button btnDesasignarActividad;
+    private ObservableList<EstadoActividad> estadosActividad;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,7 +56,10 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     public void formatearComboFiltro() {
-        cbFiltroActividades.getItems().addAll(observableListCbFiltroActividades);
+        estadosActividad = FXCollections.observableArrayList();
+        List<EstadoActividad> estados = ActividadDAO.obtenerEstadosActividad();
+        estadosActividad.addAll(estados);
+        cbFiltroActividades.setItems(estadosActividad);
         cbFiltroActividades.getSelectionModel().select(1);
     }
 
@@ -101,19 +96,19 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     @FXML
     private void cbSeleccionFiltro() {
-        String filtro = cbFiltroActividades.getSelectionModel().getSelectedItem();
-        switch (filtro) {
-            case "Asignadas":
+        EstadoActividad filtro = cbFiltroActividades.getSelectionModel().getSelectedItem();
+        switch (filtro.toString()) {
+            case "Asignada":
                 llenarTablaActividadesAsignadas();
-                btnAsignarActividad.setVisible(false);
-                btnDesasignarActividad.setVisible(true);
-                btnEliminarActividad.setVisible(false);
+                btnAsignarActividad.setDisable(true);
+                btnDesasignarActividad.setDisable(false);
+                btnEliminarActividad.setDisable(true);
                 break;
-            case "No Asignadas":
+            case "No asignada":
                 llenarTablaActividadesNoAsignadas();
-                btnAsignarActividad.setVisible(true);
-                btnDesasignarActividad.setVisible(false);
-                btnEliminarActividad.setVisible(true);
+                btnAsignarActividad.setDisable(false);
+                btnDesasignarActividad.setDisable(true);
+                btnEliminarActividad.setDisable(false);
                 break;
         }
     }
@@ -136,6 +131,11 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     @FXML
     public void btnDesarrolladores() {
         spglisoft.utils.SidebarRepresentante.irMenuDesarrolladores();
+    }
+
+    @Override
+    public void btnSolicitudesCambio() {
+        spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 
     @Override
@@ -173,12 +173,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @FXML
-    private void testConsultarSolicitudes(MouseEvent event) {
-        //spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
-    }
-
-    @FXML
-    private void irSolicitudesCambio(MouseEvent event) {
+    private void irSolicitudesCambio() {
         spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 

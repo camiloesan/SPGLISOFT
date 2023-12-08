@@ -97,20 +97,24 @@ public class ActividadDAO {
         return listaActividades;
     }
 
-    public static ArrayList<EstadoActividad> obtenerEstadosActividad() throws SQLException {
-        ArrayList<EstadoActividad> listaEstadosActividad = new ArrayList<>();
-        Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT * FROM estado_actividad";
+    public static List<EstadoActividad> obtenerEstadosActividad() {
+        List<EstadoActividad> listaEstadosActividad = new ArrayList<>();
+        try {
+            Connection conexionBD = ConexionBD.obtenerConnection();
+            String query = "SELECT * FROM estado_actividad";
 
-        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()) {
-            EstadoActividad estadoActividad = new EstadoActividad();
-            estadoActividad.setIdEstado(resultSet.getInt("id_estado_actividad"));
-            estadoActividad.setEstado(resultSet.getString("estado"));
-            listaEstadosActividad.add(estadoActividad);
+            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                EstadoActividad estadoActividad = new EstadoActividad();
+                estadoActividad.setIdEstado(resultSet.getInt("id_estado_actividad"));
+                estadoActividad.setEstado(resultSet.getString("estado"));
+                listaEstadosActividad.add(estadoActividad);
+            }
+            conexionBD.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        conexionBD.close();
         return listaEstadosActividad;
     }
     

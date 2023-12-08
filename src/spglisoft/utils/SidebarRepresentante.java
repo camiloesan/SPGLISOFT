@@ -36,23 +36,7 @@ public class SidebarRepresentante {
         MainStage.changeView("/spglisoft/vistas/FXMLRPMenuPrincipal.fxml", 1000, 600);
     }
     
-    public static void irConsultarActividades() {
-        MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
-    }
-    
     public static void irConsultarSolicitudesCambio(){
-        try {
-            Representante representante = SingletonLogin.getInstance().getRepresentante();
-            if (representante != null) {
-                FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml");
-                Parent vista = loader.load();   
-                FXMLConsultarSolicitudesController controlador = loader.getController();
-                controlador.iniciarDatos(representante);
-            } 
-            MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
-        } catch (Exception e) {
-            Utilidades.mostrarAlertaSimple("Error", "No se puede mostrar la ventana",
-                    Alert.AlertType.ERROR);
-        }
+        MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
     }
 }

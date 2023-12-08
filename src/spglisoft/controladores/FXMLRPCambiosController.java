@@ -17,13 +17,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import spglisoft.modelo.dao.ActividadDAO;
 import spglisoft.modelo.pojo.Cambio;
+import spglisoft.modelo.pojo.EstadoActividad;
+import spglisoft.utils.SidebarRepresentante;
 
 public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons {
 
     @FXML
-    private ComboBox<String> cbFiltro;
+    private ComboBox<EstadoActividad> cbFiltro;
     @FXML
     private TableView<Cambio> tvCambios;
     @FXML
@@ -34,15 +36,16 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
     private TableColumn<Cambio, String> colFechaFin;
     @FXML
     private TableColumn<Cambio, String> colEstado;
-
-    private final static ObservableList<String> observableListCbFiltroCambios =
-            FXCollections.observableArrayList("Interfaz" ,"Codigo", "Base de datos");
+    private ObservableList<EstadoActividad> estadosActividad;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
         llenarTablaCambios();
-        cbFiltro.getItems().addAll(observableListCbFiltroCambios);
+        estadosActividad = FXCollections.observableArrayList();
+        List<EstadoActividad> estados = ActividadDAO.obtenerEstadosActividad();
+        estadosActividad.addAll(estados);
+        cbFiltro.setItems(estadosActividad);
         cbFiltro.getSelectionModel().select(1);
     }
 
@@ -75,14 +78,22 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
 
     @Override
     public void btnCambios() {
+        //vista actual
     }
 
     @Override
     public void btnDefectos() {
+
     }
 
     @Override
     public void btnDesarrolladores() {
+        SidebarRepresentante.irMenuDesarrolladores();
+    }
+
+    @Override
+    public void btnSolicitudesCambio() {
+        SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 
     @Override
@@ -98,10 +109,5 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
     @FXML
     private void btnVerDetalleCambio() {
         MainStage.changeView("/spglisoft/vistas/FXMLDetalleCambio.fxml", 1000, 600);
-    }
-
-    @FXML
-    private void irSolicitudesCambio(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 }

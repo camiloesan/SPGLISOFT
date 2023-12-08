@@ -22,6 +22,7 @@ import spglisoft.modelo.dao.UsuarioDAO;
 import spglisoft.modelo.pojo.Desarrollador;
 import spglisoft.modelo.pojo.Usuario;
 import spglisoft.utils.Alertas;
+import spglisoft.utils.SidebarRepresentante;
 import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
@@ -30,7 +31,7 @@ import spglisoft.utils.Utilidades;
  *
  * @author conta
  */
-public class FXMLRPDesarrolladoresController implements Initializable {
+public class FXMLRPDesarrolladoresController implements Initializable, ISidebarRPButtons {
 
     private ObservableList<Desarrollador> desarrolladores;
     @FXML
@@ -70,31 +71,6 @@ public class FXMLRPDesarrolladoresController implements Initializable {
         }
         tvDesarrolladores.getItems().addAll(listaDesarrolladores);
     }
-    
-    @FXML
-    private void btnActividades(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irConsultarActividades();
-    }
-
-    @FXML
-    private void btnCambios(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irMenuCambios();
-    }
-
-    @FXML
-    private void btnDefectos(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irMenuDefectos();
-    }
-
-    @FXML
-    private void btnDesarrolladores(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irMenuDesarrolladores();
-    }
-
-    @FXML
-    private void btnInfoProyecto(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irMenuInformacionProyeto();
-    }
 
     @FXML
     private void btnEliminarDesarrollador(ActionEvent event) {
@@ -128,5 +104,39 @@ public class FXMLRPDesarrolladoresController implements Initializable {
     private void btnRegresar(MouseEvent event) {
         spglisoft.utils.SidebarRepresentante.irMenuDefectos();
     }
-    
+
+    @Override
+    public void btnActividades() {
+        SidebarRepresentante.irMenuActividades();
+    }
+
+    @Override
+    public void btnCambios() {
+        SidebarRepresentante.irMenuCambios();
+    }
+
+    @Override
+    public void btnDefectos() {
+
+    }
+
+    @Override
+    public void btnDesarrolladores() {
+        //vista actual
+    }
+
+    @Override
+    public void btnSolicitudesCambio() {
+        SidebarRepresentante.irConsultarSolicitudesCambio();
+    }
+
+    @Override
+    public void btnInformacionProyecto() {
+
+    }
+
+    @Override
+    public void btnRegresar() {
+        SidebarRepresentante.irMenuProyectos();
+    }
 }
