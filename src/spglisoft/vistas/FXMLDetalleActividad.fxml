@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetalleActividadController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetalleActividadController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0">
          <children>
@@ -24,10 +21,15 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </VBox.margin>
             </HBox>
-            <GridPane alignment="TOP_CENTER" hgap="10.0" prefHeight="400.0" prefWidth="711.0" VBox.vgrow="ALWAYS">
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </VBox.margin>
+            </Separator>
+            <GridPane alignment="TOP_CENTER" hgap="10.0" prefHeight="402.0" prefWidth="567.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label text="Título: " />
-                  <Label text="Esfuerzo:" GridPane.rowIndex="1" />
+                  <Label text="Esfuerzo estimado(minutos):" GridPane.rowIndex="1" />
                   <Label text="Fecha inicio: " GridPane.rowIndex="2" />
                   <Label text="Fecha fin:" GridPane.rowIndex="3" />
                   <Label text="Estado:" GridPane.rowIndex="4" />
@@ -40,8 +42,8 @@
                   <Label fx:id="lblEstado" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
                <columnConstraints>
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="467.93463134765625" minWidth="10.0" prefWidth="285.2439880371094" />
-                  <ColumnConstraints maxWidth="713.2043762207031" minWidth="10.0" prefWidth="664.7560119628906" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="467.93463134765625" minWidth="10.0" prefWidth="285.0" />
+                  <ColumnConstraints maxWidth="713.2043762207031" minWidth="10.0" prefWidth="505.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />

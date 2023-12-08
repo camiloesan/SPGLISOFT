@@ -27,11 +27,9 @@ import javafx.util.Callback;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.Representante;
 import spglisoft.modelo.pojo.SolicitudCambio;
-import spglisoft.utils.Alertas;
-import spglisoft.utils.SingletonLogin;
-import spglisoft.utils.Utilidades;
+import spglisoft.utils.*;
 
-public class FXMLConsultarSolicitudesController implements Initializable {
+public class FXMLConsultarSolicitudesController implements Initializable, ISidebarRPButtons {
     
     private ObservableList<SolicitudCambio> listaSolicitudes;
     ObservableList<String> opciones = FXCollections.observableArrayList(
@@ -54,11 +52,6 @@ public class FXMLConsultarSolicitudesController implements Initializable {
         cargarDatosLista();
         cbFiltro.setItems(opciones);
         cbFiltro.setValue(" ");
-    }
-
-
-    @FXML
-    private void btnRegresar(MouseEvent event) {
     }
 
     @FXML
@@ -165,13 +158,38 @@ public class FXMLConsultarSolicitudesController implements Initializable {
         }
     }
 
-    @FXML
-    private void irActividades(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irConsultarActividades();
+    @Override
+    public void btnActividades() {
+        SidebarRepresentante.irMenuActividades();
     }
 
-    @FXML
-    private void irCambios(MouseEvent event) {
-        spglisoft.utils.SidebarRepresentante.irMenuCambios();
+    @Override
+    public void btnCambios() {
+        SidebarRepresentante.irMenuCambios();
+    }
+
+    @Override
+    public void btnDefectos() {
+
+    }
+
+    @Override
+    public void btnDesarrolladores() {
+        SidebarRepresentante.irMenuDesarrolladores();
+    }
+
+    @Override
+    public void btnSolicitudesCambio() {
+
+    }
+
+    @Override
+    public void btnInformacionProyecto() {
+
+    }
+
+    @Override
+    public void btnRegresar() {
+        SidebarRepresentante.irMenuProyectos();
     }
 }

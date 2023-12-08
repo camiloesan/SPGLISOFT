@@ -13,6 +13,7 @@ public interface ISidebarRPButtons {
     void btnCambios();
     void btnDefectos();
     void btnDesarrolladores();
+    void btnSolicitudesCambio();
     void btnInformacionProyecto();
     void btnRegresar();
 }
