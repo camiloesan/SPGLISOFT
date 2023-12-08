@@ -23,7 +23,7 @@
             </HBox>
             <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
                <children>
-                  <Label maxWidth="250.0" prefHeight="17.0" prefWidth="250.0" text="Descripción: " wrapText="true">
+                  <Label fx:id="lblDescripcion" maxWidth="250.0" prefHeight="17.0" prefWidth="250.0" text="Descripción: " wrapText="true">
                      <VBox.margin>
                         <Insets top="75.0" />
                      </VBox.margin>
