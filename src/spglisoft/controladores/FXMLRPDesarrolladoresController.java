@@ -123,5 +123,10 @@ public class FXMLRPDesarrolladoresController implements Initializable {
         formatearTabla();
         llenarTablaDesarrolladores();
     }
+
+    @FXML
+    private void btnRegresar(MouseEvent event) {
+        spglisoft.utils.SidebarRepresentante.irMenuDefectos();
+    }
     
 }
