@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.Alertas;
@@ -16,6 +17,9 @@ import java.util.ResourceBundle;
 public class FXMLModificarEstadoSolicitudController implements Initializable {
     @FXML
     ComboBox<String> cbEstadoSolicitud;
+    @FXML
+    Label lblDescripcion;
+
     SolicitudCambio solicitudCambio;
 
     private final static ObservableList<String> observableListCbEstadosSolicitud =
@@ -29,6 +33,7 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
 
     private void inicializarInformacion() {
         solicitudCambio = (SolicitudCambio) MainStage.getUserData();
+        lblDescripcion.setText("Descripcion: " + solicitudCambio.getDescripcion());
         cbEstadoSolicitud.getSelectionModel().select(solicitudCambio.getIdEstado());
     }
 
