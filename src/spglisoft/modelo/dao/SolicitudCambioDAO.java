@@ -7,9 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import spglisoft.modelo.ResultadoOperacion;
-import spglisoft.modelo.pojo.ImpactoSolicitud;
 import spglisoft.modelo.pojo.SolicitudCambio;
 
 public class SolicitudCambioDAO {
@@ -41,7 +39,7 @@ public class SolicitudCambioDAO {
                 consulta.setString(5, solicitud.getAccionPropuesta());
                 consulta.setString(6, solicitud.getRazonCambio());
                 consulta.setString(7, solicitud.getImpactoCambio());
-                consulta.setInt(8, solicitud.getIdEstado());
+                consulta.setInt(8, solicitud.getIdEstadoSolicitud());
                 int filasAfectadas = consulta.executeUpdate();
                 if (filasAfectadas > 0) {
                     resultado.setError(false);
@@ -59,47 +57,53 @@ public class SolicitudCambioDAO {
         return resultado;
     }
     
-    /*
     public static ArrayList<SolicitudCambio> obtenerSolicitudes(int idProyecto) throws SQLException {
         ArrayList<SolicitudCambio> solicitudes = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         if (conexionBD != null) {
             try {
                 String consulta = "SELECT \n" +
-                        "sc.nombre_solicitud AS NombreSolicitud,\n" +
-                        "sc.descripcion AS DescripcionCambio,\n" +
-                        "sc.razon_cambio AS RazonCambio,\n" +
-                        "ic.impacto_cambio AS ImpactoSolicitud,\n" +
-                        "sc.accion_propuesta AS AccionPropuesta,\n" +
-                        "CONCAT(d.nombre, ' ', d.apellido_paterno, ' ', d.apellido_materno) AS NombreSolicitante,\n" +
-                        "sc.fecha_solicitud AS FechaRegistro\n" +
-                        "FROM solicitud_cambio sc\n" +
-                        "JOIN estado_solicitud ic ON sc.id_estado_solicitud = ic.id_impacto_cambio\n" +
-                        "JOIN desarrollador d ON sc.id_desarrollador = d.id_desarrollador " +
-                        "WHERE sc.id_proyecto = ?";
+                        "sc.id_solicitud,\n" +
+                        "sc.nombre_solicitud,\n" +
+                        "sc.descripcion,\n" +
+                        "sc.fecha_solicitud,\n" +
+                        "sc.accion_propuesta,\n" +
+                        "sc.razon_cambio,\n" +
+                        "sc.impacto_cambio,\n" +
+                        "es.estado_solicitud,\n" +
+                        "CONCAT(d.nombre, ' ', d.apellido_paterno, ' ', d.apellido_materno) AS nombre_desarrollador,\n " +
+                        "p.nombre_proyecto\n " +
+                        "FROM solicitud_cambio sc\n " +
+                        "INNER JOIN desarrollador d ON sc.id_desarrollador = d.id_desarrollador\n " +
+                        "INNER JOIN estado_solicitud es ON sc.id_estado_solicitud = es.id_estado_solicitud\n " +
+                        "INNER JOIN proyecto p ON sc.id_proyecto = p.id_proyecto WHERE sc.id_proyecto = ?";
                 PreparedStatement prepararSentencia = conexionBD.prepareStatement(consulta);
                 prepararSentencia.setInt(1, idProyecto);
                 ResultSet resultado = prepararSentencia.executeQuery();
                 while (resultado.next()) {
                     SolicitudCambio solicitud = new SolicitudCambio();
-                    solicitud.setNombreSolicitud(resultado.getString("NombreSolicitud"));
-                    solicitud.setDescripcion(resultado.getString("DescripcionCambio"));
-                    solicitud.setRazonCambio(resultado.getString("RazonCambio"));
-                    solicitud.setImpacto(resultado.getString("ImpactoSolicitud"));
-                    solicitud.setAccionPropuesta(resultado.getString("AccionPropuesta"));
-                    solicitud.setNombreDesarrollador(resultado.getString("NombreSolicitante"));
-                    solicitud.setFechaSolicitud(resultado.getDate("FechaRegistro"));
+                    solicitud.setIdSolicitud(resultado.getInt("sc.id_solicitud"));
+                    solicitud.setNombreSolicitud(resultado.getString("sc.nombre_solicitud"));
+                    solicitud.setDescripcion(resultado.getString("sc.descripcion"));
+                    solicitud.setFechaSolicitud(resultado.getDate("sc.fecha_solicitud"));
+                    solicitud.setAccionPropuesta(resultado.getString("accion_propuesta"));
+                    solicitud.setRazonCambio(resultado.getString("sc.razon_cambio"));
+                    solicitud.setImpactoCambio(resultado.getString("sc.impacto_cambio"));
+                    solicitud.setEstadoSolicitud(resultado.getString("es.estado_solicitud"));
+                    solicitud.setNombreDesarrollador(resultado.getString("nombre_desarrollador"));
+                    solicitud.setNombreProyecto(resultado.getString("p.nombre_proyecto"));
                     solicitudes.add(solicitud);
                 }
             } catch (SQLException e) {
                 throw e;
             } finally {
-                conexionBD.close();
+                if (conexionBD != null) {
+                    conexionBD.close();
+                }
             }
         }
         return solicitudes;
     }
-    */
     
     public static String obtenerSolicitante(int idSolicitante) throws SQLException{
         Connection conexionBD = ConexionBD.obtenerConnection();

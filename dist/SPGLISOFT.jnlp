@@ -8,11 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="SPGLISOFT.jar" size="112554" download="eager" />
-=======
-    <jar href="SPGLISOFT.jar" size="121449" download="eager" />
->>>>>>> c3ea4492907c604df612e744fa9852c3ca86f4f5
+    <jar href="SPGLISOFT.jar" size="120778" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.49.jar" size="1006904" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="spglisoft.controladores.MainStage"  name="SPGLISOFT" />

@@ -61,7 +61,7 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="687.0" prefHeight="27.0" prefWidth="660.0">
          <children>
-            <Label fx:id="lbImpactoCambio">
+            <Label fx:id="lbNombreProyecto">
                <font>
                   <Font size="18.0" />
                </font>
@@ -100,7 +100,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="19.0" layoutY="753.0" prefHeight="27.0" prefWidth="650.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="19.0" layoutY="757.0" prefHeight="27.0" prefWidth="650.0">
          <children>
             <Button mnemonicParsing="false" onAction="#btVolver" prefHeight="25.0" prefWidth="80.0" text="Volver" />
          </children>
@@ -115,5 +115,14 @@
          </children>
       </HBox>
       <TextArea fx:id="taImpactoCambio" layoutX="14.0" layoutY="533.0" prefHeight="100.0" prefWidth="620.0" />
+      <HBox layoutX="14.0" layoutY="714.0" prefHeight="27.0" prefWidth="660.0">
+         <children>
+            <Label fx:id="lbEstadoSolicitud">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

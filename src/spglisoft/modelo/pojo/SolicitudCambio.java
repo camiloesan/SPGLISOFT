@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 public class SolicitudCambio {
     private int idSolicitud;
     private int idProyecto;
+    private String nombreProyecto;
     private int idDesarrollador;
     private String nombreSolicitud;
     private String descripcion;
@@ -21,7 +22,7 @@ public class SolicitudCambio {
     private String accionPropuesta;
     private String impactoCambio;
     private String razonCambio;
-    private int idEstado;
+    private int idEstadoSolicitud;
     private Date fechaRevision;
     private int desarrolladorAsignado;
     private int idRepresentante;
@@ -91,15 +92,7 @@ public class SolicitudCambio {
     public void setRazonCambio(String razonCambio) {
         this.razonCambio = razonCambio;
     }
-
-    public int getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(int idEstado) {
-        this.idEstado = idEstado;
-    }
-
+    
     public Date getFechaRevision() {
         return fechaRevision;
     }
@@ -158,5 +151,21 @@ public class SolicitudCambio {
 
     public void setEstadoSolicitud(String estadoSolicitud) {
         this.estadoSolicitud = estadoSolicitud;
+    }
+
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
+    }
+
+    public int getIdEstadoSolicitud() {
+        return idEstadoSolicitud;
+    }
+
+    public void setIdEstadoSolicitud(int idEstadoSolicitud) {
+        this.idEstadoSolicitud = idEstadoSolicitud;
     }
 }

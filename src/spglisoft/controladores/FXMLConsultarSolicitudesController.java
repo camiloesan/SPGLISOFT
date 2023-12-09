@@ -20,7 +20,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -49,9 +48,10 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configurarTabla();
-        //cargarDatosLista();
+        cargarDatosLista();
         cbFiltro.setItems(opciones);
-        cbFiltro.setValue(" ");
+        cbFiltro.setValue("Filtrar");
+        
     }
 
     @FXML
@@ -79,7 +79,7 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
     
     public void iniciarDatos(Representante representante){
         try {
-            //cargarDatosLista();
+            cargarDatosLista();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,6 +98,18 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
         }
     }
     */
+    
+    private void cargarDatosLista(){
+        try {
+            listaSolicitudes = FXCollections.observableArrayList();
+            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO.obtenerSolicitudes(SingletonLogin
+                    .getInstance().getIdProyectoActual());
+            listaSolicitudes.addAll(solicitudesBD);
+            tvSolicitudesCambio.setItems(listaSolicitudes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     private void configurarTabla() {
     tcSolicitudes.setCellValueFactory(new PropertyValueFactory<>("nombreSolicitud"));

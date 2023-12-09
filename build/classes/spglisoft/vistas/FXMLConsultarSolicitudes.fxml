@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLConsultarSolicitudesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLConsultarSolicitudesController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="25.0" style="-fx-background-color: #003466;" HBox.hgrow="NEVER">
                <children>
-                  <Label layoutX="78.0" layoutY="302.0" onMouseClicked="#irActividades" text="Actividades" textFill="WHITE">
+                  <Label layoutX="78.0" layoutY="302.0" onMouseClicked="#btnActividades" text="Actividades" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Label>
                   <Separator layoutX="70.0" layoutY="253.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
-                  <Label layoutX="49.0" layoutY="319.0" onMouseClicked="#irCambios" text="Cambios" textFill="WHITE">
+                  <Label layoutX="49.0" layoutY="319.0" onMouseClicked="#btnCambios" text="Cambios" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -30,7 +31,7 @@
                      </cursor>
                   </Label>
                   <Separator layoutX="70.0" layoutY="350.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
-                  <Label layoutX="67.0" layoutY="327.0" text="Desarrolladores" textFill="WHITE">
+                  <Label layoutX="67.0" layoutY="327.0" onMouseClicked="#btnDesarrolladores" text="Desarrolladores" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -70,7 +71,7 @@
                   </Label>
                   <HBox>
                      <children>
-                        <ComboBox fx:id="cbFiltro" onAction="#cbSeleccionFiltro" prefWidth="150.0" promptText="Mas recientes" />
+                        <ComboBox fx:id="cbFiltro" onAction="#cbSeleccionFiltro" prefWidth="150.0" />
                      </children>
                      <VBox.margin>
                         <Insets left="25.0" right="25.0" />

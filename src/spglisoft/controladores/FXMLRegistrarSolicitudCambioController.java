@@ -108,7 +108,7 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
         nuevaSolicitud.setImpactoCambio(impactoCambio);
         nuevaSolicitud.setIdProyecto(desarrollador.getIdProyecto());
         nuevaSolicitud.setIdDesarrollador(desarrollador.getIdDesarrollador());
-        nuevaSolicitud.setIdEstado(2);
+        nuevaSolicitud.setIdEstadoSolicitud(2);
         
         registrarNuevaSolicitud(nuevaSolicitud);
     }

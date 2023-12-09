@@ -34,7 +34,7 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
     private void inicializarInformacion() {
         solicitudCambio = (SolicitudCambio) MainStage.getUserData();
         lblDescripcion.setText("Descripcion: " + solicitudCambio.getDescripcion());
-        cbEstadoSolicitud.getSelectionModel().select(solicitudCambio.getIdEstado());
+        cbEstadoSolicitud.getSelectionModel().select(solicitudCambio.getIdEstadoSolicitud());
     }
 
     private void formatearCbEstadoSolicitud() {
