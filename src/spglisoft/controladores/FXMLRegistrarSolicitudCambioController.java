@@ -35,18 +35,17 @@ import spglisoft.utils.Utilidades;
 public class FXMLRegistrarSolicitudCambioController implements Initializable {
     
     private Desarrollador desarrollador;
-    private ObservableList<ImpactoSolicitud> listaCombo = FXCollections.observableArrayList();
     
     @FXML
     private TextField tfTitulo;
-    @FXML
-    private ComboBox <ImpactoSolicitud> cbImpactoCambio;
     @FXML
     private TextArea taAccionPropuesta;
     @FXML
     private TextArea taDescripcionCambio;
     @FXML
     private TextArea taRazonCambio;
+    @FXML
+    private TextArea taImpactoCambio;
 
     /**
      * Initializes the controller class.
@@ -54,10 +53,6 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        cargarInformacionImpacto();
-        if (!listaCombo.isEmpty()) {
-            cbImpactoCambio.setValue(listaCombo.get(0));
-        }
     }
 
     @FXML
@@ -97,12 +92,11 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     }
     
     private void registro(){
-        ImpactoSolicitud Impacto = (ImpactoSolicitud) cbImpactoCambio.getSelectionModel().getSelectedItem();
+        String impactoCambio = taImpactoCambio.getText();
         String nombre = tfTitulo.getText();
         String descripcion = taDescripcionCambio.getText();
         String accionPropuesta = taAccionPropuesta.getText();
         String razonCambio = taRazonCambio.getText();
-        int idImpacto = Impacto.getIdImpacto();
         
         SolicitudCambio nuevaSolicitud = new SolicitudCambio();
         
@@ -111,7 +105,7 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
         nuevaSolicitud.setAccionPropuesta(accionPropuesta);
         nuevaSolicitud.setAccionPropuesta(accionPropuesta);
         nuevaSolicitud.setRazonCambio(razonCambio);
-        nuevaSolicitud.setIdImpacto(idImpacto);
+        nuevaSolicitud.setImpactoCambio(impactoCambio);
         nuevaSolicitud.setIdProyecto(desarrollador.getIdProyecto());
         nuevaSolicitud.setIdDesarrollador(desarrollador.getIdDesarrollador());
         nuevaSolicitud.setIdEstado(2);
@@ -127,15 +121,4 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
         Stage escenario = (Stage) tfTitulo.getScene().getWindow();
         escenario.close();
     }
-    
-    private void cargarInformacionImpacto(){
-        try {
-            List<ImpactoSolicitud> lista = SolicitudCambioDAO.obtenerImpactoSolicitud();
-            listaCombo.addAll(lista);
-            cbImpactoCambio.setItems(listaCombo);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
 }

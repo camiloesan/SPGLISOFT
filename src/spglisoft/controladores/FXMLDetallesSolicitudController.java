@@ -39,6 +39,8 @@ public class FXMLDetallesSolicitudController implements Initializable {
     private TextArea taRazonCambio;
     @FXML
     private TextArea taAccionPropuesta;
+    @FXML
+    private TextArea taImpactoCambio;
 
     /**
      * Initializes the controller class.
@@ -63,7 +65,7 @@ public class FXMLDetallesSolicitudController implements Initializable {
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
             String fechaString = formato.format(solicitud.getFechaSolicitud());
             lbTituloSolicitud.setText("Nombre de la solicitud: " + solicitud.getNombreSolicitud());
-            lbImpactoCambio.setText("Impacto del cambio: " + solicitud.getImpacto());
+            //lbImpactoCambio.setText("Impacto del cambio: " + solicitud.getImpacto());
             lbNombreSolicitante.setText("Nombre del solicitante: " + nombreSolicitante);
             lbFechaSolicitud.setText("Fecha de registro de la solicitud: " + fechaString);
             taDescripcion.setText(solicitud.getDescripcion());

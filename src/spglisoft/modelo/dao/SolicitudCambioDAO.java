@@ -31,7 +31,7 @@ public class SolicitudCambioDAO {
         if (conexionBD != null) {
             try {
                 String query = "INSERT INTO solicitud_cambio (id_proyecto, id_desarrollador, nombre_solicitud, "
-                        + "descripcion, fecha_solicitud, accion_propuesta, razon_cambio, id_impacto_cambio, id_estado_solicitud) "
+                        + "descripcion, fecha_solicitud, accion_propuesta, razon_cambio, impacto_cambio, id_estado_solicitud) "
                         + "VALUES (?,?,?,?,CURDATE(),?,?,?,?)";
                 PreparedStatement consulta = conexionBD.prepareStatement(query);
                 consulta.setInt(1, solicitud.getIdProyecto());
@@ -40,7 +40,7 @@ public class SolicitudCambioDAO {
                 consulta.setString(4, solicitud.getDescripcion());
                 consulta.setString(5, solicitud.getAccionPropuesta());
                 consulta.setString(6, solicitud.getRazonCambio());
-                consulta.setInt(7, solicitud.getIdImpacto());
+                consulta.setString(7, solicitud.getImpactoCambio());
                 consulta.setInt(8, solicitud.getIdEstado());
                 int filasAfectadas = consulta.executeUpdate();
                 if (filasAfectadas > 0) {
@@ -59,6 +59,7 @@ public class SolicitudCambioDAO {
         return resultado;
     }
     
+    /*
     public static ArrayList<SolicitudCambio> obtenerSolicitudes(int idProyecto) throws SQLException {
         ArrayList<SolicitudCambio> solicitudes = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
@@ -73,7 +74,7 @@ public class SolicitudCambioDAO {
                         "CONCAT(d.nombre, ' ', d.apellido_paterno, ' ', d.apellido_materno) AS NombreSolicitante,\n" +
                         "sc.fecha_solicitud AS FechaRegistro\n" +
                         "FROM solicitud_cambio sc\n" +
-                        "JOIN impacto_cambio ic ON sc.id_impacto_cambio = ic.id_impacto_cambio\n" +
+                        "JOIN estado_solicitud ic ON sc.id_estado_solicitud = ic.id_impacto_cambio\n" +
                         "JOIN desarrollador d ON sc.id_desarrollador = d.id_desarrollador " +
                         "WHERE sc.id_proyecto = ?";
                 PreparedStatement prepararSentencia = conexionBD.prepareStatement(consulta);
@@ -98,6 +99,7 @@ public class SolicitudCambioDAO {
         }
         return solicitudes;
     }
+    */
     
     public static String obtenerSolicitante(int idSolicitante) throws SQLException{
         Connection conexionBD = ConexionBD.obtenerConnection();
@@ -119,26 +121,5 @@ public class SolicitudCambioDAO {
             }
         }
         return nombreSolicitante;
-    }
-    
-    public static List<ImpactoSolicitud> obtenerImpactoSolicitud() throws SQLException{
-        List<ImpactoSolicitud> impactos = new ArrayList<>();
-        Connection conexionBD = ConexionBD.obtenerConnection();
-        if (conexionBD != null) {
-            try {
-                String query = "SELECT * FROM impacto_cambio";
-                PreparedStatement prepararSentencia = conexionBD.prepareStatement(query);
-                ResultSet resultado = prepararSentencia.executeQuery();
-                while (resultado.next()) {
-                    ImpactoSolicitud impacto = new ImpactoSolicitud();
-                    impacto.setIdImpacto(resultado.getInt("id_impacto_cambio"));
-                    impacto.setImpacto(resultado.getString("impacto_cambio"));
-                    impactos.add(impacto);
-                }
-            } catch (SQLException e) {
-                throw e;
-            }
-        }
-        return impactos;
     }
 }

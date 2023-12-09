@@ -51,7 +51,7 @@ public class FXMLConsultarSolicitudesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         configurarTabla();
-        cargarDatosLista();
+        //cargarDatosLista();
         cbFiltro.setItems(opciones);
         cbFiltro.setValue(" ");
     }
@@ -86,12 +86,13 @@ public class FXMLConsultarSolicitudesController implements Initializable {
     
     public void iniciarDatos(Representante representante){
         try {
-            cargarDatosLista();
+            //cargarDatosLista();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     
+    /*
     private void cargarDatosLista(){
         try {
             listaSolicitudes = FXCollections.observableArrayList();
@@ -103,6 +104,7 @@ public class FXMLConsultarSolicitudesController implements Initializable {
             e.printStackTrace();
         }
     }
+    */
     
     private void configurarTabla() {
     tcSolicitudes.setCellValueFactory(new PropertyValueFactory<>("nombreSolicitud"));

@@ -19,14 +19,14 @@ public class SolicitudCambio {
     private String descripcion;
     private Date fechaSolicitud;
     private String accionPropuesta;
-    private int idImpacto;
+    private String impactoCambio;
     private String razonCambio;
     private int idEstado;
     private Date fechaRevision;
     private int desarrolladorAsignado;
     private int idRepresentante;
     private String nombreDesarrollador;
-    private String impacto;
+    private String estadoSolicitud;
     private Button button;
 
     public SolicitudCambio() {
@@ -87,19 +87,7 @@ public class SolicitudCambio {
     public void setAccionPropuesta(String accionPropuesta) {
         this.accionPropuesta = accionPropuesta;
     }
-
-    public int getIdImpacto() {
-        return idImpacto;
-    }
-
-    public void setIdImpacto(int idImpacto) {
-        this.idImpacto = idImpacto;
-    }
-
-    public String getRazonCambio() {
-        return razonCambio;
-    }
-
+    
     public void setRazonCambio(String razonCambio) {
         this.razonCambio = razonCambio;
     }
@@ -143,14 +131,6 @@ public class SolicitudCambio {
     public void setNombreDesarrollador(String nombreDesarrollador) {
         this.nombreDesarrollador = nombreDesarrollador;
     }
-
-    public String getImpacto() {
-        return impacto;
-    }
-
-    public void setImpacto(String impacto) {
-        this.impacto = impacto;
-    }
     
     public Button getButton() {
         return button;
@@ -159,5 +139,24 @@ public class SolicitudCambio {
     public void setButton(Button button) {
         this.button = button;
     }
-    
+
+    public String getImpactoCambio() {
+        return impactoCambio;
+    }
+
+    public void setImpactoCambio(String impactoCambio) {
+        this.impactoCambio = impactoCambio;
+    }
+
+    public String getRazonCambio() {
+        return razonCambio;
+    }
+
+    public String getEstadoSolicitud() {
+        return estadoSolicitud;
+    }
+
+    public void setEstadoSolicitud(String estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
+    }
 }

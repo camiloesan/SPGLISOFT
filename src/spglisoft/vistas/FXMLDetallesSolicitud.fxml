@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetallesSolicitudController">
+<AnchorPane id="AnchorPane" prefHeight="798.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetallesSolicitudController">
    <children>
       <Pane prefHeight="80.0" prefWidth="693.0" style="-fx-background-color: #18529D;">
          <children>
@@ -15,7 +15,7 @@
                <children>
                   <Label text="Detalles de la solicitud de cambio" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
+                        <Font name="System Bold Italic" size="30.0" />
                      </font>
                   </Label>
                </children>
@@ -59,7 +59,7 @@
             <TextArea fx:id="taRazonCambio" prefHeight="100.0" prefWidth="620.0" />
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="570.0" prefHeight="27.0" prefWidth="660.0">
+      <HBox layoutX="14.0" layoutY="687.0" prefHeight="27.0" prefWidth="660.0">
          <children>
             <Label fx:id="lbImpactoCambio">
                <font>
@@ -82,7 +82,7 @@
             <TextArea fx:id="taAccionPropuesta" prefHeight="100.0" prefWidth="620.0" />
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="516.0" prefHeight="27.0" prefWidth="660.0">
+      <HBox layoutX="14.0" layoutY="633.0" prefHeight="27.0" prefWidth="660.0">
          <children>
             <Label fx:id="lbNombreSolicitante">
                <font>
@@ -91,7 +91,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="543.0" prefHeight="27.0" prefWidth="660.0">
+      <HBox layoutX="14.0" layoutY="660.0" prefHeight="27.0" prefWidth="660.0">
          <children>
             <Label fx:id="lbFechaSolicitud">
                <font>
@@ -100,10 +100,20 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="17.0" layoutY="654.0" prefHeight="27.0" prefWidth="650.0">
+      <HBox alignment="CENTER_RIGHT" layoutX="19.0" layoutY="753.0" prefHeight="27.0" prefWidth="650.0">
          <children>
             <Button mnemonicParsing="false" onAction="#btVolver" prefHeight="25.0" prefWidth="80.0" text="Volver" />
          </children>
       </HBox>
+      <HBox layoutX="14.0" layoutY="506.0" prefHeight="27.0" prefWidth="660.0">
+         <children>
+            <Label text="Impacto del cambio:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <TextArea fx:id="taImpactoCambio" layoutX="14.0" layoutY="533.0" prefHeight="100.0" prefWidth="620.0" />
    </children>
 </AnchorPane>
