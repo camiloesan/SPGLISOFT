@@ -85,20 +85,6 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
         }
     }
     
-    /*
-    private void cargarDatosLista(){
-        try {
-            listaSolicitudes = FXCollections.observableArrayList();
-            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO.obtenerSolicitudes(SingletonLogin
-                    .getInstance().getIdProyectoActual());
-            listaSolicitudes.addAll(solicitudesBD);
-            tvSolicitudesCambio.setItems(listaSolicitudes);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
-    
     private void cargarDatosLista(){
         try {
             listaSolicitudes = FXCollections.observableArrayList();

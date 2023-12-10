@@ -27,13 +27,16 @@ public class DefectoDAO {
         if (conexionBD != null) {
             try {
                 String query = "INSERT INTO defecto (id_proyecto, id_desarrollador, nombre_defecto, descripcion, "
-                        + "fecha_reporte, tipo_defecto) VALUES (?,?,?,?,CURDATE(),?)";
+                        + "fecha_reporte, id_tipo_defecto, id_estado_defecto, esfuerzo_estimado) "
+                        + "VALUES (?,?,?,?,CURDATE(),?,?,?)";
                 PreparedStatement prepararConsulta = conexionBD.prepareCall(query);
                 prepararConsulta.setInt(1, defecto.getIdProyecto());
                 prepararConsulta.setInt(2, defecto.getIdDesarrollador());
                 prepararConsulta.setString(3, defecto.getNombreDefectoString());
                 prepararConsulta.setString(4, defecto.getDescripcion());
                 prepararConsulta.setInt(5, defecto.getTipoDefecto());
+                prepararConsulta.setInt(6, defecto.getEstadoDefecto());
+                prepararConsulta.setInt(7, defecto.getEsfuerzoEstimado());
                 int filasAfectadas = prepararConsulta.executeUpdate();
                 if (filasAfectadas > 0) {
                     resultado.setError(false);

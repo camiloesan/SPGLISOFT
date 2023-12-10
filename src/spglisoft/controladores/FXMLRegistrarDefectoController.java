@@ -43,6 +43,8 @@ public class FXMLRegistrarDefectoController implements Initializable {
     private TextArea taDescripcion;
     @FXML
     private ComboBox<TipoDefecto> cbTipoDefecto;
+    @FXML
+    private TextField tfEsfuerzoEstimado;
 
     /**
      * Initializes the controller class.
@@ -54,6 +56,11 @@ public class FXMLRegistrarDefectoController implements Initializable {
         if (!tiposDefectos.isEmpty()) {
             cbTipoDefecto.setValue(tiposDefectos.get(0));
         }
+        tfEsfuerzoEstimado.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                tfEsfuerzoEstimado.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }    
 
     @FXML
@@ -68,23 +75,35 @@ public class FXMLRegistrarDefectoController implements Initializable {
         cerrarStage();
     }
     
-    private void registro(){
-        TipoDefecto tipoDefecto = (TipoDefecto) cbTipoDefecto.getSelectionModel().getSelectedItem();
-        String nombreDefecto = tfNombreDefecto.getText();
-        String descripcion = taDescripcion.getText();
-        int idTipoDefecto = tipoDefecto.getIdTipoDefecto();
+    private void registro() {
+        if (validarEsfuerzo()) {
+            TipoDefecto tipoDefecto = (TipoDefecto) cbTipoDefecto.getSelectionModel().getSelectedItem();
+            String nombreDefecto = tfNombreDefecto.getText();
+            String descripcion = taDescripcion.getText();
+            int idTipoDefecto = tipoDefecto.getIdTipoDefecto();
+            String esfuerzoEstimado = tfEsfuerzoEstimado.getText().trim();
+            int esfuerzoEstimadoInteger = Integer.parseInt(esfuerzoEstimado);
         
-        Defecto nuevoDefecto = new Defecto();
-        nuevoDefecto.setIdProyecto(desarrollador.getIdProyecto());
-        nuevoDefecto.setIdDesarrollador(desarrollador.getIdDesarrollador());
-        nuevoDefecto.setNombreDefectoString(nombreDefecto);
-        nuevoDefecto.setDescripcion(descripcion);
-        nuevoDefecto.setTipoDefecto(idTipoDefecto);
+            Defecto nuevoDefecto = new Defecto();
+            nuevoDefecto.setIdProyecto(desarrollador.getIdProyecto());
+            nuevoDefecto.setIdDesarrollador(desarrollador.getIdDesarrollador());
+            nuevoDefecto.setNombreDefectoString(nombreDefecto);
+            nuevoDefecto.setDescripcion(descripcion);
+            nuevoDefecto.setTipoDefecto(idTipoDefecto);
+            nuevoDefecto.setEsfuerzoEstimado(esfuerzoEstimadoInteger);
+            nuevoDefecto.setEstadoDefecto(2);
         
-        registrarNuevoDefecto(nuevoDefecto);
+            registrarNuevoDefecto(nuevoDefecto);
+        } else {
+            Alertas.mostrarAlertaCamposFaltantes();
+        }
     }
     
-    private void registrarNuevoDefecto(Defecto defecto){
+    private boolean validarEsfuerzo() {
+        String esfuerzo = tfEsfuerzoEstimado.getText().trim();
+        return !esfuerzo.isEmpty();
+    }
+    private void registrarNuevoDefecto(Defecto defecto) {
         if (!camposFaltantes()) {
             ResultadoOperacion resultado = new ResultadoOperacion();
             try {
@@ -97,22 +116,23 @@ public class FXMLRegistrarDefectoController implements Initializable {
             } catch (SQLException e) {
                 Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
                         Alert.AlertType.ERROR);
+                e.printStackTrace();
             }
         } else {
             Alertas.mostrarAlertaCamposFaltantes();
         }
     }
     
-    public void iniciarDatos(){
+    public void iniciarDatos() {
         this.desarrollador = SingletonLogin.getInstance().getDesarrollador();
     }
     
-    private void cerrarStage(){
+    private void cerrarStage() {
             Stage escenario = (Stage) tfNombreDefecto.getScene().getWindow();
             escenario.close();
         }
     
-    private void cargarInformacionTipoDefecto(){
+    private void cargarInformacionTipoDefecto() {
         try {
             List<TipoDefecto> lista = DefectoDAO.obtenerTiposDefecto();
             tiposDefectos.addAll(lista);
@@ -122,7 +142,8 @@ public class FXMLRegistrarDefectoController implements Initializable {
         }
     }
     
-    private boolean camposFaltantes(){
-        return tfNombreDefecto.getText().trim().isEmpty() || taDescripcion.getText().trim().isEmpty();
+    private boolean camposFaltantes() {
+        return tfNombreDefecto.getText().trim().isEmpty() || taDescripcion.getText()
+                .trim().isEmpty();
     }
 }

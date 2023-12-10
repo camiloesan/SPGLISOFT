@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import spglisoft.modelo.ResultadoOperacion;
 
 public class ActividadDAO {
     public static List<Actividad> obtenerActividadesAsignadasPorIdProyecto(int idProyecto) throws SQLException {
@@ -151,5 +152,37 @@ public class ActividadDAO {
         
         prepareStatement.execute();
         conexionBD.close();
+    }
+    
+    public static ResultadoOperacion registrarActividad(Actividad nuevaActividad) throws SQLException {
+        ResultadoOperacion resultado = new ResultadoOperacion(true, "Error al registrar la actividad", -1);
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        if (conexionBD != null) {
+            try {
+                String query = "INSERT INTO actividad (id_proyecto, nombre, descripcion, esfuerzo, "
+                        + "id_estado, fecha_inicio, fecha_fin) VALUES (?,?,?,?,?,?,?)";
+                PreparedStatement preparedStatement = conexionBD.prepareCall(query);
+                preparedStatement.setInt(1, nuevaActividad.getIdProyecto());
+                preparedStatement.setString(2, nuevaActividad.getNombre());
+                preparedStatement.setString(3, nuevaActividad.getDescripcion());
+                preparedStatement.setInt(4, nuevaActividad.getEsfuerzoMinutos());
+                preparedStatement.setInt(5, nuevaActividad.getIdEstado());
+                preparedStatement.setString(6, nuevaActividad.getFechaInicio());
+                preparedStatement.setString(7, nuevaActividad.getFechaFin());
+                int filasAfectadas = preparedStatement.executeUpdate();
+                if (filasAfectadas > 0) {
+                    resultado.setError(false);
+                    resultado.setMensaje("Actividad registrada");
+                    resultado.setFilasAfectadas(filasAfectadas);
+                }
+            } catch (SQLException e) {
+                throw e;
+            } finally {
+                if (conexionBD != null) {
+                    conexionBD.close();
+                }
+            }
+        }
+        return resultado;
     }
 }

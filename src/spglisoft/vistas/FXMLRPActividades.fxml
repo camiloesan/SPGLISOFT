@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRPActividadesController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRPActividadesController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
          <children>
@@ -99,6 +100,7 @@
                   </TableView>
                   <HBox alignment="CENTER_RIGHT" spacing="15.0">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#btnRegistrarActividad" text="Registrar actividad" />
                         <Button fx:id="btnEliminarActividad" mnemonicParsing="false" onAction="#btnEliminarActividad" text="Eliminar actividad" />
                         <Button fx:id="btnDesasignarActividad" mnemonicParsing="false" onAction="#btnDesasignarActividad" text="Desasignar actividad" />
                         <Button mnemonicParsing="false" onAction="#btnVerDetalleActividad" text="Ver detalle" />

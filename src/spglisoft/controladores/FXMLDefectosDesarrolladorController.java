@@ -62,6 +62,10 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
 
     @FXML
     private void btRegistrarDefecto(ActionEvent event) {
+        irRegistrarDefecto();
+    }
+    
+    private void irRegistrarDefecto() {
         try {
             FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLRegistrarDefecto.fxml");
             Parent vista = loader.load();

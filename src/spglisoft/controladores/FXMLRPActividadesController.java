@@ -4,6 +4,7 @@
  */
 package spglisoft.controladores;
 
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,14 +19,19 @@ import spglisoft.modelo.pojo.Actividad;
 import spglisoft.modelo.pojo.EstadoActividad;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import spglisoft.utils.Utilidades;
 
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
     @FXML
@@ -134,11 +140,13 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
+    @FXML
     public void btnSolicitudesCambio() {
         spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
 
     @Override
+    @FXML
     public void btnInformacionProyecto() {
     }
 
@@ -172,7 +180,6 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
         return tvActividades.getSelectionModel().getSelectedItem() != null;
     }
 
-    @FXML
     private void irSolicitudesCambio() {
         spglisoft.utils.SidebarRepresentante.irConsultarSolicitudesCambio();
     }
@@ -208,6 +215,28 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
             }
         } else {
             Alertas.mostrarAlertaElementoNoSeleccionado();
+        }
+    }
+
+    @FXML
+    private void btnRegistrarActividad(ActionEvent event) {
+        irRegistrarActividad();
+    }
+    
+    private void irRegistrarActividad() {
+        try {
+            FXMLLoader loader = Utilidades.cargarVista("/spglisoft/vistas/FXMLRegistrarActividad.fxml");
+            Parent vista = loader.load();
+            Scene escena = new Scene(vista);
+            
+            Stage escenario = new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Registrar actividad");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        } catch (IOException e) {
+            Utilidades.mostrarAlertaSimple("Error",
+                    "No se puede mostrar la ventana", Alert.AlertType.ERROR);
         }
     }
 }

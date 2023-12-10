@@ -19,6 +19,8 @@ public class Defecto {
     private String descripcion;
     private Date fechaReporte;
     private int tipoDefecto;
+    private int esfuerzoEstimado;
+    private int estadoDefecto;
 
     public Defecto() {
     }
@@ -77,6 +79,22 @@ public class Defecto {
 
     public void setTipoDefecto(int tipoDefecto) {
         this.tipoDefecto = tipoDefecto;
+    }
+
+    public int getEsfuerzoEstimado() {
+        return esfuerzoEstimado;
+    }
+
+    public void setEsfuerzoEstimado(int esfuerzoEstimado) {
+        this.esfuerzoEstimado = esfuerzoEstimado;
+    }
+
+    public int getEstadoDefecto() {
+        return estadoDefecto;
+    }
+
+    public void setEstadoDefecto(int estadoDefecto) {
+        this.estadoDefecto = estadoDefecto;
     }
     
 }
