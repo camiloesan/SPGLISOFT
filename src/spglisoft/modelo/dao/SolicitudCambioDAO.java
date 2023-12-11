@@ -70,6 +70,7 @@ public class SolicitudCambioDAO {
                         "sc.accion_propuesta,\n" +
                         "sc.razon_cambio,\n" +
                         "sc.impacto_cambio,\n" +
+                        "sc.id_estado_solicitud, \n" +
                         "es.estado_solicitud,\n" +
                         "CONCAT(d.nombre, ' ', d.apellido_paterno, ' ', d.apellido_materno) AS nombre_desarrollador,\n " +
                         "p.nombre_proyecto\n " +
@@ -89,6 +90,7 @@ public class SolicitudCambioDAO {
                     solicitud.setAccionPropuesta(resultado.getString("accion_propuesta"));
                     solicitud.setRazonCambio(resultado.getString("sc.razon_cambio"));
                     solicitud.setImpactoCambio(resultado.getString("sc.impacto_cambio"));
+                    solicitud.setIdEstadoSolicitud(resultado.getInt("sc.id_estado_solicitud"));
                     solicitud.setEstadoSolicitud(resultado.getString("es.estado_solicitud"));
                     solicitud.setNombreDesarrollador(resultado.getString("nombre_desarrollador"));
                     solicitud.setNombreProyecto(resultado.getString("p.nombre_proyecto"));
