@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLAsignarActividadController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLAsignarActividadController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="281.0" layoutY="32.0" prefHeight="600.0" prefWidth="1000.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -40,7 +37,7 @@
                   </TableView>
                </children>
                <VBox.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets left="100.0" right="100.0" />
                </VBox.margin>
             </VBox>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
@@ -49,7 +46,7 @@
                   <Button mnemonicParsing="false" onAction="#btnCancelar" text="Cancelar" />
                </children>
                <padding>
-                  <Insets right="25.0" />
+                  <Insets right="100.0" />
                </padding>
             </HBox>
          </children>

@@ -142,6 +142,16 @@ public class UsuarioDAO {
         
         preparedStatement.execute();
         conexionBD.close();
+        
+        query = "UPDATE actividad\n" +
+                "SET id_estado = 1, id_desarrollador = NULL\n" +
+                "WHERE id_desarrollador = (?);";
+        conexionBD = ConexionBD.obtenerConnection();
+        PreparedStatement prepareStatement = conexionBD.prepareStatement(query);
+        prepareStatement.setInt(1, idDesarrollador);
+        
+        prepareStatement.execute();
+        conexionBD.close();
     }
     
     public static void anadirDesarrolladorProyecto(int idDesarrollador, int idProyecto) throws SQLException{
