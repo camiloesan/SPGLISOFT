@@ -67,6 +67,6 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
 
     @FXML
     private void btnCancelar() {
-        MainStage.changeView("/vistas/FXMLDetalleSolicitud.fxml", 1000, 600);
+        MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
     }
 }

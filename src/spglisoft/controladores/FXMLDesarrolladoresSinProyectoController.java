@@ -75,7 +75,7 @@ public class FXMLDesarrolladoresSinProyectoController implements Initializable {
         if(esElementoSeleccionado()){
             Desarrollador desarrollador = tvDesarrolladores.getSelectionModel().getSelectedItem();
             try{
-                UsuarioDAO.añadirDesarrolladorProyecto(desarrollador.getIdDesarrollador(), SingletonLogin.getInstance().getIdProyectoActual());
+                UsuarioDAO.anadirDesarrolladorProyecto(desarrollador.getIdDesarrollador(), SingletonLogin.getInstance().getIdProyectoActual());
                 Alertas.mostrarAlertaExito();
                 formatearTabla();
                 llenarTablaDesarrolladores();

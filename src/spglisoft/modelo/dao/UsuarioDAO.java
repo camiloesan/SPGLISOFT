@@ -144,7 +144,7 @@ public class UsuarioDAO {
         conexionBD.close();
     }
     
-    public static void añadirDesarrolladorProyecto(int idDesarrollador, int idProyecto) throws SQLException{
+    public static void anadirDesarrolladorProyecto(int idDesarrollador, int idProyecto) throws SQLException{
         String query = "UPDATE desarrollador " +
                        "SET id_proyecto = (?) " +
                        "WHERE id_desarrollador = (?)";
@@ -159,7 +159,7 @@ public class UsuarioDAO {
 
     public static void asignarActividadADesarrollador(int idActividad, int idDesarrollador) throws SQLException {
         String query = "UPDATE actividad " +
-                "SET id_desarrollador = (?), id_estado = 2 " +
+                "SET id_desarrollador = (?), id_estado = 1 " +
                 "WHERE id_actividad = (?)";
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
