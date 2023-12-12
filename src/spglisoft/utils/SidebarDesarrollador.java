@@ -25,7 +25,7 @@ public class SidebarDesarrollador {
     }
 
     public static void irMenuInformacionProyecto() {
-
+        MainStage.changeView("/spglisoft/vistas/FXMLDetalleProyecto.fxml", 1000, 600);
     }
 
     public static void cerrarSesionDesarrollador() {

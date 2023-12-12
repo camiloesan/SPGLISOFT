@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import spglisoft.utils.SidebarDesarrollador;
 import spglisoft.utils.Utilidades;
 
 public class FXMLDefectosDesarrolladorController implements Initializable, ISidebarDesarrollador {
@@ -51,7 +52,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
 
     @Override
     public void btnInformacionProyecto() {
-
+        SidebarDesarrollador.irMenuInformacionProyecto();
     }
 
     @Override

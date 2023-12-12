@@ -29,7 +29,7 @@ public class SidebarRepresentante {
     }
 
     public static void irMenuInformacionProyeto() {
-
+        MainStage.changeView("/spglisoft/vistas/FXMLDetalleProyecto.fxml", 1000, 600);
     }
 
     public static void irMenuProyectos() {

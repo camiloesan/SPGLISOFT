@@ -148,6 +148,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     @Override
     @FXML
     public void btnInformacionProyecto() {
+        spglisoft.utils.SidebarRepresentante.irMenuInformacionProyeto();
     }
 
     @Override

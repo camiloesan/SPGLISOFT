@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import spglisoft.utils.SidebarDesarrollador;
 import spglisoft.utils.Utilidades;
 
 /**
@@ -65,7 +66,7 @@ public class FXMLSolicitudesCambioController implements Initializable, ISidebarD
 
     @Override
     public void btnInformacionProyecto() {
-        
+        SidebarDesarrollador.irMenuInformacionProyecto();
     }
 
     @Override

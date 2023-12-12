@@ -11,13 +11,13 @@ import spglisoft.modelo.ResultadoOperacion;
 import spglisoft.modelo.pojo.SolicitudCambio;
 
 public class SolicitudCambioDAO {
-    public static void actualizarEstadoSolicitud(String estado, int idSolicitud) throws SQLException {
+    public static void actualizarEstadoSolicitud(int idEstado, int idSolicitud) throws SQLException {
         Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "UPDATE solicitudes_cambios " +
-                "SET estado = ? " +
+        String query = "UPDATE solicitud_cambio " +
+                "SET id_estado_solicitud = ? " +
                 "WHERE id_solicitud = ?";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setString(1, estado);
+        preparedStatement.setInt(1, idEstado);
         preparedStatement.setInt(2, idSolicitud);
         preparedStatement.execute();
         conexionBD.close();

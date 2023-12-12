@@ -132,7 +132,7 @@ public class FXMLRPDesarrolladoresController implements Initializable, ISidebarR
 
     @Override
     public void btnInformacionProyecto() {
-
+        SidebarRepresentante.irMenuInformacionProyeto();
     }
 
     @Override

@@ -14,8 +14,26 @@ public class Representante {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String numeroPersonal;
+    private int idProyecto;
 
     public Representante() {
+    }
+
+    public Representante(int idRepresentante, String nombre, String apellidoPaterno, String apellidoMaterno, String numeroPersonal, int idProyecto) {
+        this.idRepresentante = idRepresentante;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.numeroPersonal = numeroPersonal;
+        this.idProyecto = idProyecto;
+    }
+
+    public int getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(int idProyecto) {
+        this.idProyecto = idProyecto;
     }
 
     public int getIdRepresentante() {

@@ -16,19 +16,46 @@ public class Proyecto {
     private String fechaFin;
     private int idEstado;
     private String nombreEstado;
-    private int usuarioResponsable;
+    private int idRepresentante;
+    private String nombreRepresentante;
+    private String apellidoPaternoRepresentante;
+    private String apellidoMaternoRepresentante;
 
     public Proyecto() {
     }
 
-    public Proyecto(int idProyecto, String nombreProyecto, String descripcion, String fechaInicio, String fechaFin, int idEstado, int usuarioResponsable) {
+    public Proyecto(int idProyecto, String nombreProyecto, String descripcion, String fechaInicio, String fechaFin, int idEstado, int idRepresentante) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.idEstado = idEstado;
-        this.usuarioResponsable = usuarioResponsable;
+        this.idRepresentante = idRepresentante;
+    }
+
+    public String getNombreRepresentante() {
+        return nombreRepresentante;
+    }
+
+    public void setNombreRepresentante(String nombreRepresentante) {
+        this.nombreRepresentante = nombreRepresentante;
+    }
+
+    public String getApellidoPaternoRepresentante() {
+        return apellidoPaternoRepresentante;
+    }
+
+    public void setApellidoPaternoRepresentante(String apellidoPaternoRepresentante) {
+        this.apellidoPaternoRepresentante = apellidoPaternoRepresentante;
+    }
+
+    public String getApellidoMaternoRepresentante() {
+        return apellidoMaternoRepresentante;
+    }
+
+    public void setApellidoMaternoRepresentante(String apellidoMaternoRepresentante) {
+        this.apellidoMaternoRepresentante = apellidoMaternoRepresentante;
     }
 
     public String getNombreEstado() {
@@ -87,11 +114,11 @@ public class Proyecto {
         this.idEstado = idEstado;
     }
 
-    public int getUsuarioResponsable() {
-        return usuarioResponsable;
+    public int getIdRepresentante() {
+        return idRepresentante;
     }
 
-    public void setUsuarioResponsable(int usuarioResponsable) {
-        this.usuarioResponsable = usuarioResponsable;
+    public void setIdRepresentante(int idRepresentante) {
+        this.idRepresentante = idRepresentante;
     }
 }

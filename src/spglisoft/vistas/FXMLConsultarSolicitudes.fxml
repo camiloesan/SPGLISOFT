@@ -39,7 +39,7 @@
                   <Separator layoutX="70.0" layoutY="399.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
                   <Label text="Solicitudes de cambio" textFill="WHITE" underline="true" />
                   <Separator layoutX="70.0" layoutY="415.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
-                  <Label layoutX="67.0" layoutY="373.0" text="Información del Proyecto" textFill="WHITE">
+                  <Label layoutX="67.0" layoutY="373.0" onMouseClicked="#btnInformacionProyecto" text="Información del Proyecto" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

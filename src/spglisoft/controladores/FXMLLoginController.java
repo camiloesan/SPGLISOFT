@@ -40,7 +40,7 @@ public class FXMLLoginController {
         if (!camposVacios()) {
             String usuario = tfEmail.getText().trim();
             String contrasena = tfPassword.getText().trim();
-            if (esMatricula()) {
+            if (usuario.matches(formato)) {
                 try {
                     Desarrollador desarrollador = UsuarioDAO.iniciarSesionDesarrollador(usuario, contrasena);
                     if (desarrollador != null) {
@@ -70,8 +70,10 @@ public class FXMLLoginController {
                 } catch (SQLException e) {
                     Alertas.mostrarAlertaErrorConexionBD();
                 }
+            } else {
+                Alertas.mostrarAlertaLoginFallido();
             }
-        }else {
+        } else {
             Utilidades.mostrarAlertaSimple("Campos faltantes", "Ingrese los campos faltantes",
                     Alert.AlertType.INFORMATION);
         }

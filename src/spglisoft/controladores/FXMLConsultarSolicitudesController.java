@@ -185,7 +185,7 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
 
     @Override
     public void btnInformacionProyecto() {
-
+        SidebarRepresentante.irMenuInformacionProyeto();
     }
 
     @Override

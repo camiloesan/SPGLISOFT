@@ -57,6 +57,7 @@ public class FXMLRPMenuPrincipalController implements Initializable {
     private void btnDetails() {
         if (tablaProyectos.getSelectionModel().getSelectedItem() != null) {
             SingletonLogin.getInstance().setIdProyectoActual(tablaProyectos.getSelectionModel().getSelectedItem().getIdProyecto());
+            SingletonLogin.getInstance().setProyectoActual(tablaProyectos.getSelectionModel().getSelectedItem());
             MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
         } else {
             Alertas.mostrarAlertaElementoNoSeleccionado();

@@ -43,19 +43,17 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("FechaInicio"));
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
     }
 
     private void llenarTablaActividades() {
         tvActividades.getItems().clear();
         List<Actividad> listaActividades = new ArrayList<>();
         try {
-            /*
             listaActividades = ActividadDAO
-                    .obtenerActividadesAsignadasPorDesarrollador(SingletonLogin.getInstance().getDesarrollador().getIdDesarrollador());
-            */
-            listaActividades = ActividadDAO.obtenerActividadesAsignadasPorIdDesarrollador(UsuarioDAO.getSesionDesarrollador().getIdDesarrollador());
+                    .obtenerActividadesAsignadasPorIdDesarrollador(UsuarioDAO.getSesionDesarrollador().getIdDesarrollador());
         } catch (SQLException e) {
+            e.printStackTrace();
             Alertas.mostrarAlertaErrorConexionBD();
         }
         tvActividades.getItems().addAll(listaActividades);
@@ -86,7 +84,7 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     @Override
     public void btnInformacionProyecto() {
-
+        spglisoft.utils.SidebarDesarrollador.irMenuInformacionProyecto();
     }
 
     @Override

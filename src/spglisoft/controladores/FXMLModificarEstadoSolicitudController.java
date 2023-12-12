@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.Alertas;
+import spglisoft.utils.Constantes;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,7 +24,7 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
     SolicitudCambio solicitudCambio;
 
     private final static ObservableList<String> observableListCbEstadosSolicitud =
-            FXCollections.observableArrayList("Aceptado" ,"Rechazado", "Sin asignar");
+            FXCollections.observableArrayList("Pendiente" ,"En Proceso", "Concluida");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,16 +45,16 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
 
     @FXML
     private void btnGuardar() {
-        String estado = "no_asignado";
+        int estado = Constantes.ESTADO_SOLICITUD_PENDIENTE;
         switch (cbEstadoSolicitud.getSelectionModel().getSelectedItem()) {
-            case "Aceptado":
-                estado = "aceptado";
+            case "Pendiente":
+                estado = Constantes.ESTADO_SOLICITUD_PENDIENTE;
                 break;
-            case "Rechazado":
-                estado = "rechazado";
+            case "En proceso":
+                estado = Constantes.ESTADO_SOLICITUD_EN_PROCESO;
                 break;
-            case "Sin asignar":
-                estado = "no_asignado";
+            case "Concluida":
+                estado = Constantes.ESTADO_SOLICITUD_CONCLUIDA;
                 break;
         }
 
