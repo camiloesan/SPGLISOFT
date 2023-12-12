@@ -98,6 +98,7 @@ public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons
 
     @Override
     public void btnInformacionProyecto() {
+        SidebarRepresentante.irMenuInformacionProyeto();
     }
 
     @Override
