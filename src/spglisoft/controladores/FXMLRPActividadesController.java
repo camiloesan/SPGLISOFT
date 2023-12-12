@@ -124,12 +124,6 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @Override
-    @FXML
-    public void btnCambios() {
-        spglisoft.utils.SidebarRepresentante.irMenuCambios();
-    }
-
-    @Override
     public void btnDefectos() {
     }
 

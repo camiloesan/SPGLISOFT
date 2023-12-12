@@ -111,11 +111,6 @@ public class FXMLRPDesarrolladoresController implements Initializable, ISidebarR
     }
 
     @Override
-    public void btnCambios() {
-        SidebarRepresentante.irMenuCambios();
-    }
-
-    @Override
     public void btnDefectos() {
 
     }

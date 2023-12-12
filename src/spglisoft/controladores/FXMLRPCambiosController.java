@@ -10,105 +10,89 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import spglisoft.modelo.dao.ActividadDAO;
-import spglisoft.modelo.pojo.Cambio;
-import spglisoft.modelo.pojo.EstadoActividad;
-import spglisoft.utils.SidebarRepresentante;
+import spglisoft.modelo.dao.CambioDAO;
+import spglisoft.modelo.pojo.*;
+import spglisoft.utils.Alertas;
 
-public class FXMLRPCambiosController implements Initializable, ISidebarRPButtons {
+public class FXMLRPCambiosController implements Initializable {
 
     @FXML
-    private ComboBox<EstadoActividad> cbFiltro;
+    private ComboBox<TipoCambio> cbFiltro;
     @FXML
     private TableView<Cambio> tvCambios;
     @FXML
-    private TableColumn<Cambio, String> colTitulo;
+    private TableColumn<Cambio, String> colNombre;
     @FXML
-    private TableColumn<Cambio, String> colFechaInicio;
+    private TableColumn<Cambio, String> colNombreEncargado;
     @FXML
-    private TableColumn<Cambio, String> colFechaFin;
+    private TableColumn<Cambio, String> colTipoCambio;
     @FXML
-    private TableColumn<Cambio, String> colEstado;
-    private ObservableList<EstadoActividad> estadosActividad;
+    private Label lblTitulo;
+    private ObservableList<TipoCambio> tipoCambios;
+    private SolicitudCambio solicitudActual;
+
+    public static SolicitudCambio SolicitudSeleccionada;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        inicializarInformacion();
         formatearTabla();
+        formatearCombo();
         llenarTablaCambios();
-        estadosActividad = FXCollections.observableArrayList();
-        List<EstadoActividad> estados = ActividadDAO.obtenerEstadosActividad();
-        estadosActividad.addAll(estados);
-        cbFiltro.setItems(estadosActividad);
-        cbFiltro.getSelectionModel().select(1);
+    }
+
+    private void inicializarInformacion() {
+        solicitudActual = (SolicitudCambio) MainStage.getUserData();
+        SolicitudSeleccionada = solicitudActual;
+        lblTitulo.setText("Cambios de la solicitud [" + solicitudActual.getNombreSolicitud() + "]");
     }
 
     private void formatearTabla() {
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
-        colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        colNombreEncargado.setCellValueFactory(new PropertyValueFactory<>("nombreCompletoDesarrollador"));
+        colTipoCambio.setCellValueFactory(new PropertyValueFactory<>("tipoCambio"));
+    }
+
+    private void formatearCombo() { //pendiente estados cambio
+        tipoCambios = FXCollections.observableArrayList();
+        List<TipoCambio> listaTiposCambio = CambioDAO.obtenerTiposCambio();
+        tipoCambios.addAll(listaTiposCambio);
+        cbFiltro.setItems(tipoCambios);
+        cbFiltro.getSelectionModel().select(1);
     }
 
     private void llenarTablaCambios() {
         tvCambios.getItems().clear();
         List<Cambio> listaCambios = new ArrayList<>();
-        /*
         try {
-            //todo dao function
+            listaCambios = CambioDAO.obtenerCambiosPorIdSolicitud(solicitudActual.getIdSolicitud());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
         }
         tvCambios.getItems().addAll(listaCambios);
-        *
-         */
-    }
-
-    @Override
-    @FXML
-    public void btnActividades() {
-        spglisoft.utils.SidebarRepresentante.irMenuActividades();
-    }
-
-    @Override
-    public void btnCambios() {
-        //vista actual
-    }
-
-    @Override
-    public void btnDefectos() {
-
-    }
-
-    @Override
-    public void btnDesarrolladores() {
-        SidebarRepresentante.irMenuDesarrolladores();
-    }
-
-    @Override
-    public void btnSolicitudesCambio() {
-        SidebarRepresentante.irConsultarSolicitudesCambio();
-    }
-
-    @Override
-    public void btnInformacionProyecto() {
-        SidebarRepresentante.irMenuInformacionProyeto();
-    }
-
-    @Override
-    @FXML
-    public void btnRegresar() {
-        spglisoft.utils.SidebarRepresentante.irMenuProyectos();
     }
 
     @FXML
     private void btnVerDetalleCambio() {
-        MainStage.changeView("/spglisoft/vistas/FXMLDetalleCambio.fxml", 1000, 600);
+        Cambio cambio = tvCambios.getSelectionModel().getSelectedItem();
+        if (cambio != null) {
+            MainStage.changeView("/spglisoft/vistas/FXMLDetalleCambio.fxml", 1000, 600, cambio);
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
+        }
+    }
+
+    @FXML
+    private void btnRegresar() {
+        MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
     }
 }

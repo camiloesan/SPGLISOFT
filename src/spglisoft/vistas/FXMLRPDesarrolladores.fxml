@@ -18,12 +18,6 @@
                      </cursor>
                   </Label>
                   <Separator layoutX="70.0" layoutY="253.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
-                  <Label layoutX="49.0" layoutY="319.0" onMouseClicked="#btnCambios" text="Cambios" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Label>
-                  <Separator layoutX="70.0" layoutY="302.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
                   <Label layoutX="85.0" layoutY="310.0" onMouseClicked="#btnDefectos" text="Defectos" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />

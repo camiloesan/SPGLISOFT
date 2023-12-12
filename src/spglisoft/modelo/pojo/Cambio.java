@@ -2,16 +2,51 @@ package spglisoft.modelo.pojo;
 
 public class Cambio {
     private int idCambio;
-    private String nombreProyecto;
-    private String titulo;
+    private String nombre;
     private String descripcion;
     private String estado;
-    private String tipo;
+    private String tipoCambio;
     private String fechaInicio;
     private String fechaFin;
     private int esfuerzoMinutos;
+    private String nombreDesarrolladorEncargado;
+    private String apellidoPaternoDesarrolladorEncargado;
+    private String apellidoMaternoDesarrolladorEncargado;
+    private String nombreCompletoDesarrollador;
 
     public Cambio() {
+    }
+
+    public String getNombreDesarrolladorEncargado() {
+        return nombreDesarrolladorEncargado;
+    }
+
+    public void setNombreDesarrolladorEncargado(String nombreDesarrolladorEncargado) {
+        this.nombreDesarrolladorEncargado = nombreDesarrolladorEncargado;
+    }
+
+    public String getApellidoPaternoDesarrolladorEncargado() {
+        return apellidoPaternoDesarrolladorEncargado;
+    }
+
+    public void setApellidoPaternoDesarrolladorEncargado(String apellidoPaternoDesarrolladorEncargado) {
+        this.apellidoPaternoDesarrolladorEncargado = apellidoPaternoDesarrolladorEncargado;
+    }
+
+    public String getApellidoMaternoDesarrolladorEncargado() {
+        return apellidoMaternoDesarrolladorEncargado;
+    }
+
+    public void setApellidoMaternoDesarrolladorEncargado(String apellidoMaternoDesarrolladorEncargado) {
+        this.apellidoMaternoDesarrolladorEncargado = apellidoMaternoDesarrolladorEncargado;
+    }
+
+    public String getNombreCompletoDesarrollador() {
+        return nombreCompletoDesarrollador;
+    }
+
+    public void setNombreCompletoDesarrollador(String nombreCompletoDesarrollador) {
+        this.nombreCompletoDesarrollador = nombreCompletoDesarrollador;
     }
 
     public int getIdCambio() {
@@ -22,20 +57,12 @@ public class Cambio {
         this.idCambio = idCambio;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDescripcion() {
@@ -54,12 +81,12 @@ public class Cambio {
         this.estado = estado;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getTipoCambio() {
+        return tipoCambio;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoCambio(String tipoCambio) {
+        this.tipoCambio = tipoCambio;
     }
 
     public String getFechaInicio() {

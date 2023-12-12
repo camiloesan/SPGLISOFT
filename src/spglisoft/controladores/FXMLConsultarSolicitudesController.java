@@ -24,6 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
+import spglisoft.modelo.pojo.Cambio;
 import spglisoft.modelo.pojo.Representante;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.*;
@@ -158,14 +159,19 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
         }
     }
 
-    @Override
-    public void btnActividades() {
-        SidebarRepresentante.irMenuActividades();
+    @FXML
+    private void btnCambios() {
+        SolicitudCambio solicitudCambio = tvSolicitudesCambio.getSelectionModel().getSelectedItem();
+        if (solicitudCambio != null) {
+            MainStage.changeView("/spglisoft/vistas/FXMLRPCambios.fxml", 1000, 600, solicitudCambio);
+        } else {
+            Alertas.mostrarAlertaElementoNoSeleccionado();
+        }
     }
 
     @Override
-    public void btnCambios() {
-        SidebarRepresentante.irMenuCambios();
+    public void btnActividades() {
+        SidebarRepresentante.irMenuActividades();
     }
 
     @Override

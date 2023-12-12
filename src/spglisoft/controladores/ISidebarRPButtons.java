@@ -10,7 +10,6 @@ package spglisoft.controladores;
  */
 public interface ISidebarRPButtons {
     void btnActividades();
-    void btnCambios();
     void btnDefectos();
     void btnDesarrolladores();
     void btnSolicitudesCambio();
