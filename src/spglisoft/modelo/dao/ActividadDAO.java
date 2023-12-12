@@ -132,7 +132,7 @@ public class ActividadDAO {
     
     public static void desasignarActividad(int idActividad) throws SQLException{
         String query = "UPDATE actividad\n" +
-                       "SET id_estado = 1, id_desarrollador = NULL\n" +
+                       "SET id_estado = 2, id_desarrollador = NULL\n" +
                        "WHERE id_actividad = (?)";
         Connection conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement prepareStatement = conexionBD.prepareStatement(query);
