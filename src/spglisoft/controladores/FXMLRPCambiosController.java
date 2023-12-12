@@ -70,11 +70,14 @@ public class FXMLRPCambiosController implements Initializable {
         cbFiltro.getSelectionModel().select(1);
     }
 
+    @FXML
     private void llenarTablaCambios() {
         tvCambios.getItems().clear();
         List<Cambio> listaCambios = new ArrayList<>();
         try {
-            listaCambios = CambioDAO.obtenerCambiosPorIdSolicitud(solicitudActual.getIdSolicitud());
+            listaCambios =
+                    CambioDAO.obtenerCambiosPorIdSolicitud(solicitudActual.getIdSolicitud(),
+                            cbFiltro.getSelectionModel().getSelectedItem().getIdCambio());
         } catch (SQLException e) {
             Alertas.mostrarAlertaErrorConexionBD();
         }

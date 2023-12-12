@@ -13,17 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CambioDAO {
-    public static List<Cambio> obtenerCambiosPorIdSolicitud(int idSolicitudCambio) throws SQLException {
+    public static List<Cambio> obtenerCambiosPorIdSolicitud(int idSolicitudCambio, int tipoCambio) throws SQLException {
         List<Cambio> listaCambios = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT c.nombre, c.descripcion, d.nombre as nombre_desarrollador, " +
                 "d.apellido_paterno, d.apellido_materno, t.tipo_cambio " +
                 "FROM cambio c INNER JOIN tipo_cambio t ON c.id_tipo_cambio = t.id_tipo_cambio " +
                 "INNER JOIN desarrollador d ON c.id_desarrollador = d.id_desarrollador " +
-                "WHERE id_solicitud_cambio = (?)";
+                "WHERE id_solicitud_cambio = (?) AND c.id_tipo_cambio = (?)";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idSolicitudCambio);
-
+        preparedStatement.setInt(2, tipoCambio);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()) {
             Cambio cambio = new Cambio();
