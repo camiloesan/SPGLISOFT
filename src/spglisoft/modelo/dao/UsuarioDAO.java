@@ -144,7 +144,7 @@ public class UsuarioDAO {
         conexionBD.close();
         
         query = "UPDATE actividad\n" +
-                "SET id_estado = 1, id_desarrollador = NULL\n" +
+                "SET id_estado = 2, id_desarrollador = NULL\n" +
                 "WHERE id_desarrollador = (?);";
         conexionBD = ConexionBD.obtenerConnection();
         PreparedStatement prepareStatement = conexionBD.prepareStatement(query);
