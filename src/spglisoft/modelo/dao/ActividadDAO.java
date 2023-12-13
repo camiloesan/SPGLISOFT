@@ -42,16 +42,17 @@ public class ActividadDAO {
         return listaActividades;
     }
 
-    public static List<Actividad> obtenerActividadesNoAsignadasPorIdProyecto(int idProyecto) throws SQLException {
+    public static List<Actividad> obtenerActividadesPorIdProyecto(int idProyecto, int idEstado) throws SQLException {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT id_actividad, id_proyecto, id_desarrollador, nombre, descripcion, " +
                 "esfuerzo, fecha_inicio, fecha_fin, e.estado as estado" +
                 " FROM actividad INNER JOIN estado_actividad e " +
                 "ON actividad.id_estado = e.id_estado_actividad " +
-                "WHERE id_proyecto = ? AND id_desarrollador IS NULL";
+                "WHERE id_proyecto = ? AND e.id_estado_actividad = (?)";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idProyecto);
+        preparedStatement.setInt(2, idEstado);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {

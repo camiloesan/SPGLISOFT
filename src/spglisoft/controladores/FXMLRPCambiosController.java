@@ -62,7 +62,7 @@ public class FXMLRPCambiosController implements Initializable {
         colTipoCambio.setCellValueFactory(new PropertyValueFactory<>("tipoCambio"));
     }
 
-    private void formatearCombo() { //pendiente estados cambio
+    private void formatearCombo() {
         tipoCambios = FXCollections.observableArrayList();
         List<TipoCambio> listaTiposCambio = CambioDAO.obtenerTiposCambio();
         tipoCambios.addAll(listaTiposCambio);

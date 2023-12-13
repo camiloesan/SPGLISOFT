@@ -58,7 +58,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
         formatearComboFiltro();
-        llenarTablaActividadesNoAsignadas();
+        llenarTablaActividades();
     }
 
     public void formatearComboFiltro() {
@@ -76,47 +76,18 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
         colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
     }
 
-    private void llenarTablaActividadesNoAsignadas() {
-        tvActividades.getItems().clear();
-        List<Actividad> listaActividades = new ArrayList<>();
-        try {
-            listaActividades = ActividadDAO
-                    .obtenerActividadesNoAsignadasPorIdProyecto(SingletonLogin.getInstance().getIdProyectoActual());
-        } catch (SQLException e) {
-            Alertas.mostrarAlertaErrorConexionBD();
-        }
-        tvActividades.getItems().addAll(listaActividades);
-    }
-
-    private void llenarTablaActividadesAsignadas() {
-        tvActividades.getItems().clear();
-        List<Actividad> listaActividades = new ArrayList<>();
-        try {
-            listaActividades = ActividadDAO
-                    .obtenerActividadesAsignadasPorIdProyecto(SingletonLogin.getInstance().getIdProyectoActual());
-        } catch (SQLException e) {
-            Alertas.mostrarAlertaErrorConexionBD();
-        }
-        tvActividades.getItems().addAll(listaActividades);
-    }
-
     @FXML
-    private void cbSeleccionFiltro() {
-        EstadoActividad filtro = cbFiltroActividades.getSelectionModel().getSelectedItem();
-        switch (filtro.toString()) {
-            case "Asignada":
-                llenarTablaActividadesAsignadas();
-                btnAsignarActividad.setDisable(true);
-                btnDesasignarActividad.setDisable(false);
-                btnEliminarActividad.setDisable(true);
-                break;
-            case "No asignada":
-                llenarTablaActividadesNoAsignadas();
-                btnAsignarActividad.setDisable(false);
-                btnDesasignarActividad.setDisable(true);
-                btnEliminarActividad.setDisable(false);
-                break;
+    private void llenarTablaActividades() {
+        tvActividades.getItems().clear();
+        List<Actividad> listaActividades = new ArrayList<>();
+        try {
+            listaActividades = ActividadDAO
+                    .obtenerActividadesPorIdProyecto(SingletonLogin.getInstance().getIdProyectoActual(),
+                            cbFiltroActividades.getSelectionModel().getSelectedItem().getIdEstado());
+        } catch (SQLException e) {
+            Alertas.mostrarAlertaErrorConexionBD();
         }
+        tvActividades.getItems().addAll(listaActividades);
     }
 
     @Override
@@ -187,7 +158,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
                 ActividadDAO.eliminarActividad(actividad.getIdActividad());
                 Alertas.mostrarAlertaExito();
                 formatearTabla();
-                llenarTablaActividadesNoAsignadas();
+                llenarTablaActividades();
             } catch (SQLException e){
                 Alertas.mostrarAlertaElementoNoSeleccionado();
             }
@@ -204,7 +175,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
                 ActividadDAO.desasignarActividad(actividad.getIdActividad());
                 Alertas.mostrarAlertaExito();
                 formatearTabla();
-                llenarTablaActividadesAsignadas();
+                llenarTablaActividades();
             } catch (SQLException e){
                 Alertas.mostrarAlertaElementoNoSeleccionado();
             }

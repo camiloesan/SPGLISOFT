@@ -68,7 +68,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox>
                      <children>
-                        <ComboBox fx:id="cbFiltroActividades" onAction="#cbSeleccionFiltro" prefWidth="150.0" promptText="Seleccionar filtro">
+                        <ComboBox fx:id="cbFiltroActividades" onAction="#llenarTablaActividades" prefWidth="150.0" promptText="Seleccionar filtro">
                            <HBox.margin>
                               <Insets top="25.0" />
                            </HBox.margin></ComboBox>
