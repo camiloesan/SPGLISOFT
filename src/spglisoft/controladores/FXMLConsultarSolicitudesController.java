@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +35,10 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
     
     private ObservableList<SolicitudCambio> listaSolicitudes;
     ObservableList<String> opciones = FXCollections.observableArrayList(
-            "Mas recientes",
-            "Mas antiguas");
+            "Pendiente",
+            "En proceso",
+            "Concluida");
+    private FilteredList<SolicitudCambio> filteredList;
     
     @FXML
     private ComboBox<String> cbFiltro;
@@ -53,29 +57,39 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
         cbFiltro.setItems(opciones);
         cbFiltro.setValue("Filtrar");
         
+         filteredList = new FilteredList<>(listaSolicitudes, p -> true);
+         
+        cbFiltro.valueProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(solicitud -> {
+                    if (newValue == null || newValue.isEmpty() || newValue.equals("Estado de la solicitud")) {
+                        return true; 
+                    }
+                    int estadoSeleccionado = obtenerCodigoEstado(newValue);
+                    return solicitud.getIdEstadoSolicitud()== estadoSeleccionado;
+                })
+        );
+        
+        SortedList<SolicitudCambio> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(tvSolicitudesCambio.comparatorProperty());
+        tvSolicitudesCambio.setItems(sortedList);
+    }
+    
+    private int obtenerCodigoEstado(String nombreEstado) {
+        switch (nombreEstado) {
+            case "Pendiente":
+                return 1;
+            case "En proceso":
+                return 2;
+            case "Concluida":
+                return 3;
+            default:
+                return 0; 
+        }
     }
 
     @FXML
     private void cbSeleccionFiltro(ActionEvent event) {
-        String opcionSeleccionada = cbFiltro.getValue();
-        if ("Mas recientes".equals(opcionSeleccionada)) {
-            ordenarPorMasRecientes();
-        } else if ("Mas antiguas".equals(opcionSeleccionada)) {
-            ordenarPorMasAntiguas();
-        }
-    }
-    
-    private void ordenarPorMasRecientes(){
-        ObservableList<SolicitudCambio> listaActual = FXCollections.observableArrayList(tvSolicitudesCambio.getItems());
-        listaActual.sort(Comparator.comparing(SolicitudCambio::getFechaSolicitud).reversed());
-        tvSolicitudesCambio.setItems(listaActual);
-    }
-    
-    private void ordenarPorMasAntiguas(){
-        ObservableList<SolicitudCambio> listaActual = FXCollections
-                .observableArrayList(tvSolicitudesCambio.getItems());
-        listaActual.sort(Comparator.comparing(SolicitudCambio::getFechaSolicitud));
-        tvSolicitudesCambio.setItems(listaActual);
+        
     }
     
     public void iniciarDatos(Representante representante){
