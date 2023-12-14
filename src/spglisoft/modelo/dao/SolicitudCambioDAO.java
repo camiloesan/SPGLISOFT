@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import spglisoft.modelo.ResultadoOperacion;
+import spglisoft.modelo.pojo.Actividad;
 import spglisoft.modelo.pojo.SolicitudCambio;
 
 public class SolicitudCambioDAO {

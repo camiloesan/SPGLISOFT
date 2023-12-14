@@ -95,7 +95,7 @@
                      <children>
                         <Button mnemonicParsing="false" onAction="#btnRegistrarActividad" text="Registrar actividad" />
                         <Button fx:id="btnEliminarActividad" mnemonicParsing="false" onAction="#btnEliminarActividad" text="Eliminar actividad" />
-                        <Button fx:id="btnDesasignarActividad" disable="true" mnemonicParsing="false" onAction="#btnDesasignarActividad" text="Desasignar actividad" />
+                        <Button fx:id="btnDesasignarActividad" mnemonicParsing="false" onAction="#btnDesasignarActividad" text="Desasignar actividad" />
                         <Button mnemonicParsing="false" onAction="#btnVerDetalleActividad" text="Ver detalle" />
                         <Button fx:id="btnAsignarActividad" mnemonicParsing="false" onAction="#btnAsignarActividad" text="Asignar actividad" />
                      </children>

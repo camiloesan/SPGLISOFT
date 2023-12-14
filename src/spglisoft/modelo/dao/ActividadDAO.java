@@ -45,11 +45,12 @@ public class ActividadDAO {
     public static List<Actividad> obtenerActividadesPorIdProyecto(int idProyecto, int idEstado) throws SQLException {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT id_actividad, id_proyecto, id_desarrollador, nombre, descripcion, " +
-                "esfuerzo, fecha_inicio, fecha_fin, e.estado as estado" +
-                " FROM actividad INNER JOIN estado_actividad e " +
-                "ON actividad.id_estado = e.id_estado_actividad " +
-                "WHERE id_proyecto = ? AND e.id_estado_actividad = (?)";
+        String query = "SELECT a.id_actividad, a.id_proyecto, a.id_desarrollador, a.nombre, a.descripcion, " +
+                "a.esfuerzo, a.fecha_inicio, a.fecha_fin, e.estado as estado, d.nombre as nombre_d, " +
+                "d.apellido_paterno, d.apellido_materno " +
+                "FROM actividad a LEFT JOIN estado_actividad e ON a.id_estado = e.id_estado_actividad " +
+                "LEFT JOIN desarrollador d ON a.id_desarrollador = d.id_desarrollador " +
+                "WHERE a.id_proyecto = (?) AND a.id_estado = (?);";
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idProyecto);
         preparedStatement.setInt(2, idEstado);
@@ -66,6 +67,11 @@ public class ActividadDAO {
             actividad.setFechaInicio(resultSet.getString("fecha_inicio"));
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
             actividad.setNombreEstado(resultSet.getString("estado"));
+            actividad.setNombreDesarrollador(resultSet.getString("nombre_d"));
+            actividad.setApellidoPDesarrollador(resultSet.getString("apellido_paterno"));
+            actividad.setApellidoMDesarrollador(resultSet.getString("apellido_materno"));
+            actividad.setNombreCompletoDesarrollador(actividad.getNombreDesarrollador() + " "
+                + actividad.getApellidoPDesarrollador() + " " + actividad.getApellidoMDesarrollador());
             listaActividades.add(actividad);
         }
         conexionBD.close();

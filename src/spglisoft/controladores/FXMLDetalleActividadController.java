@@ -23,6 +23,8 @@ public class FXMLDetalleActividadController implements Initializable {
     private Label lblEsfuerzo;
     @FXML
     private Label lblTitulo;
+    @FXML
+    private Label lblDesarrollador;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -37,6 +39,7 @@ public class FXMLDetalleActividadController implements Initializable {
         lblFechaFin.setText(actividad.getFechaFin());
         lblEsfuerzo.setText(String.valueOf(actividad.getEsfuerzoMinutos()));
         lblDescripcion.setText(actividad.getDescripcion());
+        lblDesarrollador.setText(actividad.getNombreCompletoDesarrollador());
     }
 
     @FXML

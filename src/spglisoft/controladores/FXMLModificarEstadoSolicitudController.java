@@ -10,10 +10,18 @@ import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.Constantes;
+import spglisoft.utils.Utilidades;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Caso de uso: modificar estado solicitud, se encarga de actualizar el estado
+ * de la solicitud para despues poder acceder a otros apartados del sistema.
+ */
 
 public class FXMLModificarEstadoSolicitudController implements Initializable {
     @FXML
@@ -58,11 +66,17 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
                 break;
         }
 
-        try {
-            SolicitudCambioDAO.actualizarEstadoSolicitud(estado, solicitudCambio.getIdSolicitud());
-        } catch (SQLException e) {
-            Alertas.mostrarAlertaErrorConexionBD();
-            e.printStackTrace();
+        boolean confirmacion = Utilidades.mostrarAlertaConfirmacion("Confirmar" ,"Está seguro de que desea " +
+                "actualizar el estado?");
+
+        if (confirmacion) {
+            try {
+                SolicitudCambioDAO.actualizarEstadoSolicitud(estado, solicitudCambio.getIdSolicitud());
+                MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
+            } catch (SQLException e) {
+                Alertas.mostrarAlertaErrorConexionBD();
+                e.printStackTrace();
+            }
         }
     }
 

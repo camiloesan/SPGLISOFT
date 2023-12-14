@@ -11,6 +11,10 @@ public class Actividad {
     private String nombreEstado;
     private int esfuerzoMinutos;
     private String descripcion;
+    private String nombreDesarrollador;
+    private String apellidoPDesarrollador;
+    private String apellidoMDesarrollador;
+    private String nombreCompletoDesarrollador;
 
     public Actividad(int idActividad, int idProyecto, int idDesarrollador, String nombre, String fechaInicio, String fechaFin, int idEstado, String nombreEstado, int esfuerzoMinutos, String descripcion) {
         this.idActividad = idActividad;
@@ -26,6 +30,38 @@ public class Actividad {
     }
 
     public Actividad() {
+    }
+
+    public String getNombreCompletoDesarrollador() {
+        return nombreCompletoDesarrollador;
+    }
+
+    public void setNombreCompletoDesarrollador(String nombreCompletoDesarrollador) {
+        this.nombreCompletoDesarrollador = nombreCompletoDesarrollador;
+    }
+
+    public String getNombreDesarrollador() {
+        return nombreDesarrollador;
+    }
+
+    public void setNombreDesarrollador(String nombreDesarrollador) {
+        this.nombreDesarrollador = nombreDesarrollador;
+    }
+
+    public String getApellidoPDesarrollador() {
+        return apellidoPDesarrollador;
+    }
+
+    public void setApellidoPDesarrollador(String apellidoPDesarrollador) {
+        this.apellidoPDesarrollador = apellidoPDesarrollador;
+    }
+
+    public String getApellidoMDesarrollador() {
+        return apellidoMDesarrollador;
+    }
+
+    public void setApellidoMDesarrollador(String apellidoMDesarrollador) {
+        this.apellidoMDesarrollador = apellidoMDesarrollador;
     }
 
     public String getNombreEstado() {
