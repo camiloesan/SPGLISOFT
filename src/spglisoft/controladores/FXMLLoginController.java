@@ -17,6 +17,14 @@ import spglisoft.modelo.pojo.Desarrollador;
 import spglisoft.modelo.pojo.Representante;
 import spglisoft.utils.Utilidades;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Hace el despacho del inicio de sesion,
+ * discrimina entre desarrollador o representante para despues
+ * redirigir a la pantalla correspondiente.
+ */
+
 public class FXMLLoginController {
     
     String formato = "zs[a-zA-Z0-9]+";

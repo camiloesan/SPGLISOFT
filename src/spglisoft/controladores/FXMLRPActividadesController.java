@@ -33,6 +33,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import spglisoft.utils.Utilidades;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Recupera las actividades propias del desarrollador con la
+ * sesion actual.
+ */
 public class FXMLRPActividadesController implements Initializable, ISidebarRPButtons {
     @FXML
     private TableView<Actividad> tvActividades;

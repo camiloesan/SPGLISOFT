@@ -21,6 +21,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import spglisoft.modelo.dao.UsuarioDAO;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Muestra los proyectos de los que esta a cargo el representante loggeado.
+ */
 public class FXMLRPMenuPrincipalController implements Initializable {
 
     @FXML

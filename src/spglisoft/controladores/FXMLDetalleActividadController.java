@@ -26,6 +26,12 @@ public class FXMLDetalleActividadController implements Initializable {
     @FXML
     private Label lblDesarrollador;
 
+    /*
+     * Creador: Camilo Espejo Sánchez.
+     * Fecha de creación: Dec 14, 2023.
+     * Descripción: Flujo alterno de algunos casos de uso. muestra la informacion del elemento seleccionado.
+     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inicializarInformacion();

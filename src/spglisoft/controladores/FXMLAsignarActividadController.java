@@ -22,6 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Caso de uso: Asignar actividad, permite la asignacion de
+ * una actividad a un desarrollador en particular, para que el sea cargo de esa,
+ * muestra una tabla con los desarrolladores para despues seleccionar al que se
+ * vaya a asignar.
+ */
+
 public class FXMLAsignarActividadController implements Initializable {
     @FXML
     private TableView<Desarrollador> tvDesarrolladores;

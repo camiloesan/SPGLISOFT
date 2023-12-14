@@ -23,6 +23,13 @@ import spglisoft.modelo.dao.CambioDAO;
 import spglisoft.modelo.pojo.*;
 import spglisoft.utils.Alertas;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Caso de uso: Consultar cambios, muestra los cambios que estan
+ * asociados con la solicitud seleccionada.
+ */
+
 public class FXMLRPCambiosController implements Initializable {
 
     @FXML

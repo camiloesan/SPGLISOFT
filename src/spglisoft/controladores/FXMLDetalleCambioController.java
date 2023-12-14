@@ -9,6 +9,13 @@ import spglisoft.modelo.pojo.SolicitudCambio;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Flujo alterno de algunos casos de uso.
+ * Muestra el desglose de la informacion de algun objeto seleccionado.
+ */
+
 public class FXMLDetalleCambioController implements Initializable {
     @FXML
     private Label lblNombre;

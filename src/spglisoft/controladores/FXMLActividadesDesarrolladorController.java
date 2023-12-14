@@ -21,6 +21,14 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import spglisoft.modelo.dao.UsuarioDAO;
 
+
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Caso de uso: consultar actividades, muestra las actividades propias de un desarrollador
+ * en particular.
+ */
+
 public class FXMLActividadesDesarrolladorController implements Initializable, ISidebarDesarrollador {
     @FXML
     private TableView<Actividad> tvActividades;

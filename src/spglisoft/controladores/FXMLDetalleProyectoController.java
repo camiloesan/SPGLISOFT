@@ -14,6 +14,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/*
+ * Creador: Camilo Espejo Sánchez.
+ * Fecha de creación: Dec 14, 2023.
+ * Descripción: Muestra el detalle del proyecto en el que se esta navegando actualmente
+ * dentro del sistema.
+ */
+
 public class FXMLDetalleProyectoController implements Initializable {
 
     @FXML
