@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="spglisoft.controladores.FXMLRegistrarActividadController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLRegistrarActividadController">
    <children>
       <Pane prefHeight="80.0" prefWidth="700.0" style="-fx-background-color: #18529D;">
          <children>
@@ -81,8 +77,8 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="370.0" prefHeight="27.0" prefWidth="650.0" spacing="143.0">
          <children>
-            <DatePicker fx:id="dpFechaInicio" />
-            <DatePicker fx:id="dpFechaFin" />
+            <DatePicker fx:id="dpFechaInicio" editable="false" />
+            <DatePicker fx:id="dpFechaFin" editable="false" />
          </children>
       </HBox>
       <HBox alignment="TOP_RIGHT" layoutX="14.0" layoutY="445.0" prefHeight="27.0" prefWidth="650.0" spacing="20.0">

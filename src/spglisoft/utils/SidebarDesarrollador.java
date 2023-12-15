@@ -22,6 +22,7 @@ public class SidebarDesarrollador {
 
     public static void irMenuSolicituesCambio() {
         MainStage.changeView("/spglisoft/vistas/FXMLSolicitudesCambio.fxml", 1000, 600);
+
     }
 
     public static void irMenuInformacionProyecto() {

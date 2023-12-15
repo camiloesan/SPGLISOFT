@@ -32,7 +32,7 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
     SolicitudCambio solicitudCambio;
 
     private final static ObservableList<String> observableListCbEstadosSolicitud =
-            FXCollections.observableArrayList("Pendiente" ,"En Proceso", "Concluida");
+            FXCollections.observableArrayList("Pendiente" ,"Concluido", "En Proceso");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,7 +61,7 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
             case "En proceso":
                 estado = Constantes.ESTADO_SOLICITUD_EN_PROCESO;
                 break;
-            case "Concluida":
+            case "Concluido":
                 estado = Constantes.ESTADO_SOLICITUD_CONCLUIDA;
                 break;
         }

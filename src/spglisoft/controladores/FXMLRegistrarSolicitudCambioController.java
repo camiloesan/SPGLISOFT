@@ -83,7 +83,8 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     
     private boolean camposFaltantes(){
         return tfTitulo.getText().trim().isEmpty() || taAccionPropuesta.getText().trim().isEmpty()
-                || taDescripcionCambio.getText().trim().isEmpty() || taRazonCambio.getText().trim().isEmpty();
+                || taDescripcionCambio.getText().trim().isEmpty() || taRazonCambio.getText().trim().isEmpty()
+                || taImpactoCambio.getText().trim().isEmpty();
     }
 
     @FXML

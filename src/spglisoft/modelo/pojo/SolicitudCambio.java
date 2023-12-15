@@ -28,6 +28,7 @@ public class SolicitudCambio {
     private int idRepresentante;
     private String nombreDesarrollador;
     private String estadoSolicitud;
+    private String fechaFormateada;
     private Button button;
 
     public SolicitudCambio() {
@@ -167,5 +168,13 @@ public class SolicitudCambio {
 
     public void setIdEstadoSolicitud(int idEstadoSolicitud) {
         this.idEstadoSolicitud = idEstadoSolicitud;
+    }
+
+    public String getFechaFormateada() {
+        return fechaFormateada;
+    }
+
+    public void setFechaFormateada(String fechaFormateada) {
+        this.fechaFormateada = fechaFormateada;
     }
 }

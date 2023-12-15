@@ -82,7 +82,6 @@
                   </HBox>
                   <TableView fx:id="tvSolicitudesCambio" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn fx:id="tcProyecto" prefWidth="75.0" text="Proyecto" />
                       <TableColumn fx:id="tcTitulo" prefWidth="75.0" text="Titulo" />
                         <TableColumn fx:id="tcFechaSolicitud" prefWidth="75.0" text="Fecha de la solicitud" />
                     </columns>

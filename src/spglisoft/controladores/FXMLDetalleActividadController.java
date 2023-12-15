@@ -45,7 +45,11 @@ public class FXMLDetalleActividadController implements Initializable {
         lblFechaFin.setText(actividad.getFechaFin());
         lblEsfuerzo.setText(String.valueOf(actividad.getEsfuerzoMinutos()));
         lblDescripcion.setText(actividad.getDescripcion());
-        lblDesarrollador.setText(actividad.getNombreCompletoDesarrollador());
+        if (actividad.getNombreCompletoDesarrollador().contains("null")) {
+            lblDesarrollador.setText("Actividad aun no asignada");
+        } else {
+            lblDesarrollador.setText(actividad.getNombreCompletoDesarrollador());
+        }
     }
 
     @FXML

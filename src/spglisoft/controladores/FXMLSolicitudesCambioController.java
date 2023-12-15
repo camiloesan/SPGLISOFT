@@ -6,7 +6,12 @@ package spglisoft.controladores;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +21,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import spglisoft.modelo.dao.SolicitudCambioDAO;
+import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.SidebarDesarrollador;
+import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 /**
@@ -27,18 +36,19 @@ import spglisoft.utils.Utilidades;
  */
 public class FXMLSolicitudesCambioController implements Initializable, ISidebarDesarrollador{
 
+    private ObservableList<SolicitudCambio> listaSolicitudes;
+
     @FXML
-    private TableView<?> tvSolicitudesCambio;
+    private TableView<SolicitudCambio> tvSolicitudesCambio;
     @FXML
-    private TableColumn<?, ?> tcProyecto;
+    private TableColumn tcTitulo;
     @FXML
-    private TableColumn<?, ?> tcTitulo;
-    @FXML
-    private TableColumn<?, ?> tcFechaSolicitud;
+    private TableColumn tcFechaSolicitud;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        configurarTabla();
+        cargarDatosLista();
     }
 
     @Override
@@ -96,5 +106,25 @@ public class FXMLSolicitudesCambioController implements Initializable, ISidebarD
         }
     }
 
+    private void configurarTabla() {
+        tcTitulo.setCellValueFactory(new PropertyValueFactory<>("nombreSolicitud"));
+        tcFechaSolicitud.setCellValueFactory(new PropertyValueFactory<>("fechaFormateada"));
+    }
 
+    private void cargarDatosLista(){
+        try {
+            //listaSolicitudes.clear();
+            listaSolicitudes = FXCollections.observableArrayList();
+            ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO
+                    .obtenerSolicitudesRegistradas(SingletonLogin.getInstance().getDesarrollador().getIdDesarrollador());
+            listaSolicitudes.addAll(solicitudesBD);
+            tvSolicitudesCambio.setItems(listaSolicitudes);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void iniciarDatos() {
+        cargarDatosLista();
+    }
 }

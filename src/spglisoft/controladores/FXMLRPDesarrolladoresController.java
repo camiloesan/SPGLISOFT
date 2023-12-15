@@ -76,13 +76,16 @@ public class FXMLRPDesarrolladoresController implements Initializable, ISidebarR
     private void btnEliminarDesarrollador(ActionEvent event) {
         if(esElementoSeleccionado()){
             Desarrollador desarrollador = tvDesarrolladores.getSelectionModel().getSelectedItem();
-            try{
-                UsuarioDAO.eliminarDesarrolladorDelProyecto(desarrollador.getIdDesarrollador());
-                Alertas.mostrarAlertaExito();
-                formatearTabla();
-                llenarTablaDesarrolladores();
-            } catch (SQLException e){
-                Alertas.mostrarAlertaErrorConexionBD();
+            if (Utilidades.mostrarAlertaConfirmacion("Confirmación",
+                    "¿Está seguro de que desea eliminar el desarrollador del proyecto?")) {
+                try{
+                    UsuarioDAO.eliminarDesarrolladorDelProyecto(desarrollador.getIdDesarrollador());
+                    Alertas.mostrarAlertaExito();
+                    formatearTabla();
+                    llenarTablaDesarrolladores();
+                } catch (SQLException e){
+                    Alertas.mostrarAlertaErrorConexionBD();
+                }
             }
         } else{
             Alertas.mostrarAlertaElementoNoSeleccionado();

@@ -64,6 +64,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     public void initialize(URL url, ResourceBundle rb) {
         formatearTabla();
         formatearComboFiltro();
+        cbSeleccionFiltro();
         llenarTablaActividades();
     }
 
@@ -81,10 +82,32 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
     }
+    
+    private void cbSeleccionFiltro() {
+        EstadoActividad filtro = cbFiltroActividades.getSelectionModel().getSelectedItem();
+        switch (filtro.getEstado()) {
+            case "No asignada":
+                btnAsignarActividad.setDisable(false);
+                btnDesasignarActividad.setDisable(true);
+                btnEliminarActividad.setDisable(false);
+                break;
+            case "Asignada":
+                btnAsignarActividad.setDisable(true);
+                btnDesasignarActividad.setDisable(false);
+                btnEliminarActividad.setDisable(true);
+                break;
+            case "Concluida":
+                btnAsignarActividad.setDisable(true);
+                btnDesasignarActividad.setDisable(true);
+                btnEliminarActividad.setDisable(true);
+                break;
+        }
+    }
 
     @FXML
     private void llenarTablaActividades() {
         tvActividades.getItems().clear();
+        cbSeleccionFiltro();
         List<Actividad> listaActividades = new ArrayList<>();
         try {
             listaActividades = ActividadDAO
@@ -139,7 +162,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @FXML
-    private void btnAsignarActividad() {
+    private void btnAsignarActividadEvent() {
         if (esElementoSeleccionado()) {
             Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
             MainStage.changeView("/spglisoft/vistas/FXMLAsignarActividad.fxml", 1000, 600, actividad);
@@ -157,24 +180,27 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
     }
 
     @FXML
-    private void btnEliminarActividad(ActionEvent event) {
-        if(esElementoSeleccionado()){
-            Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
-            try{
-                ActividadDAO.eliminarActividad(actividad.getIdActividad());
-                Alertas.mostrarAlertaExito();
-                formatearTabla();
-                llenarTablaActividades();
-            } catch (SQLException e){
+    private void btnEliminarActividadEvent(ActionEvent event) {
+        if (Utilidades.mostrarAlertaConfirmacion("Confirmación",
+                "¿Está seguro de que desea eliminar la actividad?")) {
+            if(esElementoSeleccionado()){
+                Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+                try{
+                    ActividadDAO.eliminarActividad(actividad.getIdActividad());
+                    Alertas.mostrarAlertaExito();
+                    formatearTabla();
+                    llenarTablaActividades();
+                } catch (SQLException e){
+                    Alertas.mostrarAlertaElementoNoSeleccionado();
+                }
+            } else {
                 Alertas.mostrarAlertaElementoNoSeleccionado();
             }
-        } else {
-            Alertas.mostrarAlertaElementoNoSeleccionado();
         }
     }
 
     @FXML
-    private void btnDesasignarActividad(ActionEvent event) {
+    private void btnDesasignarActividadEvent(ActionEvent event) {
         if(esElementoSeleccionado()){
             Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
             try{
@@ -206,6 +232,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
             escenario.setTitle("Registrar actividad");
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
+            llenarTablaActividades();
         } catch (IOException e) {
             Utilidades.mostrarAlertaSimple("Error",
                     "No se puede mostrar la ventana", Alert.AlertType.ERROR);

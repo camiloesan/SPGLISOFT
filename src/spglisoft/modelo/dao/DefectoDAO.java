@@ -24,6 +24,7 @@ public class DefectoDAO {
     public static ResultadoOperacion registrarNuevoDefecto(Defecto defecto) throws SQLException {
         ResultadoOperacion resultado = new ResultadoOperacion(true, "Error al registrar el defecto", -1);
         Connection conexionBD = ConexionBD.obtenerConnection();
+        int estadoDefecto = 1;
         if (conexionBD != null) {
             try {
                 String query = "INSERT INTO defecto (id_proyecto, id_desarrollador, nombre_defecto, descripcion, "
@@ -35,7 +36,7 @@ public class DefectoDAO {
                 prepararConsulta.setString(3, defecto.getNombreDefectoString());
                 prepararConsulta.setString(4, defecto.getDescripcion());
                 prepararConsulta.setInt(5, defecto.getTipoDefecto());
-                prepararConsulta.setInt(6, defecto.getEstadoDefecto());
+                prepararConsulta.setInt(6, estadoDefecto);
                 prepararConsulta.setInt(7, defecto.getEsfuerzoEstimado());
                 int filasAfectadas = prepararConsulta.executeUpdate();
                 if (filasAfectadas > 0) {

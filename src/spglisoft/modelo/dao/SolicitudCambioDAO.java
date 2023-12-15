@@ -59,7 +59,33 @@ public class SolicitudCambioDAO {
         }
         return resultado;
     }
-    
+
+    public static ArrayList<SolicitudCambio> obtenerSolicitudesRegistradas(int idDesarrollador) throws SQLException {
+        ArrayList<SolicitudCambio> solicitudes = new ArrayList<>();
+        Connection conexionBD = ConexionBD.obtenerConnection();
+        if (conexionBD != null) {
+            try {
+                String consulta = "SELECT nombre_solicitud, DATE_FORMAT(fecha_solicitud,'%d/%m/%Y') AS fechaFormateada" +
+                        " FROM solicitud_cambio WHERE id_desarrollador = ? ";
+                PreparedStatement preparedStatement = conexionBD.prepareStatement(consulta);
+                preparedStatement.setInt(1,idDesarrollador);
+                ResultSet resultado = preparedStatement.executeQuery();
+                while (resultado.next()) {
+                    SolicitudCambio solicitud = new SolicitudCambio();
+                    solicitud.setNombreSolicitud(resultado.getString("nombre_solicitud"));
+                    solicitud.setFechaFormateada(resultado.getString("fechaFormateada"));
+                    solicitudes.add(solicitud);
+                }
+            } catch (SQLException e) {
+                throw e;
+            } finally {
+                if (conexionBD != null) {
+                    conexionBD.close();
+                }
+            }
+        }
+        return solicitudes;
+    }
     public static ArrayList<SolicitudCambio> obtenerSolicitudes(int idProyecto) throws SQLException {
         ArrayList<SolicitudCambio> solicitudes = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
@@ -69,7 +95,7 @@ public class SolicitudCambioDAO {
                         "sc.id_solicitud,\n" +
                         "sc.nombre_solicitud,\n" +
                         "sc.descripcion,\n" +
-                        "sc.fecha_solicitud,\n" +
+                        "DATE_FORMAT(sc.fecha_solicitud, '%d/%m/%Y') AS fecha_formateada ,\n" +
                         "sc.accion_propuesta,\n" +
                         "sc.razon_cambio,\n" +
                         "sc.impacto_cambio,\n" +
@@ -89,7 +115,7 @@ public class SolicitudCambioDAO {
                     solicitud.setIdSolicitud(resultado.getInt("sc.id_solicitud"));
                     solicitud.setNombreSolicitud(resultado.getString("sc.nombre_solicitud"));
                     solicitud.setDescripcion(resultado.getString("sc.descripcion"));
-                    solicitud.setFechaSolicitud(resultado.getDate("sc.fecha_solicitud"));
+                    //solicitud.setFechaSolicitud(resultado.getDate("sc.fecha_solicitud"));
                     solicitud.setAccionPropuesta(resultado.getString("accion_propuesta"));
                     solicitud.setRazonCambio(resultado.getString("sc.razon_cambio"));
                     solicitud.setImpactoCambio(resultado.getString("sc.impacto_cambio"));
@@ -97,6 +123,7 @@ public class SolicitudCambioDAO {
                     solicitud.setEstadoSolicitud(resultado.getString("es.estado_solicitud"));
                     solicitud.setNombreDesarrollador(resultado.getString("nombre_desarrollador"));
                     solicitud.setNombreProyecto(resultado.getString("p.nombre_proyecto"));
+                    solicitud.setFechaFormateada(resultado.getString("fecha_formateada"));
                     solicitudes.add(solicitud);
                 }
             } catch (SQLException e) {

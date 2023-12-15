@@ -33,7 +33,7 @@ import spglisoft.utils.*;
 
 public class FXMLConsultarSolicitudesController implements Initializable, ISidebarRPButtons {
     
-    private ObservableList<SolicitudCambio> listaSolicitudes;
+        private ObservableList<SolicitudCambio> listaSolicitudes;
     ObservableList<String> opciones = FXCollections.observableArrayList(
             "Pendiente",
             "En proceso",

@@ -6,6 +6,7 @@ package spglisoft.controladores;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -128,9 +129,13 @@ public class FXMLRegistrarActividadController implements Initializable {
     }
     
     private boolean fechasValidas() {
+        LocalDate fechaActual = LocalDate.now();
         return dpFechaInicio.getValue().isAfter(dpFechaFin.getValue()) 
                 || dpFechaFin.getValue().isBefore(dpFechaInicio.getValue()) 
-                || dpFechaInicio.getValue().equals(dpFechaFin.getValue());
+                || dpFechaInicio.getValue().equals(dpFechaFin.getValue())
+                || dpFechaInicio.getValue().isBefore(fechaActual)
+                || dpFechaFin.getValue().isBefore(fechaActual);
+
     }
     
     private void cerrarStage() {

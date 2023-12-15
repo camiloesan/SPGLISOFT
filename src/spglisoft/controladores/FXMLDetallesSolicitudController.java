@@ -66,13 +66,14 @@ public class FXMLDetallesSolicitudController implements Initializable {
             this.solicitud = solicitud;
             this.nombreSolicitante = solicitud.getNombreDesarrollador();
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-            String fechaString = formato.format(solicitud.getFechaSolicitud());
+            //String fechaString = formato.format(solicitud.getFechaSolicitud());
+            String fechaFormateada = solicitud.getFechaFormateada();
             lbTituloSolicitud.setText("Nombre de la solicitud: " + solicitud.getNombreSolicitud());
             lbNombreProyecto.setText("Proyecto: " + solicitud.getNombreProyecto());
             lbEstadoSolicitud.setText("Estado de la solicitud: " + solicitud.getEstadoSolicitud());
             taImpactoCambio.setText(solicitud.getImpactoCambio());
             lbNombreSolicitante.setText("Nombre del solicitante: " + nombreSolicitante);
-            lbFechaSolicitud.setText("Fecha de registro de la solicitud: " + fechaString);
+            lbFechaSolicitud.setText("Fecha de registro de la solicitud: " + fechaFormateada);
             taDescripcion.setText(solicitud.getDescripcion());
             taRazonCambio.setText(solicitud.getRazonCambio());
             taAccionPropuesta.setText(solicitud.getAccionPropuesta());

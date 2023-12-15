@@ -17,7 +17,7 @@ public class ActividadDAO {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT id_actividad, id_proyecto, id_desarrollador, nombre, descripcion, " +
-                "esfuerzo, fecha_inicio, fecha_fin, e.estado as estado" +
+                "esfuerzo, DATE_FORMAT(fecha_inicio, '%d/%m/%Y'), fecha_fin, e.estado as estado" +
                 " FROM actividad INNER JOIN estado_actividad e " +
                 "ON actividad.id_estado = e.id_estado_actividad " +
                 "WHERE id_proyecto = ? AND id_desarrollador IS NOT NULL";
@@ -46,7 +46,7 @@ public class ActividadDAO {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT a.id_actividad, a.id_proyecto, a.id_desarrollador, a.nombre, a.descripcion, " +
-                "a.esfuerzo, a.fecha_inicio, a.fecha_fin, e.estado as estado, d.nombre as nombre_d, " +
+                "a.esfuerzo, DATE_FORMAT(a.fecha_inicio, '%d/%m/%Y') as fecha_inicio, DATE_FORMAT(a.fecha_fin, '%d/%m/%Y') as fecha_fin, e.estado as estado, d.nombre as nombre_d, " +
                 "d.apellido_paterno, d.apellido_materno " +
                 "FROM actividad a LEFT JOIN estado_actividad e ON a.id_estado = e.id_estado_actividad " +
                 "LEFT JOIN desarrollador d ON a.id_desarrollador = d.id_desarrollador " +
@@ -82,7 +82,7 @@ public class ActividadDAO {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT a.id_actividad, a.id_proyecto, a.id_desarrollador, a.id_estado, " +
-                "a.nombre, a.descripcion, a.esfuerzo, a.fecha_inicio, a.fecha_fin, e.estado " +
+                "a.nombre, a.descripcion, a.esfuerzo, DATE_FORMAT(a.fecha_inicio, '%d/%m/%Y') as fecha_inicio, DATE_FORMAT(a.fecha_fin, '%d/%m/%Y') as fecha_fin, e.estado " +
                 "AS estado FROM actividad a INNER JOIN estado_actividad e ON a.id_estado = e.id_estado_actividad " +
                 "INNER JOIN desarrollador d ON a.id_desarrollador = d.id_desarrollador " +
                 "WHERE a.id_desarrollador = (?)";
