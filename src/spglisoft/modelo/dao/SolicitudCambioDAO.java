@@ -11,6 +11,8 @@ import java.util.List;
 
 import spglisoft.modelo.ResultadoOperacion;
 import spglisoft.modelo.pojo.Actividad;
+import spglisoft.modelo.pojo.EstadoActividad;
+import spglisoft.modelo.pojo.EstadoSolicitud;
 import spglisoft.modelo.pojo.SolicitudCambio;
 
 public class SolicitudCambioDAO {
@@ -157,5 +159,26 @@ public class SolicitudCambioDAO {
             }
         }
         return nombreSolicitante;
+    }
+
+    public static List<EstadoSolicitud> obtenerEstadosSolicitud() {
+        List<EstadoSolicitud> listaEstadosSolicitud = new ArrayList<>();
+        try {
+            Connection conexionBD = ConexionBD.obtenerConnection();
+            String query = "SELECT * FROM estado_solicitud";
+
+            PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                EstadoSolicitud estadoSolicitud = new EstadoSolicitud();
+                estadoSolicitud.setIdEstadoSolicitud(resultSet.getInt("id_estado_solicitud"));
+                estadoSolicitud.setEstadoSolicitud(resultSet.getString("estado_solicitud"));
+                listaEstadosSolicitud.add(estadoSolicitud);
+            }
+            conexionBD.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listaEstadosSolicitud;
     }
 }

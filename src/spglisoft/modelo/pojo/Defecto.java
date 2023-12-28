@@ -11,18 +11,35 @@ import java.sql.Date;
  * @author lecap
  */
 public class Defecto {
-    
     private int idDefecto;
     private int idProyecto;
     private int idDesarrollador;
     private String nombreDefectoString;
     private String descripcion;
-    private Date fechaReporte;
+    private String fechaReporte;
     private int tipoDefecto;
+    private String nombreTipoDefecto;
     private int esfuerzoEstimado;
     private int estadoDefecto;
+    private String nombreEstadoDefecto;
 
     public Defecto() {
+    }
+
+    public String getNombreEstadoDefecto() {
+        return nombreEstadoDefecto;
+    }
+
+    public void setNombreEstadoDefecto(String nombreEstadoDefecto) {
+        this.nombreEstadoDefecto = nombreEstadoDefecto;
+    }
+
+    public String getNombreTipoDefecto() {
+        return nombreTipoDefecto;
+    }
+
+    public void setNombreTipoDefecto(String nombreTipoDefecto) {
+        this.nombreTipoDefecto = nombreTipoDefecto;
     }
 
     public int getIdDefecto() {
@@ -65,11 +82,11 @@ public class Defecto {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaReporte() {
+    public String getFechaReporte() {
         return fechaReporte;
     }
 
-    public void setFechaReporte(Date fechaReporte) {
+    public void setFechaReporte(String fechaReporte) {
         this.fechaReporte = fechaReporte;
     }
 

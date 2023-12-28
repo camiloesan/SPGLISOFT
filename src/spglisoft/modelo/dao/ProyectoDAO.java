@@ -23,7 +23,8 @@ public class ProyectoDAO {
     public static List<Proyecto> obtenerProyectosPorIdRepresentante(int idResponsable) throws SQLException {
         List<Proyecto> proyectosList = new ArrayList<>();
         String query = "SELECT p.id_proyecto, p.nombre_proyecto, p.descripcion, e.estado_proyecto " +
-                "AS estado, p.fecha_inicio, p.fecha_fin, r.nombre, r.apellido_paterno, r.apellido_materno " +
+                "AS estado, DATE_FORMAT(p.fecha_inicio, '%d/%m/%Y') as fecha_inicio, " +
+                "DATE_FORMAT(p.fecha_fin, '%d/%m/%Y') as fecha_fin, r.nombre, r.apellido_paterno, r.apellido_materno " +
                 "FROM proyecto p INNER JOIN estado_proyecto e ON p.estado_proyecto = e.id_estado_proyecto " +
                 "INNER JOIN representante_proyecto r ON p.id_representante = r.id_representante " +
                 "WHERE p.id_representante = (?)";
@@ -50,7 +51,8 @@ public class ProyectoDAO {
 
     public static Proyecto obtenerProyectoPorIdDesarrollador(int idDesarrollador) throws SQLException {
         String query = "SELECT p.id_proyecto, p.nombre_proyecto, p.descripcion, e.estado_proyecto " +
-                "AS estado, p.fecha_inicio, p.fecha_fin, r.nombre, r.apellido_paterno, r.apellido_materno " +
+                "AS estado, DATE_FORMAT(p.fecha_inicio, '%d/%m/%Y') as fecha_inicio, " +
+                "DATE_FORMAT(p.fecha_fin, '%d/%m/%Y') as fecha_fin, r.nombre, r.apellido_paterno, r.apellido_materno " +
                 "FROM proyecto p INNER JOIN estado_proyecto e ON p.estado_proyecto = e.id_estado_proyecto " +
                 "INNER JOIN representante_proyecto r ON p.id_representante = r.id_representante " +
                 "INNER JOIN desarrollador d on p.id_proyecto = d.id_proyecto where id_desarrollador = (?)";

@@ -49,7 +49,7 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     private void formatearTabla() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("FechaInicio"));
+        colFechaInicio.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
         colFechaFin.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("nombreEstado"));
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetalleDefectoController">
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDetalleDefectoController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="1000.0">
          <children>
@@ -23,16 +23,16 @@
             </HBox>
             <GridPane alignment="TOP_CENTER" hgap="10.0" prefHeight="400.0" prefWidth="711.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Título: " />
+                  <Label text="Nombre: " />
                   <Label text="Fecha del reporte: " GridPane.rowIndex="1" />
                   <Label text="Estado: " GridPane.rowIndex="2" />
                   <Label text="Descripción: " GridPane.rowIndex="3" />
                   <Label text="Tipo: " GridPane.rowIndex="4" />
-                  <Label text="placeholder descripción" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lblTipoDefecto" text="Label" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="lblNombre" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lblFechaReporte" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblEstadoDefecto" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblDescripcion" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
                <columnConstraints>
                   <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="467.93463134765625" minWidth="10.0" prefWidth="285.2439880371094" />

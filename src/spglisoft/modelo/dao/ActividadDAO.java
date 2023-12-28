@@ -82,14 +82,15 @@ public class ActividadDAO {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
         String query = "SELECT a.id_actividad, a.id_proyecto, a.id_desarrollador, a.id_estado, " +
-                "a.nombre, a.descripcion, a.esfuerzo, DATE_FORMAT(a.fecha_inicio, '%d/%m/%Y') as fecha_inicio, DATE_FORMAT(a.fecha_fin, '%d/%m/%Y') as fecha_fin, e.estado " +
-                "AS estado FROM actividad a INNER JOIN estado_actividad e ON a.id_estado = e.id_estado_actividad " +
+                "a.nombre, a.descripcion, a.esfuerzo, DATE_FORMAT(a.fecha_inicio, '%d/%m/%Y') as fecha_inicio, " +
+                "DATE_FORMAT(a.fecha_fin, '%d/%m/%Y') as fecha_fin, e.estado " +
+                "AS estado, d.nombre as nombre_d, d.apellido_paterno, d.apellido_materno " +
+                "FROM actividad a INNER JOIN estado_actividad e ON a.id_estado = e.id_estado_actividad " +
                 "INNER JOIN desarrollador d ON a.id_desarrollador = d.id_desarrollador " +
                 "WHERE a.id_desarrollador = (?)";
 
         PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
         preparedStatement.setInt(1, idDesarrollador);
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()) {
             Actividad actividad = new Actividad();
@@ -103,6 +104,11 @@ public class ActividadDAO {
             actividad.setFechaFin(resultSet.getString("fecha_fin"));
             actividad.setIdEstado(resultSet.getInt("id_estado"));
             actividad.setNombreEstado(resultSet.getString("estado"));
+            actividad.setNombreDesarrollador(resultSet.getString("nombre_d"));
+            actividad.setApellidoPDesarrollador(resultSet.getString("apellido_paterno"));
+            actividad.setApellidoMDesarrollador(resultSet.getString("apellido_materno"));
+            actividad.setNombreCompletoDesarrollador(actividad.getNombreDesarrollador() + " "
+                    + actividad.getApellidoPDesarrollador() + " " + actividad.getApellidoMDesarrollador());
             listaActividades.add(actividad);
         }
         conexionBD.close();
