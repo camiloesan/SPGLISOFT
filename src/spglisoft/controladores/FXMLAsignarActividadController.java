@@ -6,6 +6,7 @@ package spglisoft.controladores;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,6 +16,7 @@ import spglisoft.modelo.pojo.Actividad;
 import spglisoft.modelo.pojo.Desarrollador;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
+import spglisoft.utils.Utilidades;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -79,12 +81,17 @@ public class FXMLAsignarActividadController implements Initializable {
     @FXML
     private void btnAsignarActividad() {
         Actividad actividad = (Actividad) MainStage.getUserData();
-        if (esElementoSeleccionado()) {
-            Desarrollador desarrollador = tvDesarrolladores.getSelectionModel().getSelectedItem();
+        Desarrollador desarrollador = tvDesarrolladores.getSelectionModel().getSelectedItem();
+        if (desarrollador != null) {
             try {
                 UsuarioDAO.asignarActividadADesarrollador(actividad.getIdActividad(),
                         desarrollador.getIdDesarrollador());
-                Alertas.mostrarAlertaExito();
+                Utilidades.mostrarAlertaSimple("Éxito",
+                        "Se ha asignado esta actividad al desarrollador: "
+                                + desarrollador.getNombre() + " "
+                                + desarrollador.getApellidoPaterno() + " "
+                                + desarrollador.getApellidoMaterno(),
+                        Alert.AlertType.INFORMATION);
                 MainStage.changeView("/spglisoft/vistas/FXMLRPActividades.fxml", 1000, 600);
             } catch (SQLException e) {
                 Alertas.mostrarAlertaErrorConexionBD();
@@ -92,10 +99,6 @@ public class FXMLAsignarActividadController implements Initializable {
         } else {
             Alertas.mostrarAlertaElementoNoSeleccionado();
         }
-    }
-
-    private boolean esElementoSeleccionado() {
-        return tvDesarrolladores.getSelectionModel().getSelectedItem() != null;
     }
 
     @FXML

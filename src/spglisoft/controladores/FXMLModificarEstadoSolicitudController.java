@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import spglisoft.modelo.dao.ActividadDAO;
@@ -64,6 +65,10 @@ public class FXMLModificarEstadoSolicitudController implements Initializable {
         if (confirmacion) {
             try {
                 SolicitudCambioDAO.actualizarEstadoSolicitud(idEstadoSolicitud, solicitudCambio.getIdSolicitud());
+                Utilidades.mostrarAlertaSimple("Modificación exitosa",
+                        "Se ha cambiado el estado a: " + cbEstadoSolicitud
+                                .getSelectionModel().getSelectedItem().getEstadoSolicitud(),
+                        Alert.AlertType.INFORMATION);
                 MainStage.changeView("/spglisoft/vistas/FXMLConsultarSolicitudes.fxml", 1000, 600);
             } catch (SQLException e) {
                 Alertas.mostrarAlertaErrorConexionBD();
