@@ -13,35 +13,6 @@ import java.util.List;
 import spglisoft.modelo.ResultadoOperacion;
 
 public class ActividadDAO {
-    public static List<Actividad> obtenerActividadesAsignadasPorIdProyecto(int idProyecto) throws SQLException {
-        List<Actividad> listaActividades = new ArrayList<>();
-        Connection conexionBD = ConexionBD.obtenerConnection();
-        String query = "SELECT id_actividad, id_proyecto, id_desarrollador, nombre, descripcion, " +
-                "esfuerzo, DATE_FORMAT(fecha_inicio, '%d/%m/%Y'), fecha_fin, e.estado as estado" +
-                " FROM actividad INNER JOIN estado_actividad e " +
-                "ON actividad.id_estado = e.id_estado_actividad " +
-                "WHERE id_proyecto = ? AND id_desarrollador IS NOT NULL";
-        PreparedStatement preparedStatement = conexionBD.prepareStatement(query);
-        preparedStatement.setInt(1, idProyecto);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()) {
-            Actividad actividad = new Actividad();
-            actividad.setIdActividad(resultSet.getInt("id_actividad"));
-            actividad.setIdProyecto(resultSet.getInt("id_proyecto"));
-            actividad.setIdDesarrollador(resultSet.getInt("id_desarrollador"));
-            actividad.setNombre(resultSet.getString("nombre"));
-            actividad.setDescripcion(resultSet.getString("descripcion"));
-            actividad.setEsfuerzoMinutos(resultSet.getInt("esfuerzo"));
-            actividad.setFechaInicio(resultSet.getString("fecha_inicio"));
-            actividad.setFechaFin(resultSet.getString("fecha_fin"));
-            actividad.setNombreEstado(resultSet.getString("estado"));
-            listaActividades.add(actividad);
-        }
-        conexionBD.close();
-        return listaActividades;
-    }
-
     public static List<Actividad> obtenerActividadesPorIdProyecto(int idProyecto, int idEstado) throws SQLException {
         List<Actividad> listaActividades = new ArrayList<>();
         Connection conexionBD = ConexionBD.obtenerConnection();
