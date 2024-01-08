@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import spglisoft.modelo.dao.UsuarioDAO;
+import spglisoft.utils.Utilidades;
 
 
 /*
@@ -117,17 +119,26 @@ public class FXMLActividadesDesarrolladorController implements Initializable, IS
 
     @FXML
     private void btnTerminarActivida(ActionEvent event) {
-        if(esElementoSeleccionado()){
+        terminarActividad();
+    }
+    
+    private void terminarActividad(){
+        if (esElementoSeleccionado()) {
             Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
-            try{
-                ActividadDAO.terminarActividad(actividad.getIdActividad());
-                Alertas.mostrarAlertaExito();
-                formatearTabla();
-                llenarTablaActividades();
-            } catch (SQLException e){
-                Alertas.mostrarAlertaElementoNoSeleccionado();
+            if (actividad.getIdEstado() == 3) {
+                Utilidades.mostrarAlertaSimple("Mensaje", 
+                        "La actividad ya ha sido marcada como terminada", Alert.AlertType.INFORMATION);
+            }else {
+                try {
+                    ActividadDAO.terminarActividad(actividad.getIdActividad());
+                    Alertas.mostrarAlertaExito();
+                    formatearTabla();
+                    llenarTablaActividades();
+                } catch (SQLException e) {
+                    Alertas.mostrarAlertaErrorConexionBD();
+                }
             }
-        } else {
+        }else{
             Alertas.mostrarAlertaElementoNoSeleccionado();
         }
     }

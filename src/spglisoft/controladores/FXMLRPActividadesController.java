@@ -181,23 +181,27 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
 
     @FXML
     private void btnEliminarActividadEvent(ActionEvent event) {
-        if (Utilidades.mostrarAlertaConfirmacion("Confirmación",
-                "¿Está seguro de que desea eliminar la actividad?")) {
-            if(esElementoSeleccionado()){
-                Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
-                try{
-                    ActividadDAO.eliminarActividad(actividad.getIdActividad());
-                    Alertas.mostrarAlertaExito();
-                    formatearTabla();
-                    llenarTablaActividades();
-                } catch (SQLException e){
-                    Alertas.mostrarAlertaElementoNoSeleccionado();
-                }
-            } else {
-                Alertas.mostrarAlertaElementoNoSeleccionado();
-            }
-        }
+        eliminarActividad();
     }
+    
+   private void eliminarActividad(){
+       if (esElementoSeleccionado()) {
+           if (Utilidades.mostrarAlertaConfirmacion("Eliminar actividad",
+                   "¿Está seguro de que desea eliminar la actividad?")) {
+               try {
+                   Actividad actividad = tvActividades.getSelectionModel().getSelectedItem();
+                   ActividadDAO.eliminarActividad(actividad.getIdActividad());
+                   Alertas.mostrarAlertaExito();
+                   formatearTabla();
+                   llenarTablaActividades();
+               } catch (SQLException e) {
+                   Alertas.mostrarAlertaErrorConexionBD();
+               }
+           }
+       } else {
+           Alertas.mostrarAlertaElementoNoSeleccionado();
+       }
+   } 
 
     @FXML
     private void btnDesasignarActividadEvent(ActionEvent event) {

@@ -78,8 +78,8 @@ public class FXMLRegistrarDefectoController implements Initializable {
     private void registro() {
         if (validarEsfuerzo()) {
             TipoDefecto tipoDefecto = (TipoDefecto) cbTipoDefecto.getSelectionModel().getSelectedItem();
-            String nombreDefecto = tfNombreDefecto.getText();
-            String descripcion = taDescripcion.getText();
+            String nombreDefecto = tfNombreDefecto.getText().trim();
+            String descripcion = taDescripcion.getText().trim();
             int idTipoDefecto = tipoDefecto.getIdTipoDefecto();
             String esfuerzoEstimado = tfEsfuerzoEstimado.getText().trim();
             int esfuerzoEstimadoInteger = Integer.parseInt(esfuerzoEstimado);

@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDefectosDesarrolladorController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spglisoft.controladores.FXMLDefectosDesarrolladorController">
    <children>
       <HBox prefHeight="600.0" prefWidth="1000.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="25.0" style="-fx-background-color: #003466;" HBox.hgrow="NEVER">
                <children>
-                  <Pane prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label layoutX="43.0" layoutY="47.0" text="Nombre del Proyecto" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
                   <Label layoutX="78.0" layoutY="302.0" onMouseClicked="#btnActividades" text="Actividades" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -54,15 +42,18 @@
                      </cursor>
                   </Label>
                   <Separator layoutX="70.0" layoutY="415.0" maxWidth="80.0" opacity="0.6" prefWidth="200.0" />
-                  <Pane prefHeight="80.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                  <HBox>
                      <children>
-                        <Label layoutX="26.0" layoutY="102.0" onMouseClicked="#btnCerrarSesion" text="Cerrar Sesión" textFill="WHITE" underline="true">
+                        <Label onMouseClicked="#btnCerrarSesion" text="Cerrar Sesión" textFill="WHITE" underline="true">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
                      </children>
-                  </Pane>
+                     <VBox.margin>
+                        <Insets left="10.0" top="50.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="25.0" HBox.hgrow="ALWAYS">
@@ -83,14 +74,14 @@
                         <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </HBox>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tvDefectos" prefHeight="330.0" prefWidth="750.0">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Tìtulo" />
-                        <TableColumn prefWidth="75.0" text="Fecha del reporte" />
-                        <TableColumn prefWidth="75.0" text="Tipo de defecto" />
+                        <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                        <TableColumn fx:id="colFechaReporte" prefWidth="75.0" text="Fecha del reporte" />
+                        <TableColumn fx:id="colTipoDefecto" prefWidth="75.0" text="Tipo de defecto" />
 
                      </columns>
                      <VBox.margin>

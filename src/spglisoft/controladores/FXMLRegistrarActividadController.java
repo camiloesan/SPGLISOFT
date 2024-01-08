@@ -63,8 +63,8 @@ public class FXMLRegistrarActividadController implements Initializable {
         if (!fechasFaltantes() && validarEsfuerzo()) {
             String fechaInicio = dpFechaInicio.getValue().toString();
             String fechaFin = dpFechaFin.getValue().toString();
-            String nombreActividad = tfNombreActividad.getText();
-            String descripcion = taDescripcion.getText();
+            String nombreActividad = tfNombreActividad.getText().trim();
+            String descripcion = taDescripcion.getText().trim();
             String esfuerzoEstimadoString = tfEsfuerzoEstimado.getText().trim();
             int esfuerzoEstimado = Integer.parseInt(esfuerzoEstimadoString);
             
@@ -98,9 +98,7 @@ public class FXMLRegistrarActividadController implements Initializable {
                             Alert.AlertType.INFORMATION);
                     cerrarStage();
                 } catch (SQLException e) {
-                    Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
-                        Alert.AlertType.ERROR);
-                    e.printStackTrace();
+                    Alertas.mostrarAlertaErrorConexionBD();
                 }
                 
             } else {

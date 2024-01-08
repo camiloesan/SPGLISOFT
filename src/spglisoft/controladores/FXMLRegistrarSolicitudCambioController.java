@@ -93,11 +93,11 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
     }
     
     private void registro(){
-        String impactoCambio = taImpactoCambio.getText();
-        String nombre = tfTitulo.getText();
-        String descripcion = taDescripcionCambio.getText();
-        String accionPropuesta = taAccionPropuesta.getText();
-        String razonCambio = taRazonCambio.getText();
+        String impactoCambio = taImpactoCambio.getText().trim();
+        String nombre = tfTitulo.getText().trim();
+        String descripcion = taDescripcionCambio.getText().trim();
+        String accionPropuesta = taAccionPropuesta.getText().trim();
+        String razonCambio = taRazonCambio.getText().trim();
         
         SolicitudCambio nuevaSolicitud = new SolicitudCambio();
         
