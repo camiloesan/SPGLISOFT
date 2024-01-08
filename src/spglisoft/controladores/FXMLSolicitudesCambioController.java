@@ -99,6 +99,7 @@ public class FXMLSolicitudesCambioController implements Initializable, ISidebarD
             escenario.setTitle("Registrar solicitud de cambio");
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
+            cargarDatosLista();
         } catch (IOException e) {
             Utilidades.mostrarAlertaSimple("Error", "No se puede mostrar la ventana",
                     Alert.AlertType.ERROR);
@@ -113,7 +114,7 @@ public class FXMLSolicitudesCambioController implements Initializable, ISidebarD
 
     private void cargarDatosLista(){
         try {
-            //listaSolicitudes.clear();
+            tvSolicitudesCambio.getItems().clear();
             listaSolicitudes = FXCollections.observableArrayList();
             ArrayList<SolicitudCambio> solicitudesBD = SolicitudCambioDAO
                     .obtenerSolicitudesRegistradas(SingletonLogin.getInstance().getDesarrollador().getIdDesarrollador());

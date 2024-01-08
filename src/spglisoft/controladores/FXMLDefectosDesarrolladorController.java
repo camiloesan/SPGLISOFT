@@ -127,6 +127,7 @@ public class FXMLDefectosDesarrolladorController implements Initializable, ISide
             escenario.setTitle("Registrar defecto");
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
+            llenarTablaDefectos();
         } catch (IOException e) {
             Utilidades.mostrarAlertaSimple("Error",
                     "No se puede mostrar la ventana", Alert.AlertType.ERROR);
