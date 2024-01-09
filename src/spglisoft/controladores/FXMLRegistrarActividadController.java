@@ -24,9 +24,10 @@ import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 /**
- * FXML Controller class
- *
- * @author lecap
+ * Creador: Martin Emmanuel Cruz Carmona.
+ * Fecha de creacion: Nov 14, 2023.
+ * Descripcion: Caso de uso-Registrar actividad, permite al representate
+ * del proyecto registrar una actividad. 
  */
 public class FXMLRegistrarActividadController implements Initializable {
 

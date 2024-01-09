@@ -213,7 +213,7 @@ public class FXMLRPActividadesController implements Initializable, ISidebarRPBut
                 formatearTabla();
                 llenarTablaActividades();
             } catch (SQLException e){
-                Alertas.mostrarAlertaElementoNoSeleccionado();
+                Alertas.mostrarAlertaErrorConexionBD();
             }
         } else {
             Alertas.mostrarAlertaElementoNoSeleccionado();

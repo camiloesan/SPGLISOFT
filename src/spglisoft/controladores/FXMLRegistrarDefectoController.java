@@ -28,9 +28,10 @@ import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 /**
- * FXML Controller class
- *
- * @author lecap
+ * Creador: Martin Emmanuel Cruz Carmona.
+ * Fecha de creacion: Nov 17, 2023.
+ * Descripcion: Caso de uso-Registrar defecto, permite al desarrollador
+ * registrar un defecto.
  */
 public class FXMLRegistrarDefectoController implements Initializable {
     
@@ -114,9 +115,7 @@ public class FXMLRegistrarDefectoController implements Initializable {
                     cerrarStage();
                 }
             } catch (SQLException e) {
-                Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
-                        Alert.AlertType.ERROR);
-                e.printStackTrace();
+                Alertas.mostrarAlertaErrorConexionBD();
             }
         } else {
             Alertas.mostrarAlertaCamposFaltantes();

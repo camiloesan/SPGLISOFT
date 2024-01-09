@@ -6,31 +6,27 @@ package spglisoft.controladores;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import spglisoft.modelo.ResultadoOperacion;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
 import spglisoft.modelo.pojo.Desarrollador;
-import spglisoft.modelo.pojo.ImpactoSolicitud;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.Alertas;
 import spglisoft.utils.SingletonLogin;
 import spglisoft.utils.Utilidades;
 
 /**
- * FXML Controller class
- *
- * @author lecap
+ * Creador: Martin Emmanuel Cruz Carmona.
+ * Fecha de creacion: Nov 19, 2023.
+ * Descripcion: Caso de uso-Registrar solicitud de cambio, permite al desarrollador
+ * registrar una solicitud de cambio.
  */
 public class FXMLRegistrarSolicitudCambioController implements Initializable {
     
@@ -73,8 +69,7 @@ public class FXMLRegistrarSolicitudCambioController implements Initializable {
                     cerrarStage();
                 }
             } catch (SQLException e) {
-                Utilidades.mostrarAlertaSimple("Registro", resultado.getMensaje(),
-                        Alert.AlertType.ERROR);
+                Alertas.mostrarAlertaErrorConexionBD();
             }
         } else {
             Alertas.mostrarAlertaCamposFaltantes();

@@ -3,6 +3,7 @@ package spglisoft.controladores;
 import java.io.IOException;
 import javafx.fxml.Initializable;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -26,10 +27,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import spglisoft.modelo.dao.SolicitudCambioDAO;
-import spglisoft.modelo.pojo.Cambio;
 import spglisoft.modelo.pojo.Representante;
 import spglisoft.modelo.pojo.SolicitudCambio;
 import spglisoft.utils.*;
+
+/**
+ * Creador: Martin Emmanuel Cruz Carmona.
+ * Fecha de creacion: Sep 27, 2023.
+ * Descripcion: Caso de uso-Consultar solicitudes de cambio, permite al representate
+ * del proyecto consultar las solicitudes de cambio.
+ */
 
 public class FXMLConsultarSolicitudesController implements Initializable, ISidebarRPButtons {
     
@@ -107,8 +114,8 @@ public class FXMLConsultarSolicitudesController implements Initializable, ISideb
                     .getInstance().getIdProyectoActual());
             listaSolicitudes.addAll(solicitudesBD);
             tvSolicitudesCambio.setItems(listaSolicitudes);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            Alertas.mostrarAlertaErrorConexionBD();
         }
     }
     
